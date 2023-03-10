@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  php:
+    build:
+      context: docker
+      args:
+        TIMEZONE: ${TIMEZONE}
+    env_file:
+      - ./.env
+    volumes:
+      - .:/var/www/ggz:rw
+    ports:
+      - "8082:80"
+    links:
+      - db
+    command:
+      - "bash"
+      - "-c"
+      - "rm -rf /var/www/ggz/var/cache \
+        && set -eux && mkdir -p /var/www/ggz/var/logs
+        && mkdir -p /var/www/ggz/var/cache \
+        && mkdir -p /var/www/ggz/var/translations \
+        && chmod -R 777 /var/www/ggz/var \
+        && apachectl -D FOREGROUND
+        "
+  db:
+    image: mariadb:latest
+    env_file:
+      - ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql:rw
+    restart: always
+    ports:
+      - "3302:3306"
+volumes:
+  db-data: {}
