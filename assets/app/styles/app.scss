@@ -4,3 +4,78 @@
 
 @import 'common/fonts';
 @import 'layout/header';
+
+.custom-horizontal-line {
+    width: 100%;
+    height: 2px;
+    background-color: #F1F1F1;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.card-content {
+    height: 250px;
+}
+
+.white-placeholder::placeholder {
+    color: white;
+}
+.black-placeholder::placeholder {
+    color: #303030;
+}
+
+button.enabled {
+    background-color: #7D00E2;
+    color: #FFFFFF;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24), 0 4px 6px rgba(0, 0, 0, 0.12);
+}
+
+button.disabled {
+    background-color: #CCCCCC;
+    color: #878787;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+#previewImage:hover {
+    filter: grayscale(50%);
+    cursor: pointer;
+}
+
+#changeText {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    pointer-events: none;
+}
+
+#previewContainer:hover #previewImage {
+    filter: brightness(0.5);
+}
+
+.link {
+    color: #A535FF;
+    text-decoration: none;
+}
+
+.w-75 {
+    width: 75px;
+}
+
+.h-75 {
+    height: 75px;
+}
+
+.custom-full-width {
+    width: 100%;
+    max-width: 100%;
+}

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+<div class="container mx-auto mt-10">
+    <div class="flex flex-row">
+        <p class="pl-16 font-lato text-4xl font-extrabold text-[#C4C4C4] tracking-wider">1/3</p>
+    </div>
+    <div class="flex flex-col mt-4">
+        <div class="flex justify-center">
+            <p class="font-ubuntu text-5xl font-bold text-purpleggz">Thanks for joining us!</p>
+        </div>
+        <div class="flex justify-center">
+            <p class="font-lato text-xl font-bold text-blacktext">Complete your registration and start your journey!</p>
+        </div>
+        <div class="flex flex-col justify-center w-9/12 mx-auto mt-8">
+            <div class="flex justify-center mt-4">
+                <textarea style="width: 22rem;" id="message" rows="1" class="black-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-blacktext bg-[#F2EDF6] border-b-2 border-[#303030] rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2" placeholder="Choose a username" oninput="checkInput()"></textarea>
+            </div>
+        </div>
+        <div class="flex flex-col w-2/5 mx-auto mt-8">
+            <button type="button" id="submitButton" class="mt-2 text-[#878787] bg-[#CCCCCC] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-bold font-ubuntu rounded-lg text-2xl py-2.5 text-center inline-flex mx-auto px-6 dark:focus:ring-[#4285F4]/55 mb-2" style="cursor: not-allowed; pointer-events: none;">
+                GO TO NEXT STEP
+            </button>
+        </div>
+    </div>
+
+</div>
+
+
+{% include "home/tabcontents.html.twig" %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    function checkInput() {
+        const textarea = document.getElementById('message');
+        const submitButton = document.getElementById('submitButton');
+
+        if (textarea.value.trim() !== '') {
+            submitButton.style.backgroundColor = '#7D00E2';
+            submitButton.style.color = '#FFFFFF';
+            submitButton.style.cursor = 'pointer';
+            submitButton.style.pointerEvents = 'auto';
+            submitButton.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.24), 0 4px 6px rgba(0, 0, 0, 0.12)';
+            submitButton.onclick = () => {
+                window.location.href = '/onboarding2';
+            };
+        } else {
+            submitButton.style.backgroundColor = '#CCCCCC';
+            submitButton.style.color = '#878787';
+            submitButton.style.cursor = 'not-allowed';
+            submitButton.style.pointerEvents = 'none';
+            submitButton.style.boxShadow = 'none';
+            submitButton.onclick = null;
+        }
+    }
+</script>
+{% endblock %}
+
+
