@@ -2482,10 +2482,10 @@ find-up@^4.0.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-flowbite@^1.6.4:
-  version "1.6.4"
-  resolved "https://registry.npmjs.org/flowbite/-/flowbite-1.6.4.tgz"
-  integrity sha512-//kSaigwERCcE3udumadB3+xfOXeN/ZQzcub2qVCHuB7uscB4XIm3yP9R8zL0XsEOnYG2lnroq/dydQZbzvESw==
+flowbite@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.npmjs.org/flowbite/-/flowbite-1.6.5.tgz"
+  integrity sha512-eI4h3pIRI9d7grlYq14r0A01KUtw7189sPLLx/O2i7JyPEWpbleScfYuEc48XTeNjk1xxm/JHgZkD9kjyOWAlA==
   dependencies:
     "@popperjs/core" "^2.9.3"
     mini-svg-data-uri "^1.4.3"

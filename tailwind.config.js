@@ -62,6 +62,7 @@ module.exports = {
                 '90-screen': '90vh',
                 '95-screen': '95vh',
             },
+        },
         colors: {
             'purpleggz' : '#7D00E2',
             'purpleggz2' : '#A535FF',
@@ -75,5 +76,4 @@ module.exports = {
     plugins: [
         require('flowbite/plugin')
     ],
-}
 }
