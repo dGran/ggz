@@ -2,42 +2,55 @@
 
 namespace App\Entity;
 
-use App\Repository\CountryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CountryRepository::class)]
+/**
+ * Country
+ *
+ * @ORM\Table(name="country", indexes={@ORM\Index(name="IDX_5373C966ECD792C0", columns={"default_currency_id"})})
+ * @ORM\Entity
+ */
 class Country
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
 
-    #[ORM\Column(length: 10)]
-    private ?string $isoCode = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iso_code", type="string", length=10, nullable=false)
+     */
+    private $isoCode;
 
-    #[ORM\OneToMany(mappedBy: 'country', targetEntity: CountryLang::class)]
-    private Collection $countryLangs;
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="country_zone", type="string", length=255, nullable=true)
+     */
+    private $countryZone;
 
-    #[ORM\ManyToOne(inversedBy: 'countries')]
-    private ?Currency $defaultCurrency = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $countryZone = null;
-
-    #[ORM\OneToMany(mappedBy: 'country', targetEntity: User::class)]
-    private Collection $users;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-        $this->countryLangs = new ArrayCollection();
-    }
+    /**
+     * @var \Currency
+     *
+     * @ORM\ManyToOne(targetEntity="Currency")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="default_currency_id", referencedColumnName="id")
+     * })
+     */
+    private $defaultCurrency;
 
     public function getId(): ?int
     {
@@ -68,14 +81,14 @@ class Country
         return $this;
     }
 
-    public function getCountryLang(): ?CountryLang
+    public function getCountryZone(): ?string
     {
-        return $this->countryLang;
+        return $this->countryZone;
     }
 
-    public function setCountryLang(?CountryLang $countryLang): self
+    public function setCountryZone(?string $countryZone): self
     {
-        $this->countryLang = $countryLang;
+        $this->countryZone = $countryZone;
 
         return $this;
     }
@@ -92,45 +105,5 @@ class Country
         return $this;
     }
 
-    public function getCountryZone(): ?string
-    {
-        return $this->countryZone;
-    }
 
-    public function setCountryZone(?string $countryZone): self
-    {
-        $this->countryZone = $countryZone;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setCountry($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getCountry() === $this) {
-                $user->setCountry(null);
-            }
-        }
-
-        return $this;
-    }
 }

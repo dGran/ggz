@@ -2,32 +2,38 @@
 
 namespace App\Entity;
 
-use App\Repository\LanguageRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: LanguageRepository::class)]
+/**
+ * Language
+ *
+ * @ORM\Table(name="language")
+ * @ORM\Entity
+ */
 class Language
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
 
-    #[ORM\Column(length: 10)]
-    private ?string $isoCode = null;
-
-    #[ORM\OneToMany(mappedBy: 'language', targetEntity: CountryLang::class)]
-    private Collection $countryLangs;
-
-    public function __construct()
-    {
-         $this->countryLangs = new ArrayCollection();
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iso_code", type="string", length=10, nullable=false)
+     */
+    private $isoCode;
 
     public function getId(): ?int
     {
@@ -58,33 +64,5 @@ class Language
         return $this;
     }
 
-    /**
-     * @return Collection<int, CountryLang>
-     */
-    public function getCountryLangs(): Collection
-    {
-        return $this->countryLangs;
-    }
 
-    public function addCountryLang(CountryLang $countryLang): self
-    {
-        if (!$this->countryLangs->contains($countryLang)) {
-            $this->countryLangs->add($countryLang);
-            $countryLang->setLanguage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCountryLang(CountryLang $countryLang): self
-    {
-        if ($this->countryLangs->removeElement($countryLang)) {
-            // set the owning side to null (unless already changed)
-            if ($countryLang->getLanguage() === $this) {
-                $countryLang->setLanguage(null);
-            }
-        }
-
-        return $this;
-    }
 }

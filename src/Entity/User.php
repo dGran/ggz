@@ -2,66 +2,111 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
+/**
+ * User
+ *
+ * @ORM\Table(name="user", indexes={@ORM\Index(name="IDX_8D93D64938248176", columns={"currency_id"}), @ORM\Index(name="IDX_8D93D649F92F3E70", columns={"country_id"}), @ORM\Index(name="pk_user_account_type_idx", columns={"user_account_type"})})
+ * @ORM\Entity
+ */
 class User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 60, nullable: true)]
-    private ?string $nickname = null;
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="nickname", type="string", length=60, nullable=true)
+     */
+    private $nickname;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     */
+    private $email;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $password = null;
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
+     */
+    private $password;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $profilePic = null;
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="profile_pic", type="string", length=255, nullable=true)
+     */
+    private $profilePic;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $socialCredentials = null;
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="social_credentials", type="string", length=255, nullable=true)
+     */
+    private $socialCredentials;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $rememberToken = null;
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="remember_token", type="string", length=255, nullable=true)
+     */
+    private $rememberToken;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $resetPasswordExpires = null;
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="reset_password_expires", type="datetime", nullable=true)
+     */
+    private $resetPasswordExpires;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $marketingMailing = null;
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="marketing_mailing", type="boolean", nullable=true)
+     */
+    private $marketingMailing;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?Currency $currency = null;
+    /**
+     * @var \AccountType
+     *
+     * @ORM\ManyToOne(targetEntity="AccountType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_account_type", referencedColumnName="idaccount_type")
+     * })
+     */
+    private $userAccountType;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?Country $country = null;
+    /**
+     * @var \Currency
+     *
+     * @ORM\ManyToOne(targetEntity="Currency")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="currency_id", referencedColumnName="id")
+     * })
+     */
+    private $currency;
 
-    #[ORM\Column]
-    private ?bool $emailVerified = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $birthday = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $registrationDate = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $lastLogin = null;
-
-    #[ORM\Column]
-    private ?bool $admin = null;
-
-    #[ORM\Column]
-    private ?bool $accountStatus = null;
+    /**
+     * @var \Country
+     *
+     * @ORM\ManyToOne(targetEntity="Country")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * })
+     */
+    private $country;
 
     public function getId(): ?int
     {
@@ -164,6 +209,18 @@ class User
         return $this;
     }
 
+    public function getUserAccountType(): ?AccountType
+    {
+        return $this->userAccountType;
+    }
+
+    public function setUserAccountType(?AccountType $userAccountType): self
+    {
+        $this->userAccountType = $userAccountType;
+
+        return $this;
+    }
+
     public function getCurrency(): ?Currency
     {
         return $this->currency;
@@ -188,75 +245,5 @@ class User
         return $this;
     }
 
-    public function isEmailVerified(): ?bool
-    {
-        return $this->emailVerified;
-    }
 
-    public function setEmailVerified(bool $emailVerified): self
-    {
-        $this->emailVerified = $emailVerified;
-
-        return $this;
-    }
-
-    public function getBirthday(): ?\DateTimeInterface
-    {
-        return $this->birthday;
-    }
-
-    public function setBirthday(?\DateTimeInterface $birthday): self
-    {
-        $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    public function getRegistrationDate(): ?\DateTimeInterface
-    {
-        return $this->registrationDate;
-    }
-
-    public function setRegistrationDate(\DateTimeInterface $registrationDate): self
-    {
-        $this->registrationDate = $registrationDate;
-
-        return $this;
-    }
-
-    public function getLastLogin(): ?\DateTimeInterface
-    {
-        return $this->lastLogin;
-    }
-
-    public function setLastLogin(\DateTimeInterface $lastLogin): self
-    {
-        $this->lastLogin = $lastLogin;
-
-        return $this;
-    }
-
-    public function isAdmin(): ?bool
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(bool $admin): self
-    {
-        $this->admin = $admin;
-
-        return $this;
-    }
-
-    public function isAccountStatus(): ?bool
-    {
-        return $this->accountStatus;
-    }
-
-    public function setAccountStatus(bool $accountStatus): self
-    {
-        $this->accountStatus = $accountStatus;
-
-        return $this;
-    }
 }

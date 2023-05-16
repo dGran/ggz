@@ -2,34 +2,51 @@
 
 namespace App\Entity;
 
-use App\Repository\CountryLangRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CountryLangRepository::class)]
+/**
+ * CountryLang
+ *
+ * @ORM\Table(name="country_lang", indexes={@ORM\Index(name="IDX_B63A0F8682F1BAF4", columns={"language_id"}), @ORM\Index(name="IDX_B63A0F86F92F3E70", columns={"country_id"})})
+ * @ORM\Entity
+ */
 class CountryLang
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
 
-    #[ORM\ManyToOne(inversedBy: 'countryLangs')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Language $language = null;
+    /**
+     * @var \Language
+     *
+     * @ORM\ManyToOne(targetEntity="Language")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="language_id", referencedColumnName="id")
+     * })
+     */
+    private $language;
 
-    #[ORM\ManyToOne(targetEntity: Country::class, inversedBy: 'countryLangs')]
-    #[ORM\JoinColumn(name: "country_id", referencedColumnName: "id")]
+    /**
+     * @var \Country
+     *
+     * @ORM\ManyToOne(targetEntity="Country")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * })
+     */
     private $country;
-
-    public function __construct()
-    {
-        $this->countries = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -60,33 +77,17 @@ class CountryLang
         return $this;
     }
 
-    /**
-     * @return Collection<int, Country>
-     */
-    public function getCountries(): Collection
+    public function getCountry(): ?Country
     {
-        return $this->countries;
+        return $this->country;
     }
 
-    public function addCountry(Country $country): self
+    public function setCountry(?Country $country): self
     {
-        if (!$this->countries->contains($country)) {
-            $this->countries->add($country);
-            $country->setCountryLang($this);
-        }
+        $this->country = $country;
 
         return $this;
     }
 
-    public function removeCountry(Country $country): self
-    {
-        if ($this->countries->removeElement($country)) {
-            // set the owning side to null (unless already changed)
-            if ($country->getCountryLang() === $this) {
-                $country->setCountryLang(null);
-            }
-        }
 
-        return $this;
-    }
 }
