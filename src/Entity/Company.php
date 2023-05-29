@@ -43,7 +43,7 @@ class Company
     private $description;
 
     /**
-     * @var \CompanyType
+     * @var CompanyType
      *
      * @ORM\ManyToOne(targetEntity="CompanyType")
      * @ORM\JoinColumns({

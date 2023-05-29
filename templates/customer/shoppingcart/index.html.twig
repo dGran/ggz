@@ -1,0 +1,220 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-10 pb-2">
+    <div class="flex flex-row justify-between items-center">
+        <p class="ml-2 text-xl font-ubuntu font-bold text-disabled-gray mr-2">Shopping Cart: <span class="text-purpleggz">3 items</span> from <span class="text-purpleggz">2 sellers</span></p>
+        <p class="ml-2 text-lg font-ubuntu font-bold text-purpleggz mr-2">Need support?</p>
+    </div>
+</div>
+<div class="container flex mx-auto flex-row space-x-3">
+    <div class="flex flex-col w-2/3">
+        <div class="flex-1 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div class="flex flex-col">
+                <div class="flex flex-row ml-8 mr-8 justify-between items-center">
+                    <div class="flex flex-row items-center mt-2 ">
+                        <p class="ml-2 text-lg font-lato font-md text-disabled-gray mr-2">Seller: <span class="font-bold text-purpleggz">diderotto</span> (<span class="font-bold text-purpleggz2">16</span>)</p>
+                        <div class="flex items-center">
+                            <svg aria-hidden="true" class="w-6 h-6 text-yellow-400 gap-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg aria-hidden="true" class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg aria-hidden="true" class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg aria-hidden="true" class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg aria-hidden="true" class="w-6 h-6 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                    </div>
+                    <p class="font-lato text-md font-bold text-black-text mt-2">Shipping from Spain</p>
+                    <div class="flex flex-row items-center">
+                        <button type="button" class="mt-2 py-1 px-5 mr-3 mb-2 text-lg font-lato font-bold text-purpleggz text-gray-900 focus:outline-none bg-white rounded-lg border-2 border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            <p>Request combined shipping</p>
+                        </button>
+                        <svg fill="none" width="30" height="30" stroke="#969696" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="custom-horizontal-line2"></div>
+                <table class="w-full text-md font-lato text-left text-black-text">
+                    <thead class="text-sm text-disabled-gray">
+                        <tr>
+                            <th scope="col" class="px-10 py-3">
+                                Item description
+                            </th>
+                            <th scope="col" class="w-1/6 px-6 py-3 text-center">
+                                <div class="inline-flex items-center justify-center space-x-1">
+                                    <span>Condition</span>
+                                    <svg fill="#7D00E2" class="w-4 h-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path clip-rule="evenodd" fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"></path>
+                                    </svg>
+                                </div>
+                            </th>
+                            <th scope="col" class="w-1/6 px-6 py-3 text-center">
+                                <div class="inline-flex items-center justify-center space-x-1">
+                                    <span>Content</span>
+                                    <svg fill="#7D00E2" class="w-4 h-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path clip-rule="evenodd" fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"></path>
+                                    </svg>
+                                </div>
+                            </th>
+                            <th scope="col" class="w-1/6 px-6 py-3 text-center">
+                                Price
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b hover:bg-[#F5EBFD]">
+                            <td class="px-10 py-4">
+                                <div class="flex flex-row items-center">
+                                    <img src="{{asset('build/app/img/elden.png')}}" style="width: 80px; height: 108px;" class="object-cover border-2 border-gray-border">
+                                    <div class="flex flex-col ml-4">
+                                        <span class="font-lato text-xl font-bold text-black-text">Elden Ring</span>
+                                        <span class="font-lato text-base text-black-text">Playstation 5 - PAL(ES)</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                Silver
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                Laptop
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                $2999
+                            </td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-[#F5EBFD]">
+                            <td class="px-10 py-4">
+                                <div class="flex flex-row items-center">
+                                    <img src="{{asset('build/app/img/elden.png')}}" style="width: 80px; height: 108px;" class="object-cover border-2 border-gray-border">
+                                    <div class="flex flex-col ml-4">
+                                        <span class="font-lato text-xl font-bold text-black-text">Elden Ring</span>
+                                        <span class="font-lato text-base text-black-text">Playstation 5 - PAL(ES)</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                Silver
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                Laptop
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                $2999
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-footer bg-white mt-1 border-t-0.5 border-gray-200 py-4 flex items-center justify-between">
+                    <div class="flex flex-col w-3/5 ml-8">
+                        <p class="font-lato font-bold text-md mb-1">Add a note to your order <span class="text-disabled-gray">(instructions, requests, etc.)</span></p>
+                        <form>
+                            <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+                                    <label for="comment" class="sr-only">Your comment</label>
+                                    <textarea id="comment" rows="4" class="w-full px-0 text-md text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required></textarea>
+                                </div>
+                                <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+                                    <button type="submit" class="inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-[#A535FF] rounded-lg focus:ring-4 focus:ring-purple-200 hover:bg-[#7D00E2]">
+                                        Save note
+                                    </button>
+                                    <div class="flex pl-0 space-x-1 sm:pl-2">
+                                        <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path></svg>
+                                            <span class="sr-only">Attach file</span>
+                                        </button>
+                                        <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                                            <span class="sr-only">Set location</span>
+                                        </button>
+                                        <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+                                            <span class="sr-only">Upload image</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <p class="ml-auto text-xs text-gray-500">Remember, messages should follow our <a href="#" class="text-[#A535FF] hover:underline">Community Guidelines</a>.</p>
+                    </div>
+                    <div class="table mr-12">
+                        <div class="table-row">
+                            <div class="table-cell text-right font-lato italic text-lg text-disabled-gray pr-5">2 items</div>
+                            <div class="table-cell font-lato italic font-semibold text-lg text-black-text pl-5">83,65€</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell text-right font-lato italic text-lg text-disabled-gray pr-5">Applicable Tax</div>
+                            <div class="table-cell font-lato italic font-semibold text-lg text-black-text pl-5">0,00€</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell text-right font-lato italic text-lg text-disabled-gray pr-5">Gengemz Fee</div>
+                            <div class="table-cell font-lato italic font-semibold text-lg text-black-text pl-5">3,35€</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell text-right pr-4">
+                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-disabled-gray font-lato italic bg-white hover:bg-gray-100 border-2 border-[#D6D6D6] font-medium rounded-lg text-lg px-2 py-1 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 pr-2" type="button">Standard shipping <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                                <!-- Dropdown menu -->
+                                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                    <!-- ... Dropdown content ... -->
+                                </div>
+                            </div>
+                            <div class="table-cell font-lato italic font-semibold text-lg text-black-text pl-5">10,00€</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell text-right font-lato italic text-xl text-black-text font-bold pr-5">Total</div>
+                            <div class="table-cell font-lato italic font-semibold text-xl text-black-text pl-5">97,00€</div>
+                        </div>
+                    </div>
+                </div>  
+            </div>    
+        </div>
+    </div>
+    <div class="flex-1 flex-col w-1/3">
+        <div class="bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-3">
+            <div class="flex flex-row mx-8 mt-4 justify-between">
+                <p class="text-md font-lato font-bold text-black-text mr-2">Your details</p>
+                <p class="text-md font-lato font-bold text-purpleggz2 mr-2">Edit</p>
+            </div>
+            <p class="text-md font-lato font-bold text-black-text mx-8 mt-8">Payment Method: PayPal (mprats@gmail.com)</p>
+            <p class="text-md font-lato font-bold text-black-text mx-8">Shipping address:</p>
+            <div class="flex flex-col mx-16 mt-4 mb-6">
+                <p class="text-md italic font-lato text-black-text">Miquel Prats</p>
+                <p class="text-md italic font-lato text-black-text">Carrer de la Pau, 1</p>
+                <p class="text-md italic font-lato text-black-text">08001 Barcelona</p>
+                <p class="text-md italic font-lato text-black-text">Spain</p>
+            </div>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <p class="text-md font-lato font-bold text-black-text mx-8 mt-4">Bulk order</p>
+            <div class="flex flex-col mt-4 space-y-1">
+                <div class="flex flex-row justify-between mx-10">
+                    <p class="text-2xl font-bold font-lato text-disabled-gray">3 items</p>
+                    <p class="text-2xl font-bold font-lato text-purpleggz2">114,30€</p>
+                </div>
+                <div class="flex flex-row justify-between mx-10">
+                    <p class="text-2xl font-bold font-lato text-disabled-gray">2 shippings</p>
+                    <p class="text-2xl font-bold font-lato text-purpleggz2">25,00€</p>
+                </div>
+                <div class="flex flex-row justify-between mx-10">
+                    <p class="text-2xl font-bold font-lato text-disabled-gray">GGZ service fee</p>
+                    <p class="text-2xl font-bold font-lato text-purpleggz2">4,55€</p>
+                </div>
+            </div>
+            <div class="custom-horizontal-line mx-10 my-4"></div>
+            <div class="flex flex-row justify-between mx-10 mb-8">
+                <p class="text-3xl font-bold font-lato text-purpleggz">TOTAL</p>
+                <p class="text-3xl font-bold font-lato text-purpleggz">143,85€</p>
+            </div>
+            <div class="flex flex-row justify-center mb-6">
+                <button type="button" class="text-[#FFFFFF] bg-[#7D00E2] focus:ring-4 focus:outline-none focus:ring-purple-200 font-bold font-ubuntu rounded-lg text-2xl py-2.5 text-center inline-flex mx-auto px-6 mb-2">
+                    PROCEED TO CHECKOUT
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "customer/home/tabcontents.html.twig" %}
+
+
+{% endblock %}

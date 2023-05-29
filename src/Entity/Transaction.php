@@ -37,7 +37,7 @@ class Transaction
     private $transactionBuyerNote;
 
     /**
-     * @var \User
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
@@ -47,7 +47,7 @@ class Transaction
     private $transactionBuyer;
 
     /**
-     * @var \TransactionState
+     * @var TransactionState
      *
      * @ORM\ManyToOne(targetEntity="TransactionState")
      * @ORM\JoinColumns({
@@ -57,7 +57,7 @@ class Transaction
     private $transactionState;
 
     /**
-     * @var \Currency
+     * @var Currency
      *
      * @ORM\ManyToOne(targetEntity="Currency")
      * @ORM\JoinColumns({
@@ -67,7 +67,7 @@ class Transaction
     private $transactionCurrency;
 
     /**
-     * @var \Address
+     * @var Address
      *
      * @ORM\ManyToOne(targetEntity="Address")
      * @ORM\JoinColumns({
@@ -77,7 +77,7 @@ class Transaction
     private $transactionAddress;
 
     /**
-     * @var \User
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({

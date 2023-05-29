@@ -79,7 +79,7 @@ class Platform
     private $platformLinks;
 
     /**
-     * @var \PlatformType
+     * @var PlatformType
      *
      * @ORM\ManyToOne(targetEntity="PlatformType")
      * @ORM\JoinColumns({
@@ -89,7 +89,7 @@ class Platform
     private $platformType;
 
     /**
-     * @var \Company
+     * @var Company
      *
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumns({
@@ -99,7 +99,7 @@ class Platform
     private $platformCompany;
 
     /**
-     * @var \PlatformFamily
+     * @var PlatformFamily
      *
      * @ORM\ManyToOne(targetEntity="PlatformFamily")
      * @ORM\JoinColumns({

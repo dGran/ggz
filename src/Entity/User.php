@@ -2,127 +2,39 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * User
- *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="IDX_8D93D64938248176", columns={"currency_id"}), @ORM\Index(name="IDX_8D93D649F92F3E70", columns={"country_id"}), @ORM\Index(name="pk_user_account_type_idx", columns={"user_account_type"})})
- * @ORM\Entity
- */
-class User
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $email = null;
+
+    #[ORM\Column]
+    private array $roles = [];
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="nickname", type="string", length=60, nullable=true)
+     * @var string The hashed password
      */
-    private $nickname;
+    #[ORM\Column]
+    private ?string $password = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     */
-    private $email;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
-     */
-    private $password;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="profile_pic", type="string", length=255, nullable=true)
-     */
-    private $profilePic;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="social_credentials", type="string", length=255, nullable=true)
-     */
-    private $socialCredentials;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="remember_token", type="string", length=255, nullable=true)
-     */
-    private $rememberToken;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="reset_password_expires", type="datetime", nullable=true)
-     */
-    private $resetPasswordExpires;
-
-    /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="marketing_mailing", type="boolean", nullable=true)
-     */
-    private $marketingMailing;
-
-    /**
-     * @var \AccountType
-     *
-     * @ORM\ManyToOne(targetEntity="AccountType")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_account_type", referencedColumnName="idaccount_type")
-     * })
-     */
-    private $userAccountType;
-
-    /**
-     * @var \Currency
-     *
-     * @ORM\ManyToOne(targetEntity="Currency")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="currency_id", referencedColumnName="id")
-     * })
-     */
-    private $currency;
-
-    /**
-     * @var \Country
-     *
-     * @ORM\ManyToOne(targetEntity="Country")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="country_id", referencedColumnName="id")
-     * })
-     */
-    private $country;
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNickname(): ?string
-    {
-        return $this->nickname;
-    }
-
-    public function setNickname(?string $nickname): self
-    {
-        $this->nickname = $nickname;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -137,113 +49,68 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword(?string $password): self
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    public function getProfilePic(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        return $this->profilePic;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
-    public function setProfilePic(?string $profilePic): self
+    public function isVerified(): bool
     {
-        $this->profilePic = $profilePic;
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
-
-    public function getSocialCredentials(): ?string
-    {
-        return $this->socialCredentials;
-    }
-
-    public function setSocialCredentials(?string $socialCredentials): self
-    {
-        $this->socialCredentials = $socialCredentials;
-
-        return $this;
-    }
-
-    public function getRememberToken(): ?string
-    {
-        return $this->rememberToken;
-    }
-
-    public function setRememberToken(?string $rememberToken): self
-    {
-        $this->rememberToken = $rememberToken;
-
-        return $this;
-    }
-
-    public function getResetPasswordExpires(): ?\DateTimeInterface
-    {
-        return $this->resetPasswordExpires;
-    }
-
-    public function setResetPasswordExpires(?\DateTimeInterface $resetPasswordExpires): self
-    {
-        $this->resetPasswordExpires = $resetPasswordExpires;
-
-        return $this;
-    }
-
-    public function isMarketingMailing(): ?bool
-    {
-        return $this->marketingMailing;
-    }
-
-    public function setMarketingMailing(?bool $marketingMailing): self
-    {
-        $this->marketingMailing = $marketingMailing;
-
-        return $this;
-    }
-
-    public function getUserAccountType(): ?AccountType
-    {
-        return $this->userAccountType;
-    }
-
-    public function setUserAccountType(?AccountType $userAccountType): self
-    {
-        $this->userAccountType = $userAccountType;
-
-        return $this;
-    }
-
-    public function getCurrency(): ?Currency
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency(?Currency $currency): self
-    {
-        $this->currency = $currency;
-
-        return $this;
-    }
-
-    public function getCountry(): ?Country
-    {
-        return $this->country;
-    }
-
-    public function setCountry(?Country $country): self
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-
 }

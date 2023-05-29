@@ -50,7 +50,7 @@ class Series
     private $seriesPicture;
 
     /**
-     * @var \Series
+     * @var Series
      *
      * @ORM\ManyToOne(targetEntity="Series")
      * @ORM\JoinColumns({
@@ -60,7 +60,7 @@ class Series
     private $seriesParent;
 
     /**
-     * @var \Universe
+     * @var Universe
      *
      * @ORM\ManyToOne(targetEntity="Universe")
      * @ORM\JoinColumns({

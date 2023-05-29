@@ -72,7 +72,7 @@ class Master
     private $masterLocked;
 
     /**
-     * @var \Region
+     * @var Region
      *
      * @ORM\ManyToOne(targetEntity="Region")
      * @ORM\JoinColumns({
@@ -82,7 +82,7 @@ class Master
     private $masterRegion;
 
     /**
-     * @var \ContributionState
+     * @var ContributionState
      *
      * @ORM\ManyToOne(targetEntity="ContributionState")
      * @ORM\JoinColumns({
@@ -92,7 +92,7 @@ class Master
     private $masterContributionState;
 
     /**
-     * @var \Genre
+     * @var Genre
      *
      * @ORM\ManyToOne(targetEntity="Genre")
      * @ORM\JoinColumns({
@@ -102,7 +102,7 @@ class Master
     private $masterGenre;
 
     /**
-     * @var \Platform
+     * @var Platform
      *
      * @ORM\ManyToOne(targetEntity="Platform")
      * @ORM\JoinColumns({
@@ -112,7 +112,7 @@ class Master
     private $masterPlatform;
 
     /**
-     * @var \Series
+     * @var Series
      *
      * @ORM\ManyToOne(targetEntity="Series")
      * @ORM\JoinColumns({
@@ -122,7 +122,7 @@ class Master
     private $masterSeries;
 
     /**
-     * @var \Country
+     * @var Country
      *
      * @ORM\ManyToOne(targetEntity="Country")
      * @ORM\JoinColumns({
@@ -132,7 +132,7 @@ class Master
     private $masterCountry;
 
     /**
-     * @var \Language
+     * @var Language
      *
      * @ORM\ManyToOne(targetEntity="Language")
      * @ORM\JoinColumns({
@@ -142,7 +142,7 @@ class Master
     private $masterLanguage;
 
     /**
-     * @var \Company
+     * @var Company
      *
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumns({
@@ -152,7 +152,7 @@ class Master
     private $masterPublisher;
 
     /**
-     * @var \Universe
+     * @var Universe
      *
      * @ORM\ManyToOne(targetEntity="Universe")
      * @ORM\JoinColumns({
@@ -162,7 +162,7 @@ class Master
     private $masterUniverse;
 
     /**
-     * @var \Company
+     * @var Company
      *
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumns({
@@ -172,7 +172,7 @@ class Master
     private $masterDeveloper;
 
     /**
-     * @var \NumberOfPlayers
+     * @var NumberOfPlayers
      *
      * @ORM\ManyToOne(targetEntity="NumberOfPlayers")
      * @ORM\JoinColumns({

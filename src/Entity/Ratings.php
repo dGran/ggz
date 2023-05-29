@@ -65,7 +65,7 @@ class Ratings
     private $ratingsReviewLastEditDate;
 
     /**
-     * @var \User
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({

@@ -1,0 +1,160 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <div class="flex flex-row">
+        <p class="pl-16 font-lato text-4xl font-extrabold text-[#C4C4C4] tracking-wider">3/3</p>
+    </div>
+    <div class="flex flex-col mt-4">
+        <div class="flex justify-center">
+            <p class="font-ubuntu text-5xl font-bold text-purpleggz">Add a bit of flair</p>
+        </div>
+        <div class="flex justify-center">
+            <p class="font-lato text-xl font-bold text-blacktext">A picture is worth more than a thousand words</p>
+        </div>
+        <div class="flex items-center justify-center mt-8">
+            <label for="dropzone-file" class="relative flex items-center justify-center w-64 h-64 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                <div id="previewContainer" class="absolute inset-0 flex items-center justify-center">
+                    <img id="previewImage" src="#" alt="Image preview" class="rounded-full w-full h-full object-cover" style="display: none; z-index: 20;" />
+                    <div id="grayOverlay" class="absolute inset-0 bg-disabled-gray opacity-0" style="z-index: 10;"></div>
+                    <span id="changeText" style="display: none; z-index: 10; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Change</span>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6" id="uploadInstructions">
+                        <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                    </div>
+                </div>
+                <input id="dropzone-file" type="file" class="hidden" />
+            </label>
+        </div>
+        <button id="addProfilePicButton" type="button" class="mt-8 text-[#FFFFFF] bg-[#7D00E2] focus:ring-4 focus:outline-none focus:ring-[#C6C6C6] hover:bg-[#6B00C1] font-bold font-ubuntu rounded-lg text-2xl py-2.5 text-center inline-flex mx-auto px-6 mb-2">
+            ADD PROFILE PIC
+        </button>
+        <label for="addProfilePicButton" class="hidden">
+            <input id="dropzone-file" type="file" class="hidden" />
+        </label>
+        </div>
+        <div class="flex flex-col w-3/5 mx-auto mt-8">
+            <p class="ml-2 text-2xl font-bold font-lato text-blacktext dark:text-gray-300 text-center">Lastly, please choose who you will be sharing your content with (you will be able to change this again later, if you wish)</p>
+            <div class="flex justify-center mt-4">
+                <select style="width: 22rem;" id="message" class="black-placeholder text-whiteblock p-2.5 pl-4 text-xl font-ubuntu text-blacktext bg-[#F2EDF6] border-b-2 border-[#303030] rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2">
+                    <option value="" disabled selected>Share my content with</option>
+                    <option value="option1">Everybody</option>
+                    <option value="option2">Friends only</option>
+                    <option value="option3">Nobody</option>
+                </select>
+            </div>
+            <button type="button" id="submitButton" class="mt-12 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-bold font-ubuntu rounded-lg text-2xl py-2.5 text-center inline-flex mx-auto px-6 mb-2 disabled" disabled>
+                COMPLETE REGISTRATION
+            </button>
+            <div class="flex flex-row items-center mt-2">
+                <a href="/profile" class="font-ubuntu font-bold text-purpleggz text-xl mx-auto">SKIP THIS STEP</a>    
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function checkConditions() {
+        const fileInput = document.getElementById('dropzone-file');
+        const privacySelect = document.getElementById('message');
+        const submitButton = document.getElementById('submitButton');
+
+        if (fileInput.files.length > 0 && privacySelect.value) {
+            submitButton.removeAttribute('disabled');
+            submitButton.setAttribute('enabled', '');
+            submitButton.classList.remove('opacity-50');
+            submitButton.style.backgroundColor = '#7D00E2';
+            submitButton.style.color = '#FFFFFF';
+            submitButton.style.cursor = 'pointer';
+            submitButton.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.24), 0 4px 6px rgba(0, 0, 0, 0.12)';
+            submitButton.onclick = () => {
+                window.location.href = '/profile';
+            };
+        } else {
+            submitButton.setAttribute('disabled', '');
+            submitButton.classList.add('opacity-50');
+            submitButton.style.backgroundColor = '#CCCCCC';
+            submitButton.style.color = '#878787';
+            submitButton.style.cursor = 'not-allowed';
+        }
+    }
+    function previewImage() {
+        const fileInput = document.getElementById('dropzone-file');
+        const preview = document.getElementById('previewImage');
+        const uploadInstructions = document.getElementById('uploadInstructions');
+        const addProfilePicButton = document.getElementById('addProfilePicButton');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                uploadInstructions.style.display = 'none';
+                addProfilePicButton.setAttribute('disabled', '');
+                addProfilePicButton.style.cursor = 'not-allowed';
+                addProfilePicButton.classList.add('disabled');
+                addProfilePicButton.classList.remove('hover:bg-[#6B00C1]');
+                const grayOverlay = document.getElementById('grayOverlay');
+                grayOverlay.style.opacity = '0';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        const previewContainer = document.getElementById('previewContainer');
+        const changeText = document.getElementById('changeText');
+        previewContainer.addEventListener('mouseover', () => {
+            if (previewImage.style.display === 'block') {
+                changeText.style.display = 'block';
+                grayOverlay.style.opacity = '0.5';
+            }
+        });
+        previewContainer.addEventListener('mouseout', () => {
+            changeText.style.display = 'none';
+            grayOverlay.style.opacity = '0';
+        });
+    }
+    function showChangeText() {
+        const changeText = document.getElementById('changeText');
+        const grayOverlay = document.getElementById('grayOverlay');
+        if (preview.style.display === 'block') {
+            changeText.style.display = 'block';
+            grayOverlay.style.opacity = '0.5';
+        }
+    }
+
+    function hideChangeText() {
+        const changeText = document.getElementById('changeText');
+        const grayOverlay = document.getElementById('grayOverlay');
+        changeText.style.display = 'none';
+        grayOverlay.style.opacity = '0';
+    }
+
+    document.getElementById('dropzone-file').addEventListener('change', () => {
+        previewImage();
+        checkConditions();
+    });
+    document.getElementById('message').addEventListener('change', checkConditions);
+    document.getElementById('addProfilePicButton').addEventListener('click', () => {
+        if (!document.getElementById('addProfilePicButton').hasAttribute('disabled')) {
+            document.getElementById('dropzone-file').click();
+        }
+    });
+
+    const previewContainer = document.getElementById('previewContainer');
+    const grayOverlay = document.getElementById('grayOverlay');
+    previewContainer.addEventListener('mouseenter', showChangeText);
+    previewContainer.addEventListener('mouseleave', hideChangeText);    
+</script>
+
+{% include "customer/home/tabcontents.html.twig" %}
+
+
+{% endblock %}
+
+

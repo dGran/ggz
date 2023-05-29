@@ -43,7 +43,7 @@ class Country
     private $countryZone;
 
     /**
-     * @var \Currency
+     * @var Currency
      *
      * @ORM\ManyToOne(targetEntity="Currency")
      * @ORM\JoinColumns({

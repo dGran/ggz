@@ -50,7 +50,7 @@ class Universe
     private $universePicture;
 
     /**
-     * @var \Universe
+     * @var Universe
      *
      * @ORM\ManyToOne(targetEntity="Universe")
      * @ORM\JoinColumns({

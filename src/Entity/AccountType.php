@@ -63,6 +63,4 @@ class AccountType
 
         return $this;
     }
-
-
 }

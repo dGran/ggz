@@ -29,7 +29,7 @@ class CountryLang
     private $name;
 
     /**
-     * @var \Language
+     * @var Language
      *
      * @ORM\ManyToOne(targetEntity="Language")
      * @ORM\JoinColumns({
@@ -39,7 +39,7 @@ class CountryLang
     private $language;
 
     /**
-     * @var \Country
+     * @var Country
      *
      * @ORM\ManyToOne(targetEntity="Country")
      * @ORM\JoinColumns({

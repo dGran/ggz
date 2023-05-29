@@ -29,7 +29,7 @@ class GameCredits
     private $gameCreditsOrder;
 
     /**
-     * @var \CreditType
+     * @var CreditType
      *
      * @ORM\ManyToOne(targetEntity="CreditType")
      * @ORM\JoinColumns({
@@ -39,7 +39,7 @@ class GameCredits
     private $gameCreditsCreditType;
 
     /**
-     * @var \Master
+     * @var Master
      *
      * @ORM\ManyToOne(targetEntity="Master")
      * @ORM\JoinColumns({
@@ -49,7 +49,7 @@ class GameCredits
     private $gameCreditsGame;
 
     /**
-     * @var \Credits
+     * @var Credits
      *
      * @ORM\ManyToOne(targetEntity="Credits")
      * @ORM\JoinColumns({

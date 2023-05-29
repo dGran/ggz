@@ -79,47 +79,47 @@ class Edition
     private $editionLatestUpdate;
 
     /**
-     * @var \ContributionState
+     * @var ContributionState
      *
      * @ORM\ManyToOne(targetEntity="ContributionState")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="edition_contribution_state_id", referencedColumnName="idcontribution_state")
+     * @ORM\JoinColumn(name="edition_contribution_state_id", referencedColumnName="idcontribution_state")
      * })
      */
     private $editionContributionState;
 
     /**
-     * @var \Genre
+     * @var Genre
      *
      * @ORM\ManyToOne(targetEntity="Genre")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="edition_genre_id", referencedColumnName="idgenre")
+     * @ORM\JoinColumn(name="edition_genre_id", referencedColumnName="idgenre")
      * })
      */
     private $editionGenre;
 
     /**
-     * @var \NumberOfPlayers
+     * @var NumberOfPlayers
      *
      * @ORM\ManyToOne(targetEntity="NumberOfPlayers")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="edition_number_of_players_id", referencedColumnName="idnumber_of_players")
+     * @ORM\JoinColumn(name="edition_number_of_players_id", referencedColumnName="idnumber_of_players")
      * })
      */
     private $editionNumberOfPlayers;
 
     /**
-     * @var \Region
+     * @var Region
      *
      * @ORM\ManyToOne(targetEntity="Region")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="edition_region_id", referencedColumnName="idregion")
+     * @ORM\JoinColumn(name="edition_region_id", referencedColumnName="idregion")
      * })
      */
     private $editionRegion;
 
     /**
-     * @var \Country
+     * @var Country
      *
      * @ORM\ManyToOne(targetEntity="Country")
      * @ORM\JoinColumns({
@@ -129,7 +129,7 @@ class Edition
     private $editionCountry;
 
     /**
-     * @var \Language
+     * @var Language
      *
      * @ORM\ManyToOne(targetEntity="Language")
      * @ORM\JoinColumns({
@@ -139,7 +139,7 @@ class Edition
     private $editionLanguage;
 
     /**
-     * @var \Platform
+     * @var Platform
      *
      * @ORM\ManyToOne(targetEntity="Platform")
      * @ORM\JoinColumns({
@@ -149,7 +149,7 @@ class Edition
     private $editionPlatform;
 
     /**
-     * @var \Series
+     * @var Series
      *
      * @ORM\ManyToOne(targetEntity="Series")
      * @ORM\JoinColumns({
@@ -159,7 +159,7 @@ class Edition
     private $editionSeries;
 
     /**
-     * @var \Company
+     * @var Company
      *
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumns({
@@ -169,7 +169,7 @@ class Edition
     private $editionDeveloper;
 
     /**
-     * @var \Master
+     * @var Master
      *
      * @ORM\ManyToOne(targetEntity="Master")
      * @ORM\JoinColumns({
@@ -179,7 +179,7 @@ class Edition
     private $editionMaster;
 
     /**
-     * @var \Company
+     * @var Company
      *
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumns({
@@ -189,7 +189,7 @@ class Edition
     private $editionPublisher;
 
     /**
-     * @var \Universe
+     * @var Universe
      *
      * @ORM\ManyToOne(targetEntity="Universe")
      * @ORM\JoinColumns({

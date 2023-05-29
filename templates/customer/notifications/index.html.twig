@@ -1,0 +1,92 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-6 pb-2">
+    <div class="container flex mx-auto flex-row space-x-3 content-center w-2/3">
+        <div class="flex flex-col w-full space-y-2">
+            <p class="text-2xl font-ubuntu font-bold text-purpleggz ml-4">Notifications</p>
+            <div class="flex-1 bg-white border border-gray-200 rounded-lg shadow-xl">
+                <div class="flex flex-col">
+                    <div class="flex flex-row justify-end">
+                        <p class="mt-4 text-md font-lato font-bold text-purpleggz2 mr-8">Mark all as read</p>
+                    </div>
+                    <ul class="py-2 font-lato text-lg text-black-text" aria-labelledby="dropdownDefaultButton">
+                    <li class="pl-4">
+                        <a href="/profile" class="flex flex-row items-center block px-3 py-2 hover:bg-[#F5EBFD] space-x-2">
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="8" cy="8" r="8" fill="#A535FF" />
+                            </svg>
+                            <div class="flex flex-row items-center space-x-4">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiUQ81m1FEWnNAXTIMivxS_AS7Z-QpD3WkFAYJlSJTpP6ap_kLETK66hQYx7Pc9Z4wOYg&usqp=CAU" class="rounded-full object-cover w-16 h-16">
+                                <div class="flex flex-col">
+                                    <p class="font-lato text-lg text-black-text">You made a sale! Check here the status of the new order.</p>
+                                    <p class="font-lato text-md text-disabled-gray">30 minutes ago</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="custom-horizontal-line2"></div>
+                    <li class="pl-4">
+                        <a href="#" class="flex flex-row items-center block px-4 py-2 hover:bg-[#F5EBFD] space-x-2">
+                            <div class="flex flex-row items-center space-x-4 w-full">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiUQ81m1FEWnNAXTIMivxS_AS7Z-QpD3WkFAYJlSJTpP6ap_kLETK66hQYx7Pc9Z4wOYg&usqp=CAU" class="rounded-full object-cover w-16 h-16">
+                                <div class="flex flex-col w-full">
+                                    <p class="font-lato text-lg text-disabled-gray pr-4">An item from your wantlist has been listed. To purchase, click here and add the item to your shopping cart.</p>
+                                    <p class="font-lato text-md text-[#CBCBCB]">30 minutes ago</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="custom-horizontal-line2"></div>
+                    <li class="pl-4">
+                        <a href="#" class="flex flex-row items-center block px-4 py-2 hover:bg-[#F5EBFD] space-x-2">
+                            <div class="flex flex-row items-center space-x-4 w-full">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiUQ81m1FEWnNAXTIMivxS_AS7Z-QpD3WkFAYJlSJTpP6ap_kLETK66hQYx7Pc9Z4wOYg&usqp=CAU" class="rounded-full object-cover w-16 h-16">
+                                <div class="flex flex-col w-full">
+                                    <p class="font-lato text-lg text-disabled-gray pr-4">An item from your wantlist has been listed. To purchase, click here and add the item to your shopping cart.</p>
+                                    <p class="font-lato text-md text-[#CBCBCB]">30 minutes ago</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="custom-horizontal-line2"></div>
+                    <li class="pl-4">
+                        <a href="#" class="flex flex-row items-center block px-4 py-2 hover:bg-[#F5EBFD] space-x-2">
+                            <div class="flex flex-row items-center space-x-4 w-full">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiUQ81m1FEWnNAXTIMivxS_AS7Z-QpD3WkFAYJlSJTpP6ap_kLETK66hQYx7Pc9Z4wOYg&usqp=CAU" class="rounded-full object-cover w-16 h-16">
+                                <div class="flex flex-col w-full">
+                                    <p class="font-lato text-lg text-disabled-gray pr-4">An item from your wantlist has been listed. To purchase, click here and add the item to your shopping cart.</p>
+                                    <p class="font-lato text-md text-[#CBCBCB]">30 minutes ago</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="custom-horizontal-line2"></div>
+                    <li class="pl-4">
+                        <a href="#" class="flex flex-row items-center block px-4 py-2 hover:bg-[#F5EBFD] space-x-2">
+                            <div class="flex flex-row items-center space-x-4 w-full">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiUQ81m1FEWnNAXTIMivxS_AS7Z-QpD3WkFAYJlSJTpP6ap_kLETK66hQYx7Pc9Z4wOYg&usqp=CAU" class="rounded-full object-cover w-16 h-16">
+                                <div class="flex flex-col w-full">
+                                    <p class="font-lato text-lg text-disabled-gray pr-4">An item from your wantlist has been listed. To purchase, click here and add the item to your shopping cart.</p>
+                                    <p class="font-lato text-md text-[#CBCBCB]">30 minutes ago</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    </ul>
+                    <div class="flex flex-row justify-center py-4">
+                        <a href="#" class="font-lato text-lg text-[#CBCBCB]">You are up to date ^_^</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include "customer/home/tabcontents.html.twig" %}
+
+
+{% endblock %}

@@ -29,7 +29,7 @@ class Unit
     private $unitPrice;
 
     /**
-     * @var \Condition
+     * @var Condition
      *
      * @ORM\ManyToOne(targetEntity="Condition")
      * @ORM\JoinColumns({
@@ -39,7 +39,7 @@ class Unit
     private $unitCondition;
 
     /**
-     * @var \Edition
+     * @var Edition
      *
      * @ORM\ManyToOne(targetEntity="Edition")
      * @ORM\JoinColumns({
@@ -49,7 +49,7 @@ class Unit
     private $unitEdition;
 
     /**
-     * @var \UnitContent
+     * @var UnitContent
      *
      * @ORM\ManyToOne(targetEntity="UnitContent")
      * @ORM\JoinColumns({
@@ -59,7 +59,7 @@ class Unit
     private $unitContent;
 
     /**
-     * @var \User
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
@@ -69,7 +69,7 @@ class Unit
     private $unitUser;
 
     /**
-     * @var \Currency
+     * @var Currency
      *
      * @ORM\ManyToOne(targetEntity="Currency")
      * @ORM\JoinColumns({

@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>{% block title %}Gengemz - Sign up{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body class="bg-purpleggz2">
+        <div class="flex flex-col items-center justify-center h-screen">
+            <p class="text-white font-ubuntu font-bold text-5xl pb-16">Log in</p>
+            <button type="button" style="width: 22rem;" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 mb-2">
+            <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
+            Continue with Google
+            </button>
+            <button type="button" style="width: 22rem;" class="px-16 text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#3b5998]/55 mb-2">
+            <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path></svg>
+            Continue with Facebook
+            </button>
+            <div style="width: 20rem; height: 2px; background-color: white;" class="mt-6 mb-2"></div>
+            <textarea style="width: 22rem;" id="message" rows="1" class="white-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-white bg-gray-50 border-b-2 border-white rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2 bg-opacity-25" placeholder="E-mail address"></textarea>
+            <textarea style="width: 22rem;" id="message" rows="1" class="white-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-white bg-gray-50 border-b-2 border-white rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-2 mb-2 bg-opacity-25" placeholder="Password"></textarea>
+            <div style="width: 22rem;" class="flex items-center pb-4 justify-between">
+                <div class="flex items-center">
+                    <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="default-checkbox" class="ml-2 text-sm font-medium font-lato text-white dark:text-gray-300">Remember me</label>
+                </div>
+                <a href="#" class="ml-auto text-sm font-medium font-lato text-white dark:text-gray-300">Forgot password?</a>
+            </div>
+            <div class="flex flex-col pt-1">
+                <button type="button" style="width: 22rem;" class="text-[#878787] bg-[#CCCCCC] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 mb-2">
+                Sign in
+                </button>
+            </div>
+            <div class="flex flex-row pt-2">
+                <p class="font-lato text-white font-regular">New user?</p>
+                <a href="#" class="pl-2 font-lato text-white font-bold">SIGN UP HERE</a>
+            </div>
+            <div class="flex flex-row pt-20">
+                <p class="font-lato text-[#C4C4C4] font-regular">By logging in, you acknowledge that you have read and agree to accept Gengemz’s</p>
+                <a href="#" class="pl-1 font-lato text-white font-bold underline">Terms & Conditions</a>
+                <p class="pl-1 font-lato text-[#C4C4C4] font-regular">and</p>
+                <a href="#" class="pl-1 font-lato text-white font-bold underline">Privacy Policy</a>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
