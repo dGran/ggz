@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\ToReview;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,7 +78,7 @@ class Platform
     private $platformLinks;
 
     /**
-     * @var PlatformType
+     * @var \PlatformType
      *
      * @ORM\ManyToOne(targetEntity="PlatformType")
      * @ORM\JoinColumns({
@@ -89,7 +88,7 @@ class Platform
     private $platformType;
 
     /**
-     * @var Company
+     * @var \Company
      *
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumns({
@@ -99,7 +98,7 @@ class Platform
     private $platformCompany;
 
     /**
-     * @var PlatformFamily
+     * @var \PlatformFamily
      *
      * @ORM\ManyToOne(targetEntity="PlatformFamily")
      * @ORM\JoinColumns({

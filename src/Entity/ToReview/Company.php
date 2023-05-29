@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\ToReview;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,7 +43,7 @@ class Company
     private $description;
 
     /**
-     * @var CompanyType
+     * @var \CompanyType
      *
      * @ORM\ManyToOne(targetEntity="CompanyType")
      * @ORM\JoinColumns({

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\ToReview;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -50,7 +50,7 @@ class Universe
     private $universePicture;
 
     /**
-     * @var Universe
+     * @var \Universe
      *
      * @ORM\ManyToOne(targetEntity="Universe")
      * @ORM\JoinColumns({

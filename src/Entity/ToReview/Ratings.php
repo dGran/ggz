@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\ToReview;
 
-use Doctrine\DBAL\Types\Types;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -65,7 +65,7 @@ class Ratings
     private $ratingsReviewLastEditDate;
 
     /**
-     * @var User
+     * @var \User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
