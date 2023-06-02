@@ -6,13 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/onboardingsns', name: 'app_onboardingsns')]
 class OnboardingsnsController extends AbstractController
 {
-    #[Route('/onboardingsns', name: 'app_onboardingsns')]
-    public function index(): Response
+    public function __invoke(): Response
     {
-        return $this->render('onboardingsns/index.html.twig', [
-            'controller_name' => 'OnboardingsnsController',
-        ]);
+        return $this->render('customer/onboardingsns/index.html.twig');
     }
 }

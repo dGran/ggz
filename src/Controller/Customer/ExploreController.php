@@ -14,6 +14,6 @@ class ExploreController extends AbstractController
 {
     public function __invoke(Request $request): Response
     {
-        return $this->render('customer/explore/list.html.twig', []);
+        return $this->render('customer/explore/list.html.twig');
     }
 }

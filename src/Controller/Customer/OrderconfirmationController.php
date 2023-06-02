@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/orderconfirmation', name: 'app_orderconfirmation')]
 class OrderconfirmationController extends AbstractController
 {
-    #[Route('/orderconfirmation', name: 'app_orderconfirmation')]
-    public function index(): Response
+    public function __invoke(): Response
     {
-        return $this->render('orderconfirmation/index.html.twig');
+        return $this->render('customer/orderconfirmation/index.html.twig');
     }
 }

@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/shoppingcart', name: 'app_shoppingcart')]
 class ShoppingcartController extends AbstractController
 {
-    #[Route('/shoppingcart', name: 'app_shoppingcart')]
-    public function index(): Response
+    public function __invoke(): Response
     {
-        return $this->render('shoppingcart/index.html.twig');
+        return $this->render('customer/shoppingcart/index.html.twig');
     }
 }

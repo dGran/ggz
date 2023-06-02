@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/notifications', name: 'app_notifications')]
 class NotificationsController extends AbstractController
 {
-    #[Route('/notifications', name: 'app_notifications')]
-    public function index(): Response
+    public function __invoke(): Response
     {
-        return $this->render('notifications/index.html.twig');
+        return $this->render('customer/notifications/index.html.twig');
     }
 }
