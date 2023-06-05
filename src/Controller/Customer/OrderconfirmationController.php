@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/orderconfirmation', name: 'app_orderconfirmation')]
+#[Route('/orderconfirmation', name: 'customer_orderconfirmation')]
 class OrderconfirmationController extends AbstractController
 {
     public function __invoke(): Response

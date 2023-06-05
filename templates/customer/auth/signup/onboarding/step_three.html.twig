@@ -1,5 +1,8 @@
 {% extends 'customer/base.html.twig' %}
 
+{% set whithoutHeader = true %}
+{% set whithoutFooter = true %}
+
 {% block title %}Hello TestController!{% endblock %}
 
 {% block content %}
@@ -151,8 +154,6 @@
     previewContainer.addEventListener('mouseenter', showChangeText);
     previewContainer.addEventListener('mouseleave', hideChangeText);    
 </script>
-
-{% include "customer/home/tabcontents.html.twig" %}
 
 
 {% endblock %}

@@ -2,7 +2,7 @@
 
 namespace App\Entity\ToReview;
 
-use App\Entity\User;
+use App\Entity\UserGGZ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -189,12 +189,12 @@ class Address
         return $this;
     }
 
-    public function getAddressUser(): ?User
+    public function getAddressUser(): ?UserGGZ
     {
         return $this->addressUser;
     }
 
-    public function setAddressUser(?User $addressUser): self
+    public function setAddressUser(?UserGGZ $addressUser): self
     {
         $this->addressUser = $addressUser;
 

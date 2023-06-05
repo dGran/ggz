@@ -2,7 +2,7 @@
 
 namespace App\Entity\ToReview;
 
-use App\Entity\User;
+use App\Entity\UserGGZ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -132,12 +132,12 @@ class Unit
         return $this;
     }
 
-    public function getUnitUser(): ?User
+    public function getUnitUser(): ?UserGGZ
     {
         return $this->unitUser;
     }
 
-    public function setUnitUser(?User $unitUser): self
+    public function setUnitUser(?UserGGZ $unitUser): self
     {
         $this->unitUser = $unitUser;
 

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/lists', name: 'app_lists')]
+#[Route('/lists', name: 'customer_lists')]
 class ListsController extends AbstractController
 {
     public function __invoke(): Response

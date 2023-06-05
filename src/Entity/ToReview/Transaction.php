@@ -2,7 +2,7 @@
 
 namespace App\Entity\ToReview;
 
-use App\Entity\User;
+use App\Entity\UserGGZ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -115,12 +115,12 @@ class Transaction
         return $this;
     }
 
-    public function getTransactionBuyer(): ?User
+    public function getTransactionBuyer(): ?UserGGZ
     {
         return $this->transactionBuyer;
     }
 
-    public function setTransactionBuyer(?User $transactionBuyer): self
+    public function setTransactionBuyer(?UserGGZ $transactionBuyer): self
     {
         $this->transactionBuyer = $transactionBuyer;
 
@@ -163,12 +163,12 @@ class Transaction
         return $this;
     }
 
-    public function getTransactionSeller(): ?User
+    public function getTransactionSeller(): ?UserGGZ
     {
         return $this->transactionSeller;
     }
 
-    public function setTransactionSeller(?User $transactionSeller): self
+    public function setTransactionSeller(?UserGGZ $transactionSeller): self
     {
         $this->transactionSeller = $transactionSeller;
 

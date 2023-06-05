@@ -2,7 +2,7 @@
 
 namespace App\Entity\ToReview;
 
-use App\Entity\User;
+use App\Entity\UserGGZ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -170,12 +170,12 @@ class PrivacySettings
         return $this;
     }
 
-    public function getPrivacySettingsUser(): ?User
+    public function getPrivacySettingsUser(): ?UserGGZ
     {
         return $this->privacySettingsUser;
     }
 
-    public function setPrivacySettingsUser(?User $privacySettingsUser): self
+    public function setPrivacySettingsUser(?UserGGZ $privacySettingsUser): self
     {
         $this->privacySettingsUser = $privacySettingsUser;
 

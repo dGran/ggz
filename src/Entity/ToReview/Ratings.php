@@ -2,7 +2,7 @@
 
 namespace App\Entity\ToReview;
 
-use App\Entity\User;
+use App\Entity\UserGGZ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -151,12 +151,12 @@ class Ratings
         return $this;
     }
 
-    public function getRatingsUser(): ?User
+    public function getRatingsUser(): ?UserGGZ
     {
         return $this->ratingsUser;
     }
 
-    public function setRatingsUser(?User $ratingsUser): self
+    public function setRatingsUser(?UserGGZ $ratingsUser): self
     {
         $this->ratingsUser = $ratingsUser;
 

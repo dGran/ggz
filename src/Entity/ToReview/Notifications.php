@@ -2,7 +2,7 @@
 
 namespace App\Entity\ToReview;
 
-use App\Entity\User;
+use App\Entity\UserGGZ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -135,12 +135,12 @@ class Notifications
         return $this;
     }
 
-    public function getNotificationsUser(): ?User
+    public function getNotificationsUser(): ?UserGGZ
     {
         return $this->notificationsUser;
     }
 
-    public function setNotificationsUser(?User $notificationsUser): self
+    public function setNotificationsUser(?UserGGZ $notificationsUser): self
     {
         $this->notificationsUser = $notificationsUser;
 

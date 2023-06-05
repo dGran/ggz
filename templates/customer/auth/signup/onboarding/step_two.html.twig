@@ -1,5 +1,8 @@
 {% extends 'customer/base.html.twig' %}
 
+{% set whithoutHeader = true %}
+{% set whithoutFooter = true %}
+
 {% block title %}Hello TestController!{% endblock %}
 
 {% block content %}
@@ -111,5 +114,4 @@
     document.getElementById('acceptAllButton').addEventListener('click', acceptAll);
 </script>
 
-{% include "customer/home/tabcontents.html.twig" %}
 {% endblock %}

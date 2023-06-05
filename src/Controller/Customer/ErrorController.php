@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/error', name: 'app_error')]
+#[Route('/error', name: 'error')]
 class ErrorController extends AbstractController
 {
     public function __invoke(): Response

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/notifications', name: 'app_notifications')]
+#[Route('/notifications', name: 'customer_notifications')]
 class NotificationsController extends AbstractController
 {
     public function __invoke(): Response

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user", indexes={@ORM\Index(name="IDX_8D93D64938248176", columns={"currency_id"}), @ORM\Index(name="IDX_8D93D649F92F3E70", columns={"country_id"}), @ORM\Index(name="pk_user_account_type_idx", columns={"user_account_type"})})
  * @ORM\Entity
  */
-class User
+class UserGGZ
 {
     /**
      * @var int

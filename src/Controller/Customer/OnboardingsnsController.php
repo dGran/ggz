@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/onboardingsns', name: 'app_onboardingsns')]
+#[Route('/onboardingsns', name: 'customer_onboardingsns')]
 class OnboardingsnsController extends AbstractController
 {
     public function __invoke(): Response

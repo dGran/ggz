@@ -42,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email): User
     {
         $this->email = $email;
 
@@ -68,10 +68,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return \array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(array $roles): User
     {
         $this->roles = $roles;
 
@@ -86,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): User
     {
         $this->password = $password;
 
@@ -107,7 +107,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): self
+    public function setIsVerified(bool $isVerified): User
     {
         $this->isVerified = $isVerified;
 

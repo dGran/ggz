@@ -1,5 +1,6 @@
 {% extends 'customer/base.html.twig' %}
 
+{% set whithoutHeader = true %}
 {% set whithoutFooter = true %}
 
 {% block title %}Hello TestController!{% endblock %}
@@ -45,10 +46,7 @@
             </button>
         </div>
     </div>
-
 </div>
-
-{% include "customer/home/tabcontents.html.twig" %}
 
 {% endblock %}
 

@@ -1,0 +1,49 @@
+{% extends 'customer/base.html.twig' %}
+
+{% set whithoutFooter = true %}
+{% set whithoutHeader = true %}
+{% set bodyBackgroundClass = 'bg-purpleggz2' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col items-center justify-start h-screen">
+            <h1 class="text-white font-ubuntu font-bold text-5xl py-16 text-center">Sign up</h1>
+            <section class="flex flex-col items-center">
+
+                <button type="button" style="width: 22rem;" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 mb-2">
+                    <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
+                    Sign up with Google
+                </button>
+                <button type="button" style="width: 22rem;" class="px-16 text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#3b5998]/55 mb-2">
+                    <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path></svg>
+                    Sign up with Facebook
+                </button>
+                <hr class="w-80 h-0.5 mx-auto my-4 bg-white border-0 rounded">
+                {{ form_start(sign_up_form) }}
+                {{ form_row(sign_up_form.email) }}
+                {{ form_row(sign_up_form.plainPassword, {label: 'Password'}) }}
+                <textarea style="width: 22rem;" id="message" rows="1" class="white-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-white bg-gray-50 border-b-2 border-white rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2 bg-opacity-25" placeholder="E-mail address"></textarea>
+
+                <div class="flex flex-col pt-1">
+                    <button type="submit" style="width: 22rem;" class="text-[#878787] bg-[#CCCCCC] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 mb-2">
+                        Proceed with your e-mail
+                    </button>
+                </div>
+
+                {{ form_end(sign_up_form) }}
+                <p class="font-lato text-white font-regular">Already registered?<a href="#" class="pl-2 font-lato text-white font-bold">SIGN IN</a></p>
+
+            </section>
+
+            <p class="mt-8 py-8 font-lato text-[#C4C4C4] font-regular text-center">
+                In order to sign up, you will need to accept Gengemz’s <a href="#" class="px-1 text-white font-bold underline">Terms & Conditions</a><span class="text-[#C4C4C4] font-regular">and</span><a href="#" class="px-1 text-white font-bold underline">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
