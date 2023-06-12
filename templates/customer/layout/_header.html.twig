@@ -46,12 +46,12 @@
                 </div>
             </div>
             <div class="flex items-center space-x-3">
-                <img src="{{ asset('build/app/img/bell.svg') }}" alt="Notifications" data-dropdown-toggle="dropdown-notifications">
-                <div id="dropdown-notifications" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-auto">
-                    {% include 'customer/layout/header/_notifications_dropdown.html.twig' %}
-                </div>
-                <img src="{{ asset('build/app/img/cart.svg') }}" alt="Cart">
                 {% if app.user %}
+                    <img src="{{ asset('build/app/img/bell.svg') }}" alt="Notifications" data-dropdown-toggle="dropdown-notifications">
+                    <div id="dropdown-notifications" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-auto">
+                        {% include 'customer/layout/header/_notifications_dropdown.html.twig' %}
+                    </div>
+                    <img src="{{ asset('build/app/img/cart.svg') }}" alt="Cart">
                     <img src="{{ asset('build/app/img/mario.svg') }}" alt="Account" data-dropdown-toggle="dropdown-account" class="bg-white rounded-full p-[2px]">
                     <div id="dropdown-account" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60">
                         {% include 'customer/layout/header/_user_dropdown.html.twig' %}
