@@ -15,6 +15,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -23,12 +24,18 @@ class SignupController extends AbstractController
     private EmailVerifier $emailVerifier;
     private UserService $userService;
     private MailerInterface $mailer;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(EmailVerifier $emailVerifier, UserService $userService, MailerInterface $mailer)
-    {
+    public function __construct(
+        EmailVerifier $emailVerifier,
+        UserService $userService,
+        MailerInterface $mailer,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->emailVerifier = $emailVerifier;
         $this->userService = $userService;
         $this->mailer = $mailer;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     #[Route('/signup', name: 'customer_signup')]
@@ -90,18 +97,51 @@ class SignupController extends AbstractController
     #[Route('/onboarding/{user}/step-one', name: 'customer_onboarding_step_one')]
     public function onBoardingStepOne(User $user): Response
     {
-        return $this->render('customer/auth/signup/onboarding/step_one.html.twig');
+        if (
+            !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
+            || !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')
+        ) {
+            return $this->redirectToRoute('customer_home');
+        }
+
+        return $this->render('customer/auth/signup/onboarding/step_one.html.twig',
+            [
+                'user' => $user,
+            ]
+        );
     }
 
     #[Route('/onboarding/{user}/step-two', name: 'customer_onboarding_step_two')]
     public function onBoardingStepTwo(User $user): Response
     {
+        if (
+            !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
+            || !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')
+        ) {
+            return $this->redirectToRoute('customer_home',
+                [
+                    'user' => $user,
+                ]
+            );
+        }
+
         return $this->render('customer/auth/signup/onboarding/step_two.html.twig');
     }
 
     #[Route('/onboarding/{user}/step-three', name: 'customer_onboarding_step_three')]
     public function onBoardingStepThree(User $user): Response
     {
-        return $this->render('customer/auth/signup/onboarding/step_three.html.twig');
+        if (
+            !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
+            || !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')
+        ) {
+            return $this->redirectToRoute('customer_home');
+        }
+
+        return $this->render('customer/auth/signup/onboarding/step_three.html.twig',
+            [
+                'user' => $user,
+            ]
+        );
     }
 }
