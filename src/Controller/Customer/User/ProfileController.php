@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Customer;
+namespace App\Controller\Customer\User;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +11,6 @@ class ProfileController extends AbstractController
 {
     public function __invoke(): Response
     {
-        return $this->render('customer/profile/index.html.twig');
+        return $this->render('customer/user/profile/index.html.twig');
     }
 }

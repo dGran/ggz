@@ -19,8 +19,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'customer_login';
-    public const LOGIN_REDIRECT_ROUTE = 'customer_home';
+    public const SIGN_IN_ROUTE = 'customer_sign_in';
+    public const SIGN_IN_REDIRECT_ROUTE = 'customer_home';
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
@@ -47,11 +47,11 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-         return new RedirectResponse($this->urlGenerator->generate(self::LOGIN_REDIRECT_ROUTE));
+         return new RedirectResponse($this->urlGenerator->generate(self::SIGN_IN_REDIRECT_ROUTE));
     }
 
     protected function getLoginUrl(Request $request): string
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        return $this->urlGenerator->generate(self::SIGN_IN_ROUTE);
     }
 }
