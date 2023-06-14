@@ -16,6 +16,8 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -41,6 +43,13 @@ class SignupController extends AbstractController
     #[Route('/signup', name: 'customer_signup')]
     public function signUp(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        if (
+            $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
+            || $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')
+        ) {
+            return $this->redirectToRoute('customer_home');
+        }
+
         $user = new User();
         $form = $this->createForm(SignUpType::class, $user);
         $form->handleRequest($request);
@@ -57,14 +66,14 @@ class SignupController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('customer_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('no-reply@gengemz.com', 'Gengemz'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('customer/auth/signup/confirmation_email.html.twig')
-            );
-            // do anything else you need here, like send an email
+//            $this->emailVerifier->sendEmailConfirmation('customer_verify_email', $user,
+//                (new TemplatedEmail())
+//                    ->from(new Address('no-reply@gengemz.com', 'Gengemz'))
+//                    ->to($user->getEmail())
+//                    ->subject('Please Confirm your Email')
+//                    ->htmlTemplate('customer/auth/signup/confirmation_email.html.twig')
+//            );
+
 
             return $this->redirectToRoute('customer_onboarding_step_one', ['user' => $user->getId()]);
         }
@@ -97,12 +106,15 @@ class SignupController extends AbstractController
     #[Route('/onboarding/{user}/step-one', name: 'customer_onboarding_step_one')]
     public function onBoardingStepOne(User $user): Response
     {
-        if (
-            !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
-            || !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')
-        ) {
-            return $this->redirectToRoute('customer_home');
-        }
+//        dump($user);die;
+
+
+//        if (
+//            !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
+//            || !$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')
+//        ) {
+//            return $this->redirectToRoute('customer_home');
+//        }
 
         return $this->render('customer/auth/signup/onboarding/step_one.html.twig',
             [
