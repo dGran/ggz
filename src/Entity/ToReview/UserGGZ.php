@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Entity;
+declare(strict_types=1);
+
+namespace App\Entity\ToReview;
 
 use App\Entity\ToReview\AccountType;
 use App\Entity\ToReview\Country;

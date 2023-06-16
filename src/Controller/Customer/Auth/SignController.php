@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Customer\Auth;
 
 use App\Entity\User;
