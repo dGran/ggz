@@ -22,6 +22,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    #[ORM\Column(length: 30, unique: true, nullable: true)]
+    private ?string $nickname = null;
+
     #[ORM\Column]
     private array $roles = [];
 
@@ -29,10 +32,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null;
+    private string $password;
 
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $birthdate;
+
+    #[ORM\Column]
+    private bool $onBoardingComplete = false;
+
+    #[ORM\Column]
+    private bool $acceptMailing = false;
+
+    #[ORM\Column]
+    private bool $isVerified = false;
 
     public function getId(): ?int
     {
@@ -49,6 +61,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
 
         return $this;
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(?string $nickname): void
+    {
+        $this->nickname = $nickname;
     }
 
     /**
@@ -95,6 +117,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getBirthdate(): ?\DateTime
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate(?\DateTime $birthdate): void
+    {
+        $this->birthdate = $birthdate;
+    }
+
     /**
      * @see UserInterface
      */
@@ -102,6 +134,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isOnBoardingComplete(): bool
+    {
+        return $this->onBoardingComplete;
+    }
+
+    public function setOnBoardingComplete(bool $onBoardingComplete): void
+    {
+        $this->onBoardingComplete = $onBoardingComplete;
+    }
+
+    public function isAcceptMailing(): bool
+    {
+        return $this->acceptMailing;
+    }
+
+    public function setAcceptMailing(bool $acceptMailing): void
+    {
+        $this->acceptMailing = $acceptMailing;
     }
 
     public function isVerified(): bool

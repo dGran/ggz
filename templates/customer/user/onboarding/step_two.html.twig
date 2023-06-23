@@ -1,9 +1,9 @@
-{% extends '../../base.html.twig' %}
+{% extends 'customer/base.html.twig' %}
 
 {% set whithoutHeader = true %}
 {% set whithoutFooter = true %}
 
-{% block title %}Hello TestController!{% endblock %}
+{% block title %}Brief policy review{% endblock %}
 
 {% block content %}
 <div class="container mx-auto mt-10">
@@ -19,99 +19,46 @@
         </div>
         <div class="flex flex-col justify-center w-9/12 mx-auto mt-8">
             <p class="flex mt-2 font-ubuntu justify-center text-2xl font-bold text-purpleggz">Date of birth</p>
-            <div class="flex justify-center">
-                <input type="date" id="birthdate" class="p-2.5 pl-4 font-ubuntu text-blacktext bg-[#F2EDF6] border-b-2 border-[#303030] rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-4 mb-2 mx-2" />
+            {{ form_start(on_boarding_step_two_form) }}
+            {{ form_row(on_boarding_step_two_form.birthdate) }}
+
+            <div class="flex flex-row items-center justify-end w-9/12 mx-auto mt-10">
+                <p class="font-ubuntu text-xl font-bold text-blacktext"><span class="text-lg"><span class="text-purpleggz">*</span> Required</span></p>
             </div>
-        </div>
-        <div class="flex flex-row items-center justify-end w-9/12 mx-auto mt-10">
-            <p class="font-ubuntu text-xl font-bold text-blacktext"><span class="text-lg"><span class="text-purpleggz">*</span> Required</span></p>
-        </div>
-        <div class="flex flex-col w-2/5 mx-auto mt-8">
-            <div class="flex flex-row items-center mb-1">
-                <input id="checkbox1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="checkbox1" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I confirm I have read and accept the <span class="text-purpleggz font-bold">Terms and Conditions</span> of the site <span class="text-purpleggz">*</span></label>
-            </div>
-            <div class="flex flex-row items-center mb-1">
-                <input id="checkbox2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="checkbox2" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I confirm I have read and accept the <span class="text-purpleggz font-bold">Privacy policy</span> of the site <span class="text-purpleggz">*</span></label>
-            </div>
-            <div class="flex flex-row items-center mb-1 ml-8">
-                <div class="flex flex-col my-4">
-                    <p class="font-lato font-medium text-[#969696] text-sm my-1"><span class="font-bold">Data we store:</span> Mes ac ante ipsum primis in faucibus. Etiam sed laoreet diam, a faucibus</p>
-                    <p class="font-lato font-medium text-[#969696] text-sm"><span class="font-bold">Who we share it with:</span> Etiam sed laoreet diam, a faucibus</p>
-                    <p class="font-lato font-medium text-[#969696] text-sm my-1"><span class="font-bold">Purpose:</span>  Etiam sed laoreet diam, a faucibus</p>
+            <div class="flex flex-col w-2/5 mx-auto mt-8">
+                <div class="flex flex-row items-center mb-1">
+                    <input id="checkbox1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="checkbox1" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I confirm I have read and accept the <span class="text-purpleggz font-bold">Terms and Conditions</span> of the site <span class="text-purpleggz">*</span></label>
+                </div>
+                <div class="flex flex-row items-center mb-1">
+                    <input id="checkbox2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="checkbox2" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I confirm I have read and accept the <span class="text-purpleggz font-bold">Privacy policy</span> of the site <span class="text-purpleggz">*</span></label>
+                </div>
+                <div class="flex flex-row items-center mb-1 ml-8">
+                    <div class="flex flex-col my-4">
+                        <p class="font-lato font-medium text-[#969696] text-sm my-1"><span class="font-bold">Data we store:</span> Mes ac ante ipsum primis in faucibus. Etiam sed laoreet diam, a faucibus</p>
+                        <p class="font-lato font-medium text-[#969696] text-sm"><span class="font-bold">Who we share it with:</span> Etiam sed laoreet diam, a faucibus</p>
+                        <p class="font-lato font-medium text-[#969696] text-sm my-1"><span class="font-bold">Purpose:</span>  Etiam sed laoreet diam, a faucibus</p>
+                    </div>
+                </div>
+                <div class="flex flex-row items-center mb-1">
+                    <input id="checkbox3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="checkbox3" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I agree to receive Gengemz’s e-mail communications about special promotions, offers or Marketing campaigns</label>
+                </div>
+                <div class="flex flex-row items-center mb-1">
+                    <input id="checkbox4" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="checkbox4" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I acknowledge that only original and official items can be traded in this site. Reproductions, fake or counterfeit items are not accepted or tolerated.</label>
+                </div>
+                <div class="flex flex-row items-center mt-12">
+                    <button type="button" id="acceptAllButton" class="font-ubuntu font-bold text-purpleggz text-lg mx-auto accept-all bg-transparent border-none outline-none cursor-pointer focus:outline-none">Accept all</button>
                 </div>
             </div>
-            <div class="flex flex-row items-center mb-1">
-                <input id="checkbox3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="checkbox3" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I agree to receive Gengemz’s e-mail communications about special promotions, offers or Marketing campaigns</label>
+
+            <div class="py-6">
+                {{ form_widget(on_boarding_step_two_form.submit) }}
             </div>
-            <div class="flex flex-row items-center mb-1">
-                <input id="checkbox4" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="checkbox4" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I acknowledge that only original and official items can be traded in this site. Reproductions, fake or counterfeit items are not accepted or tolerated.</label>
-            </div>
-            <div class="flex flex-row items-center mt-12">
-                <button type="button" id="acceptAllButton" class="font-ubuntu font-bold text-purpleggz text-lg mx-auto accept-all bg-transparent border-none outline-none cursor-pointer focus:outline-none">Accept all</button>
-            </div>
-            <button type="button" id="submitButton" class="mt-2 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-bold font-ubuntu rounded-lg text-2xl py-2.5 text-center inline-flex mx-auto px-6 mb-2 disabled" disabled>
-                GO TO FINAL STEP
-            </button>
+            {{ form_end(on_boarding_step_two_form) }}
         </div>
     </div>
-
 </div>
-
-
-<script>
-    function checkConditions() {
-        const birthdate = document.getElementById('birthdate');
-        const checkbox1 = document.querySelector('#checkbox1');
-        const checkbox2 = document.querySelector('#checkbox2');
-        const checkbox4 = document.querySelector('#checkbox4');
-        const submitButton = document.getElementById('submitButton');
-
-        if (
-            birthdate.value &&
-            (checkbox1.checked && checkbox2.checked && checkbox4.checked)
-        ) {
-            submitButton.removeAttribute('disabled');
-            submitButton.setAttribute('enabled', '');
-            submitButton.classList.remove('opacity-50');
-            submitButton.style.backgroundColor = '#7D00E2';
-            submitButton.style.color = '#FFFFFF';
-            submitButton.style.cursor = 'pointer';
-            submitButton.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.24), 0 4px 6px rgba(0, 0, 0, 0.12)';
-            submitButton.onclick = () => {
-                window.location.href = '/onboarding3';
-            };
-        } else {
-            submitButton.setAttribute('disabled', '');
-            submitButton.classList.add('opacity-50');
-            submitButton.style.backgroundColor = '#CCCCCC';
-            submitButton.style.color = '#878787';
-            submitButton.style.cursor = 'not-allowed';
-        }
-    }
-    function acceptAll() {
-        const checkbox1 = document.querySelector('#checkbox1');
-        const checkbox2 = document.querySelector('#checkbox2');
-        const checkbox3 = document.querySelector('#checkbox3');
-        const checkbox4 = document.querySelector('#checkbox4');
-
-        checkbox1.checked = true;
-        checkbox2.checked = true;
-        checkbox3.checked = true;
-        checkbox4.checked = true;
-
-        // Call checkConditions() to update the submit button's state
-        checkConditions();
-    }
-
-    document.getElementById('birthdate').addEventListener('change', checkConditions);
-    document.getElementById('checkbox1').addEventListener('change', checkConditions);
-    document.getElementById('checkbox2').addEventListener('change', checkConditions);
-    document.getElementById('checkbox4').addEventListener('change', checkConditions);
-    document.getElementById('acceptAllButton').addEventListener('click', acceptAll);
-</script>
-
 {% endblock %}
