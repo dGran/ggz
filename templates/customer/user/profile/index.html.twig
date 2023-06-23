@@ -5,10 +5,10 @@
 {% block content %}
 <div class="container mx-auto mt-10">
     <div class="flex items-center space-x-6 justify-between">
-        <img src="{{asset("build/app/img/avatar2 3.png")}}" class="rounded-full h-56 w-56 object-cover flex-initial">
+        <img src="{{asset(user.getProfilePicPath)}}" class="rounded-full h-56 w-56 object-cover flex-initial">
         <div class="flex flex-col items-end basis-1/4">
             <div class="w-full">
-                <p class="text-2xl font-bold py-6 font-ubuntu text-purpleggz">username</p>
+                <p class="text-2xl font-bold py-6 font-ubuntu text-purpleggz">{{ user.nickname }}</p>
             </div>
             <div class="w-full">
                 <p class="font-lato font-bold text-black-text text-base">Account creation date</p>

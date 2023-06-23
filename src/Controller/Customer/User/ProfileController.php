@@ -18,6 +18,8 @@ class ProfileController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
-        return $this->render('customer/user/profile/index.html.twig');
+        return $this->render('customer/user/profile/index.html.twig', [
+            'user' => $user,
+        ]);
     }
 }
