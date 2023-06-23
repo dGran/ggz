@@ -54,8 +54,19 @@
             <button type="button" id="submitButton" class="mt-12 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-bold font-ubuntu rounded-lg text-2xl py-2.5 text-center inline-flex mx-auto px-6 mb-2 disabled" disabled>
                 COMPLETE REGISTRATION
             </button>
+
+
+            {{ form_start(on_boarding_step_three_form) }}
+            {{ form_row(on_boarding_step_three_form.profilePic) }}
+            {{ form_row(on_boarding_step_three_form.shareContent) }}
+            <div class="py-6">
+                {{ form_widget(on_boarding_step_three_form.submit) }}
+            </div>
+            {{ form_end(on_boarding_step_three_form) }}
+
+
             <div class="flex flex-row items-center mt-2">
-                <a href="/profile" class="font-ubuntu font-bold text-purpleggz text-xl mx-auto">SKIP THIS STEP</a>    
+                <a href="{{ path('customer_skip_onboarding_step_three', {user: user.id}) }}" class="font-ubuntu font-bold text-purpleggz text-xl mx-auto">SKIP THIS STEP</a>
             </div>
         </div>
     </div>

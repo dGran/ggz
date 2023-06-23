@@ -9,7 +9,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent('user_dropdown_item')]
 final class UserDropdownItemComponent
 {
-    public ?string $route = null;
+    public ?string $path = null;
 
     public string $name;
 

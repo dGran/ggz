@@ -1,11 +1,11 @@
 <ul class="py-2 font-lato text-sm text-black-text" aria-labelledby="dropdownDefaultButton">
-    {{ component('user_dropdown_item', { name: 'Profile', route: 'customer_profile', iconClass: 'profile', itemClasses: 'border-b' }) }}
+    {{ component('user_dropdown_item', { name: 'Profile', path: path('customer_profile', { user: app.user.id }), iconClass: 'profile', itemClasses: 'border-b' }) }}
     {{ component('user_dropdown_item', { name: 'Marketplace ratings', iconClass: 'marketplace-ratings' }) }}
     {{ component('user_dropdown_item', { name: 'Friends', iconClass: 'friends' }) }}
     {{ component('user_dropdown_item', { name: 'Wantlist', iconClass: 'wantlist' }) }}
     {{ component('user_dropdown_item', { name: 'Lists', iconClass: 'lists' }) }}
     {{ component('user_dropdown_item', { name: 'Submissions', iconClass: 'submissions' }) }}
-    {{ component('user_dropdown_item', { name: 'Settings', route: 'customer_user_settings', iconClass: 'settings', itemClasses: 'border-b' }) }}
+    {{ component('user_dropdown_item', { name: 'Settings', path: path('customer_user_settings'), iconClass: 'settings', itemClasses: 'border-b' }) }}
     {{ component('user_dropdown_item', { name: 'Help center', iconClass: 'help-center' }) }}
-    {{ component('user_dropdown_item', { name: 'Sign out', route: 'customer_sign_out', iconClass: 'log-out' }) }}
+    {{ component('user_dropdown_item', { name: 'Sign out', path: path('customer_sign_out'), iconClass: 'log-out' }) }}
 </ul>

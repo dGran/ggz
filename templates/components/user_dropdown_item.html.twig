@@ -1,5 +1,5 @@
 <li class="{{ itemClasses }}">
-    <a {% if route is not null %}href="{{ path(route) }}"{% endif %} class="flex flex-row items-center block px-4 py-2 hover:bg-[#F5EBFD] space-x-2 {{ linkClasses }}">
+    <a {% if path is not null %}href="{{ path }}"{% endif %} class="flex flex-row items-center block px-4 py-2 hover:bg-[#F5EBFD] space-x-2 {{ linkClasses }}">
         <i class="icon-{{ iconClass }} text-[24px]"></i>
         <span>{{ name }}</span>
     </a>

@@ -14,6 +14,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    public const SHARE_CONTENT_EVERYBODY = "Everybody";
+    public const SHARE_CONTENT_FRIENDS_ONLY = "Friends only";
+    public const SHARE_CONTENT_NOBODY = "Nobody";
+    private const SHARE_CONTENT_ENUM = "ENUM('".self::SHARE_CONTENT_EVERYBODY."', '".self::SHARE_CONTENT_FRIENDS_ONLY."', '".self::SHARE_CONTENT_NOBODY."')";
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -28,14 +33,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private string $password;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTime $birthdate;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $profilePic = null;
+
+    #[ORM\Column(type: "string", nullable: true, columnDefinition: self::SHARE_CONTENT_ENUM)]
+    private ?string $shareContent = null;
 
     #[ORM\Column]
     private bool $onBoardingComplete = false;
@@ -125,6 +133,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthdate(?\DateTime $birthdate): void
     {
         $this->birthdate = $birthdate;
+    }
+
+    public function getProfilePic(): ?string
+    {
+        return $this->profilePic;
+    }
+
+    public function setProfilePic(?string $profilePic): void
+    {
+        $this->profilePic = $profilePic;
+    }
+
+    public function getShareContent(): ?string
+    {
+        return $this->shareContent;
+    }
+
+    public function setShareContent(?string $shareContent): void
+    {
+        $this->shareContent = $shareContent;
     }
 
     /**
