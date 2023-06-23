@@ -22,7 +22,7 @@ class OnBoardingStepThreeType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    'class' => 'black-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-blacktext bg-[#F2EDF6] border-b-2 border-[#303030] rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2',
+                    'class' => 'hidden black-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-blacktext bg-[#F2EDF6] border-b-2 border-[#303030] rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2',
                 ],
             ])
             ->add('shareContent', ChoiceType::class, [

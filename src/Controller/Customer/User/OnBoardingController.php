@@ -11,6 +11,7 @@ use App\Form\Customer\auth\OnBoardingStepTwoType;
 use App\Manager\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -96,6 +97,17 @@ class OnBoardingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $profilePicFile */
+            $profilePicFile = $form['profilePic']->getData();
+
+            if ($profilePicFile) {
+                $destination = $this->getParameter('kernel.project_dir').'/public/'.User::PROFILE_PIC_PATH;
+                $filename = uniqid().'.'.$profilePicFile->guessExtension();
+                $profilePicFile->move($destination, $filename);
+
+                $user->setProfilePic($filename);
+            }
+
             $this->userManager->onBoardingComplete($user);
 
             return $this->redirectToRoute('customer_profile', ['user' => $userId]);
