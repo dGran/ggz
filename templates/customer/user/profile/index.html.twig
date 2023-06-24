@@ -11,7 +11,7 @@
                 <p class="text-2xl font-bold py-6 font-ubuntu text-purpleggz">{{ user.nickname }}</p>
             </div>
             <div class="w-full">
-                <p class="font-lato font-bold text-black-text text-base">Account creation date</p>
+                <p class="font-lato font-bold text-black-text text-base">{{ user.dateCreated|date('d-m-Y') }}</p>
             </div>
             <div class="w-full">
                 <p class="font-lato font-bold text-black-text text-base">City, Country</p>

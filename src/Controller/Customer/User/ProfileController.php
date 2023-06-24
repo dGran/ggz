@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Security('is_granted("ROLE_USER")')]
 class ProfileController extends AbstractController
 {
-    public function __invoke(User $user, ): Response
+    public function __invoke(User $user): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 

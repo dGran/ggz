@@ -18,4 +18,11 @@ final class UserDropdownItemComponent
     public ?string $itemClasses = null;
 
     public ?string $linkClasses = null;
+
+    public string $disablePathClasses;
+
+    public function __construct()
+    {
+        $this->disablePathClasses = 'text-gray-400 pointer-events-none';
+    }
 }

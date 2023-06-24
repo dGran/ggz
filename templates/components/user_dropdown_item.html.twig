@@ -1,6 +1,10 @@
 <li class="{{ itemClasses }}">
-    <a {% if path is not null %}href="{{ path }}"{% endif %} class="flex flex-row items-center block px-4 py-2 hover:bg-[#F5EBFD] space-x-2 {{ linkClasses }}">
-        {% if iconClass is not null %}<i class="icon-{{ iconClass }} text-[24px]"></i>{% endif %}
+    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+    <a {% if path is not null %}href="{{ path }}"{% endif %}
+       class="flex flex-row items-center block px-4 py-2 hover:bg-[#F5EBFD] space-x-2 {{ linkClasses }}{% if current_path == path %}{{ disablePathClasses }}{% endif %}">
+        {% if iconClass is not null %}
+            <i class="icon-{{ iconClass }} text-[24px]"></i>
+        {% endif %}
         <span>{{ name }}</span>
     </a>
 </li>

@@ -42,6 +42,8 @@ class OnBoardingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setDateUpdated(new \DateTime());
+
             $this->userManager->save($user);
 
             return $this->redirectToRoute('customer_onboarding_step_two', ['user' => $user->getId()]);
@@ -69,6 +71,8 @@ class OnBoardingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setDateUpdated(new \DateTime());
+
             $this->userManager->save($user);
 
             return $this->redirectToRoute('customer_onboarding_step_three', ['user' => $user->getId()]);
@@ -108,7 +112,10 @@ class OnBoardingController extends AbstractController
                 $user->setProfilePic($filename);
             }
 
-            $this->userManager->onBoardingComplete($user);
+            $user->setOnBoardingComplete(true);
+            $user->setDateUpdated(new \DateTime());
+
+            $this->userManager->save($user);
 
             return $this->redirectToRoute('customer_profile', ['user' => $userId]);
         }
@@ -124,7 +131,10 @@ class OnBoardingController extends AbstractController
     #[Route('/onboarding/{user}/step-three/skip', name: 'customer_skip_onboarding_step_three')]
     public function skipOnBoardingStepThree(User $user): Response
     {
-        $this->userManager->onBoardingComplete($user);
+        $user->setOnBoardingComplete(true);
+        $user->setDateUpdated(new \DateTime());
+
+        $this->userManager->save($user);
 
         return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
     }

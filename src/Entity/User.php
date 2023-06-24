@@ -18,42 +18,52 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public const SHARE_CONTENT_EVERYBODY = "Everybody";
     public const SHARE_CONTENT_FRIENDS_ONLY = "Friends only";
     public const SHARE_CONTENT_NOBODY = "Nobody";
-    private const SHARE_CONTENT_ENUM = "ENUM('".self::SHARE_CONTENT_EVERYBODY."', '".self::SHARE_CONTENT_FRIENDS_ONLY."', '".self::SHARE_CONTENT_NOBODY."')";
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    protected int $id;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+    protected string $email;
+
+    #[ORM\Column]
+    protected string $password;
 
     #[ORM\Column(length: 30, unique: true, nullable: true)]
-    private ?string $nickname = null;
+    protected ?string $nickname = null;
 
     #[ORM\Column]
-    private array $roles = [];
-
-    #[ORM\Column]
-    private string $password;
+    protected array $roles = [];
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTime $birthdate;
+    protected ?\DateTime $birthdate;
 
     #[ORM\Column(nullable: true)]
-    private ?string $profilePic = null;
+    protected ?string $profilePic = null;
 
-    #[ORM\Column(type: "string", nullable: true, columnDefinition: self::SHARE_CONTENT_ENUM)]
-    private ?string $shareContent = null;
-
-    #[ORM\Column]
-    private bool $onBoardingComplete = false;
+    #[ORM\Column(nullable: true)]
+    protected ?string $shareContent = null;
 
     #[ORM\Column]
-    private bool $acceptMailing = false;
+    protected bool $onBoardingComplete = false;
 
     #[ORM\Column]
-    private bool $isVerified = false;
+    protected bool $acceptMailing = false;
+
+    #[ORM\Column]
+    protected bool $isVerified = false;
+
+    #[ORM\Column]
+    protected \DateTime $dateCreated;
+
+    #[ORM\Column]
+    protected ?\DateTime $dateUpdated;
+
+    public function __construct()
+    {
+        $this->dateCreated = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -63,6 +73,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): User
+    {
+        $this->password = $password;
+
+        return $this;
     }
 
     public function setEmail(string $email): User
@@ -77,9 +102,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->nickname;
     }
 
-    public function setNickname(?string $nickname): void
+    public function setNickname(?string $nickname): User
     {
         $this->nickname = $nickname;
+
+        return $this;
     }
 
     /**
@@ -111,29 +138,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): User
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getBirthdate(): ?\DateTime
     {
         return $this->birthdate;
     }
 
-    public function setBirthdate(?\DateTime $birthdate): void
+    public function setBirthdate(?\DateTime $birthdate): User
     {
         $this->birthdate = $birthdate;
+
+        return $this;
     }
 
     public function getProfilePic(): ?string
@@ -141,9 +155,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->profilePic;
     }
 
-    public function setProfilePic(?string $profilePic): void
+    public function setProfilePic(?string $profilePic): User
     {
         $this->profilePic = $profilePic;
+
+        return $this;
     }
 
     public function getProfilePicPath(): ?string
@@ -156,9 +172,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->shareContent;
     }
 
-    public function setShareContent(?string $shareContent): void
+    public function setShareContent(?string $shareContent): User
     {
         $this->shareContent = $shareContent;
+
+        return $this;
     }
 
     /**
@@ -175,9 +193,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->onBoardingComplete;
     }
 
-    public function setOnBoardingComplete(bool $onBoardingComplete): void
+    public function setOnBoardingComplete(bool $onBoardingComplete): User
     {
         $this->onBoardingComplete = $onBoardingComplete;
+
+        return $this;
     }
 
     public function isAcceptMailing(): bool
@@ -185,9 +205,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->acceptMailing;
     }
 
-    public function setAcceptMailing(bool $acceptMailing): void
+    public function setAcceptMailing(bool $acceptMailing): User
     {
         $this->acceptMailing = $acceptMailing;
+
+        return $this;
     }
 
     public function isVerified(): bool
@@ -198,6 +220,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): User
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getDateCreated(): \DateTime
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(\DateTime $dateCreated): User
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getDateUpdated(): ?\DateTime
+    {
+        return $this->dateUpdated;
+    }
+
+    public function setDateUpdated(?\DateTime $dateUpdated): User
+    {
+        $this->dateUpdated = $dateUpdated;
 
         return $this;
     }

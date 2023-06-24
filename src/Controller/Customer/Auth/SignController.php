@@ -7,7 +7,7 @@ namespace App\Controller\Customer\Auth;
 use App\Entity\User;
 use App\Form\Customer\auth\SignUpType;
 use App\Security\EmailVerifier;
-use App\Service\Customer\UserService;
+use App\Manager\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,18 +26,18 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class SignController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
-    private UserService $userService;
+    private UserManager $userManager;
     private MailerInterface $mailer;
     private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EmailVerifier $emailVerifier,
-        UserService $userService,
+        UserManager $userManager,
         MailerInterface $mailer,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->emailVerifier = $emailVerifier;
-        $this->userService = $userService;
+        $this->userManager = $userManager;
         $this->mailer = $mailer;
         $this->authorizationChecker = $authorizationChecker;
     }
@@ -78,15 +78,10 @@ class SignController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
+            $user->setDateCreated(new \DateTime());
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->userManager->save($user);
 
             // generate a signed url and email it to the user
 //            $this->emailVerifier->sendEmailConfirmation('customer_verify_email', $user,
