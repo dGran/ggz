@@ -65,11 +65,4 @@ class UserManager
     {
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
-
-    public function onBoardingComplete(User $user): void
-    {
-        $user->setOnBoardingComplete(true);
-
-        $this->save($user);
-    }
 }

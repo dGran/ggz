@@ -135,6 +135,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfonycasts/verify-email-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/public/build/app" />
+      <excludeFolder url="file://$MODULE_DIR$/public/build/fonts" />
+      <excludeFolder url="file://$MODULE_DIR$/public/build/images" />
+      <excludeFolder url="file://$MODULE_DIR$/public/img/user" />
+      <excludeFolder url="file://$MODULE_DIR$/var/cache/dev" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/data-fixtures" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
     </content>
