@@ -7,7 +7,7 @@ namespace App\Entity\ToReview;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Country
+ * DataSource
  *
  * @ORM\Table(name="country", indexes={@ORM\Index(name="IDX_5373C966ECD792C0", columns={"default_currency_id"})})
  * @ORM\Entity

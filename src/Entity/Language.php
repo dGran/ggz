@@ -33,6 +33,7 @@ class Language
     public function __construct()
     {
         $this->currencies = new ArrayCollection();
+        $this->dateCreated = new \DateTime();
     }
 
     public function getId(): int
