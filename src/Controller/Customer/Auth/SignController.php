@@ -6,10 +6,12 @@ namespace App\Controller\Customer\Auth;
 
 use App\Controller\Customer\User\OnBoardingController;
 use App\Entity\User;
+use App\Form\Customer\auth\SignInType;
 use App\Form\Customer\auth\SignUpType;
 use App\Security\EmailVerifier;
 use App\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -45,7 +47,7 @@ class SignController extends AbstractController
     }
 
     #[Route(path: '/sign-in', name: 'customer_sign_in')]
-    public function signIn(AuthenticationUtils $authenticationUtils): Response
+    public function signIn(AuthenticationUtils $authenticationUtils, FormFactoryInterface $formFactory): Response
     {
         if (
             $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
@@ -59,14 +61,13 @@ class SignController extends AbstractController
 
         return $this->render('customer/auth/sign/sign_in.html.twig', [
             'last_username' => $lastUsername,
-            'error' => $error
+            'error' => $error,
         ]);
     }
 
     #[Route(path: '/sign-out', name: 'customer_sign_out')]
     public function signOut(): void
     {
-//        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
     #[Route('/sign-up', name: 'customer_sign_up')]

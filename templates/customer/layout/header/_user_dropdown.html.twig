@@ -1,5 +1,5 @@
 <ul class="py-2 font-lato text-sm text-black-text" aria-labelledby="dropdownDefaultButton">
-    {{ component('user_dropdown_item', { name: 'Profile', path: path('customer_profile', { user: app.user.id }), iconClass: 'profile', itemClasses: 'border-b' }) }}
+    {{ component('user_dropdown_item', { name: 'Profile', path: path('customer_profile'), iconClass: 'profile', itemClasses: 'border-b' }) }}
     {{ component('user_dropdown_item', { name: 'Marketplace ratings', iconClass: 'marketplace-ratings' }) }}
     {{ component('user_dropdown_item', { name: 'Friends', iconClass: 'friends' }) }}
     {{ component('user_dropdown_item', { name: 'Wantlist', iconClass: 'wantlist' }) }}

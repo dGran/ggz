@@ -1,0 +1,17 @@
+#button-send-form.filled {
+  background-color: #C7FD69 !important;
+  border-color: #C7FD69 !important;
+}
+
+#button-send-form.filled:hover,
+#button-send-form.filled:focus {
+  background-color: #B3FF2E !important;
+  border-color: #B3FF2E !important;
+}
+
+#button-send-form.empty {
+  background-color: #CCCC !important;
+  color: #E5E7EB !important;
+  border-color: #CCCC !important;
+  pointer-events: none;
+}
