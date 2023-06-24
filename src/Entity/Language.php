@@ -18,7 +18,7 @@ class Language
     #[ORM\Column(length: 25)]
     protected string $name;
 
-    #[ORM\Column(length: 10, unique: true)]
+    #[ORM\Column(length: 10, unique: true, nullable: true)]
     protected ?string $isoCode = null;
 
     #[ORM\ManyToMany(targetEntity: Currency::class, inversedBy: 'Language')]
@@ -27,7 +27,7 @@ class Language
     #[ORM\Column]
     protected \DateTime $dateCreated;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     protected ?\DateTime $dateUpdated;
 
     public function __construct()

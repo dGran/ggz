@@ -57,7 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     protected \DateTime $dateCreated;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     protected ?\DateTime $dateUpdated;
 
     public function __construct()

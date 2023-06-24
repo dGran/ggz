@@ -21,13 +21,16 @@ class Country
     #[ORM\Column(length: 10, unique: true)]
     protected string $isoCode;
 
-    #[ORM\Column]
-    protected bool $active = false;
+    #[ORM\Column(length: 10, unique: true)]
+    protected string $isoCodeLanguage;
+
+    #[ORM\Column(nullable: true)]
+    protected ?string $countryZoneName = null;
 
     #[ORM\Column]
     protected \DateTime $dateCreated;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     protected ?\DateTime $dateUpdated;
 
     public function __construct()
@@ -64,16 +67,24 @@ class Country
         return $this;
     }
 
-    public function isActive(): bool
+    public function getIsoCodeLanguage(): string
     {
-        return $this->active;
+        return $this->isoCodeLanguage;
     }
 
-    public function setActive(bool $active): Country
+    public function setIsoCodeLanguage(string $isoCodeLanguage): void
     {
-        $this->active = $active;
+        $this->isoCodeLanguage = $isoCodeLanguage;
+    }
 
-        return $this;
+    public function getCountryZoneName(): ?string
+    {
+        return $this->countryZoneName;
+    }
+
+    public function setCountryZoneName(?string $countryZoneName): void
+    {
+        $this->countryZoneName = $countryZoneName;
     }
 
     public function getDateCreated(): \DateTime

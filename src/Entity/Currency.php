@@ -27,7 +27,7 @@ class Currency
     #[ORM\Column]
     protected \DateTime $dateCreated;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     protected ?\DateTime $dateUpdated;
 
     public function __construct()
