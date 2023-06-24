@@ -7,83 +7,77 @@
 {% block title %}Sign in{% endblock %}
 
 {% block content %}
-    <div class="flex flex-col items-center justify-center h-screen">
-        <p class="text-white font-ubuntu font-bold text-5xl pb-16">Sign in</p>
-        <button type="button" style="width: 22rem;" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 mb-2">
-            <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
-            Continue with Google
-        </button>
-        <button type="button" style="width: 22rem;" class="px-16 text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#3b5998]/55 mb-2">
-            <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path></svg>
-            Continue with Facebook
-        </button>
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
 
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col items-center justify-center h-screen">
+            <div class="w-[22rem] mx-auto text-center">
+                <p class="text-white font-ubuntu font-bold text-5xl pb-16">Sign in</p>
 
-
-        <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                <div class="flex flex-col space-y-2.5">
+                    <button type="button" class="w-full font-medium bg-white hover:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-lg py-2.5 text-center flex items-center justify-center space-x-1.5">
+                        <img src="https://static.vecteezy.com/system/resources/previews/012/871/371/original/google-search-icon-google-product-illustration-free-png.png" alt="Google icon" class="w-4 h-4 object-cover">
+                        <span>Continue with Google</span>
+                    </button>
+                    <button type="button" class="w-full font-medium bg-white hover:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-lg py-2.5 text-center flex items-center justify-center space-x-1.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1024px-2021_Facebook_icon.svg.png" alt="Facebook icon" class="w-4 h-4 object-cover">
+                        <span>Continue with Facebook</span>
+                    </button>
                 </div>
-            {% endif %}
 
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label for="inputEmail">Email</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-            <label for="inputPassword">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                <hr class="bg-white mx-2.5 h-0.5 my-9">
 
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <div class="flex flex-col space-y-4">
+                        <input type="email"
+                               value="{{ last_username }}"
+                               name="email"
+                               id="input-email"
+                               class="text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#E7D6F8] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300"
+                               placeholder="E-mail address"
+                               autocomplete="email"
+                               required
+                               autofocus>
+                        <input type="password"
+                               name="password"
+                               id="input-password"
+                               class="text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#E7D6F8] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300"
+                               placeholder="Password"
+                               autocomplete="current-password"
+                               required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    </div>
 
-            {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+                    <div class="pt-3 w-full flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="default-checkbox" type="checkbox" name="_remember_me" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-checkbox" class="ml-2 text-sm font-medium font-lato text-white dark:text-gray-300">Remember me</label>
+                        </div>
+                        <a href="#" class="ml-auto text-[13px] font-medium font-lato text-white dark:text-gray-300 uppercase">Forgot my password</a>
+                    </div>
+{#                    <button type="submit" class="w-full text-[#878787] bg-[#CCCCCC] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center">#}
+{#                        Sign in#}
+{#                    </button>#}
+                    <button type="submit" class="my-5 w-full font-bold bg-[#C7FD69] hover:bg-[#B3FF2E] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-bold font-ubuntu rounded-lg text-md py-2.5 text-center shadow-md shadow-[#6700BC]">
+                        Sign in
+                    </button>
+                </form>
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
+                <div class="font-lato text-white flex items-center justify-center">
+                    New user?
+                    <a href="{{ path('customer_sign_up') }}" class="ml-2 font-bold uppercase">SIGN UP HERE</a>
+                </div>
             </div>
-            #}
-
-            <button class="btn btn-lg btn-primary" type="submit">
-                Sign in
-            </button>
-        </form>
 
 
-
-
-        <div style="width: 20rem; height: 2px; background-color: white;" class="mt-6 mb-2"></div>
-        <textarea style="width: 22rem;" id="message" rows="1" class="white-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-white bg-gray-50 border-b-2 border-white rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2 bg-opacity-25" placeholder="E-mail address"></textarea>
-        <textarea style="width: 22rem;" id="message" rows="1" class="white-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-white bg-gray-50 border-b-2 border-white rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-2 mb-2 bg-opacity-25" placeholder="Password"></textarea>
-        <div style="width: 22rem;" class="flex items-center pb-4 justify-between">
-            <div class="flex items-center">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ml-2 text-sm font-medium font-lato text-white dark:text-gray-300">Remember me</label>
+            <div class="pt-12 font-lato flex items-center">
+                <span class="text-[#C4C4C4] font-regular">By logging in, you acknowledge that you have read and agree to accept Gengemz’s</span><a href="#" class="pl-1 text-white font-bold underline">Terms & Conditions</a><span class="pl-1 text-[#C4C4C4] font-regular">and</span><a href="#" class="pl-1 text-white font-bold underline">Privacy Policy</a>
             </div>
-            <a href="#" class="ml-auto text-sm font-medium font-lato text-white dark:text-gray-300">Forgot password?</a>
-        </div>
-        <div class="flex flex-col pt-1">
-            <button type="button" style="width: 22rem;" class="text-[#878787] bg-[#CCCCCC] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 mb-2">
-                Sign in
-            </button>
-        </div>
-        <div class="flex flex-row pt-2">
-            <p class="font-lato text-white font-regular">New user?</p>
-            <a href="{{ path('customer_sign_up') }}" class="pl-2 font-lato text-white font-bold">SIGN UP HERE</a>
-        </div>
-        <div class="flex flex-row pt-20">
-            <p class="font-lato text-[#C4C4C4] font-regular">By logging in, you acknowledge that you have read and agree to accept Gengemz’s</p>
-            <a href="#" class="pl-1 font-lato text-white font-bold underline">Terms & Conditions</a>
-            <p class="pl-1 font-lato text-[#C4C4C4] font-regular">and</p>
-            <a href="#" class="pl-1 font-lato text-white font-bold underline">Privacy Policy</a>
         </div>
     </div>
 {% endblock %}

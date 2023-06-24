@@ -47,16 +47,20 @@ class SignController extends AbstractController
     #[Route(path: '/sign-in', name: 'customer_sign_in')]
     public function signIn(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if (
+            $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
+            || $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')
+        ) {
+            return $this->redirectToRoute('customer_home');
+        }
 
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('customer/auth/sign/sign_in.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('customer/auth/sign/sign_in.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error
+        ]);
     }
 
     #[Route(path: '/sign-out', name: 'customer_sign_out')]
