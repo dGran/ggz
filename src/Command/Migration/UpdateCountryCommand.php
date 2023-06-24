@@ -55,8 +55,9 @@ class UpdateCountryCommand extends Command
             }
 
             $country->setIsoCode($countryFromSource['iso_code']);
+            $country->setLanguageIsoCode($countryFromSource['language_iso_code']);
             $country->setNameCanonical($countryFromSource['name_canonical']);
-            $country->setActive((bool)$countryFromSource['active']);
+            $country->setCountryZoneName($countryFromSource['country_zone_name']);
 
             $countries[] = $country;
         }

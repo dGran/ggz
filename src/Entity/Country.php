@@ -21,8 +21,8 @@ class Country
     #[ORM\Column(length: 10, unique: true)]
     protected string $isoCode;
 
-    #[ORM\Column(length: 10, unique: true)]
-    protected string $isoCodeLanguage;
+    #[ORM\Column(length: 10)]
+    protected string $languageIsoCode;
 
     #[ORM\Column(nullable: true)]
     protected ?string $countryZoneName = null;
@@ -67,14 +67,14 @@ class Country
         return $this;
     }
 
-    public function getIsoCodeLanguage(): string
+    public function getLanguageIsoCode(): string
     {
-        return $this->isoCodeLanguage;
+        return $this->languageIsoCode;
     }
 
-    public function setIsoCodeLanguage(string $isoCodeLanguage): void
+    public function setLanguageIsoCode(string $languageIsoCode): void
     {
-        $this->isoCodeLanguage = $isoCodeLanguage;
+        $this->languageIsoCode = $languageIsoCode;
     }
 
     public function getCountryZoneName(): ?string

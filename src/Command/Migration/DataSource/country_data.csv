@@ -1,245 +1,235 @@
-iso_code;name_canonical;active
-ad;Andorra;0
-ae;United Arab Emirates;0
-af;Afghanistan;0
-ag;Antigua and Barbuda;0
-ai;Anguilla;0
-al;Albania;0
-am;Armenia;0
-an;Netherlands Antilles;0
-ao;Angola;0
-aq;Antarctica;0
-ar;Argentina;0
-as;American Samoa;0
-at;Austria;0
-au;Australia;0
-aw;Aruba;0
-ax;Åland Islands;0
-az;Azerbaijan;0
-ba;Bosnia and Herzegovina;0
-bb;Barbados;0
-bd;Bangladesh;0
-be;Belgium;0
-bf;Burkina Faso;0
-bg;Bulgaria;0
-bh;Bahrain;0
-bi;Burundi;0
-bj;Benin;0
-bl;Saint Barthelemy;0
-bm;Bermuda;0
-bn;Brunei;0
-bo;Bolivia;0
-br;Brazil;0
-bs;Bahamas;0
-bt;Bhutan;0
-bv;Bouvet Island;0
-bw;Botswana;0
-by;Belarus;0
-bz;Belize;0
-ca;Canada;0
-cc;Cocos (Keeling) Islands;0
-cd;Congo, Dem. Republic;0
-cf;Central African Republic;0
-cg;Congo, Republic;0
-ch;Switzerland;0
-ci;Ivory Coast;0
-ck;Cook Islands;0
-cl;Chile;0
-cm;Cameroon;0
-cn;China;0
-co;Colombia;0
-cr;Costa Rica;0
-cu;Cuba;0
-cv;Cape Verde;0
-cx;Christmas Island;0
-cy;Cyprus;0
-cz;Czech Republic;0
-de;Germany;0
-dj;Djibouti;0
-dk;Denmark;0
-dm;Dominica;0
-do;Dominican Republic;0
-dz;Algeria;0
-ec;Ecuador;0
-ee;Estonia;0
-eg;Egypt;0
-eh;Western Sahara;0
-er;Eritrea;0
-es;Spain;0,
-et;Ethiopia;0
-fi;Finland;0
-fj;Fiji;0
-fk;Falkland Islands;0
-fm;Micronesia;0
-fo;Faroe Islands;0
-fr;France;0,
-ga;Gabon;0
-gb;United Kingdom;0
-gd;Grenada;0
-ge;Georgia;0
-gf;French Guiana;0
-gg;Guernsey;0
-gh;Ghana;0
-gi;Gibraltar;0
-gl;Greenland;0
-gm;Gambia;0
-gn;Guinea;0
-gp;Guadeloupe;0
-gq;Equatorial Guinea;0
-gr;Greece;0
-gs;South Georgia and the South Sandwich Islands;0
-gt;Guatemala;0
-gu;Guam;0
-gw;Guinea-Bissau;0
-gy;Guyana;0
-hk;HongKong;0
-hm;Heard Island and McDonald Islands;0
-hn;Honduras;0
-hr;Croatia;0
-ht;Haiti;0
-hu;Hungary;0
-id;Indonesia;0
-ie;Ireland;0
-il;Israel;0
-im;Man Island;0
-in;India;0
-io;British Indian Ocean Territory;0
-iq;Iraq;0
-ir;Iran;0
-is;Iceland;0
-it;Italy;0
-je;Jersey;0
-jm;Jamaica;0
-jo;Jordan;0
-jp;Japan;0
-ke;Kenya;0
-kg;Kyrgyzstan;0
-kh;Cambodia;0
-ki;Kiribati;0
-km;Comoros;0
-kn;Saint Kitts and Nevis;0
-kp;Korea, Dem. Republic of;0
-kr;South Korea;0
-kw;Kuwait;0
-ky;Cayman Islands;0
-kz;Kazakhstan;0
-la;Laos;0
-lb;Lebanon;0
-lc;Saint Lucia;0
-li;Liechtenstein;0
-lk;Sri Lanka;0
-lr;Liberia;0
-ls;Lesotho;0
-lt;Lithuania;0
-lu;Luxemburg;0
-lv;Latvia;0
-ly;Libya;0
-ma;Morocco;0
-mc;Monaco;0
-md;Moldova;0
-me;Montenegro;0
-mf;Saint Martin;0
-mg;Madagascar;0
-mh;Marshall Islands;0
-mk;Macedonia;0
-ml;Mali;0
-mm;Burma (Myanmar);0
-mn;Mongolia;0
-mo;Macau;0
-mp;Northern Mariana Islands;0
-mq;Martinique;0
-mr;Mauritania;0
-ms;Montserrat;0
-mt;Malta;0
-mu;Mauritius;0
-mv;Maldives;0
-mw;Malawi;0
-mx;Mexico;0
-my;Malaysia;0
-mz;Mozambique;0
-na;Namibia;0
-nc;New Caledonia;0
-ne;Niger;0
-nf;Norfolk Island;0
-ng;Nigeria;0
-ni;Nicaragua;0
-nl;Netherlands;0
-no;Norway;0
-np;Nepal;0
-nr;Nauru;0
-nu;Niue;0
-nz;New Zealand;0
-om;Oman;0
-pa;Panama;0
-pe;Peru;0
-pf;French Polynesia;0
-pg;Papua New Guinea;0
-ph;Philippines;0
-pk;Pakistan;0
-pl;Poland;0
-pm;Saint Pierre and Miquelon;0
-pn;Pitcairn;0
-pr;Puerto Rico;0
-ps;Palestinian Territories;0
-pt;Portugal;0
-pw;Palau;0
-py;Paraguay;0
-qa;Qatar;0
-re;Reunion Island;0
-ro;Romania;0
-rs;Serbia;0
-ru;Russian Federation;0
-rw;Rwanda;0
-sa;Saudi Arabia;0
-sb;Solomon Islands;0
-sc;Seychelles;0
-sd;Sudan;0
-se;Sweden;0
-sg;Singapore;0
-si;Slovenia;0
-sj;Svalbard and Jan Mayen;0
-sk;Slovakia;0
-sl;Sierra Leone;0
-sm;San Marino;0
-sn;Senegal;0
-so;Somalia;0
-sr;Suriname;0
-st;São Tomé and Príncipe;0
-sv;El Salvador;0
-sy;Syria;0
-sz;Swaziland;0
-tc;Turks and Caicos Islands;0
-td;Chad;0
-tf;French Southern Territories;0
-tg;Togo;0
-th;Thailand;0
-tj;Tajikistan;0
-tk;Tokelau;0
-tl;East Timor;0
-tm;Turkmenistan;0
-tn;Tunisia;0
-to;Tonga;0
-tr;Turkey;0
-tt;Trinidad and Tobago;0
-tv;Tuvalu;0
-tw;Taiwan;0
-tz;Tanzania;0
-ua;Ukraine;0
-ug;Uganda;0
-us;United States;0
-uy;Uruguay;0
-uz;Uzbekistan;0
-va;Vatican City State;0
-vc;Saint Vincent and the Grenadines;0
-ve;Venezuela;0
-vg;Virgin Islands (British);0
-vi;Virgin Islands (U.S.);0
-vn;Vietnam;0
-vu;Vanuatu;0
-wf;Wallis and Futuna;0
-ws;Samoa;0
-ye;Yemen;0
-yt;Mayotte;0
-za;South Africa;0
-zm;Zambia;0
-zw;Zimbabwe;0
+iso_code;language_iso_code;name_canonical;country_zone_name
+ao;en;Angola;Africa
+bf;fr;Burkina Faso;Africa
+bi;fr;Burundi;Africa
+bj;fr;Benin;Africa
+bw;en;Botswana;Africa
+cd;fr;Congo, Dem. Republic;Africa
+cf;fr;Central African Republic;Africa
+cg;fr;Congo, Republic;Africa
+ci;fr;Ivory Coast;Africa
+cm;en;Cameroon;Africa
+cv;en;Cape Verde;Africa
+dj;en;Djibouti;Africa
+dz;en;Algeria;Africa
+eg;en;Egypt;Africa
+eh;en;Western Sahara;Africa
+er;en;Eritrea;Africa
+et;en;Ethiopia;Africa
+ga;fr;Gabon;Africa
+gh;en;Ghana;Africa
+gm;en;Gambia;Africa
+gn;en;Guinea;Africa
+gq;es;Equatorial Guinea;Africa
+gw;pt;Guinea-Bissau;Africa
+ke;en;Kenya;Africa
+km;en;Comoros;Africa
+lr;en;Liberia;Africa
+ls;en;Lesotho;Africa
+ly;en;Libya;Africa
+ma;en;Morocco;Africa
+mg;en;Madagascar;Africa
+ml;en;Mali;Africa
+mr;en;Mauritania;Africa
+mu;en;Mauritius;Africa
+mw;en;Malawi;Africa
+mz;en;Mozambique;Africa
+na;en;Namibia;Africa
+ne;en;Niger;Africa
+ng;en;Nigeria;Africa
+re;fr;Reunion Island;Africa
+rw;en;Rwanda;Africa
+sc;en;Seychelles;Africa
+sd;en;Sudan;Africa
+sl;en;Sierra Leone;Africa
+sn;en;Senegal;Africa
+so;en;Somalia;Africa
+st;pt;São Tomé and Príncipe;Africa
+sz;en;Swaziland;Africa
+td;en;Chad;Africa
+tg;en;Togo;Africa
+tn;en;Tunisia;Africa
+tz;en;Tanzania;Africa
+ug;en;Uganda;Africa
+yt;fr;Mayotte;Africa
+za;en;South Africa;Africa
+zm;en;Zambia;Africa
+zw;en;Zimbabwe;Africa
+ae;en;United Arab Emirates;Asia
+af;en;Afghanistan;Asia
+am;en;Armenia;Asia
+az;en;Azerbaijan;Asia
+bd;en;Bangladesh;Asia
+bh;en;Bahrain;Asia
+bn;en;Brunei;Asia
+bt;en;Bhutan;Asia
+cc;en;Cocos (Keeling) Islands;Asia
+cn;en;China;Asia
+cx;en;Christmas Island;Asia
+ge;en;Georgia;Asia
+hk;en;HongKong;Asia
+id;en;Indonesia;Asia
+il;en;Israel;Asia
+in;en;India;Asia
+iq;en;Iraq;Asia
+ir;en;Iran;Asia
+jo;en;Jordan;Asia
+jp;en;Japan;Asia
+kg;en;Kyrgyzstan;Asia
+kh;en;Cambodia;Asia
+kp;en;Korea, Dem. Republic of;Asia
+kr;en;South Korea;Asia
+kw;en;Kuwait;Asia
+kz;en;Kazakhstan;Asia
+la;en;Laos;Asia
+lb;en;Lebanon;Asia
+lk;si;Sri Lanka;Asia
+mm;en;Burma (Myanmar);Asia
+mn;en;Mongolia;Asia
+mo;en;Macau;Asia
+my;en;Malaysia;Asia
+np;en;Nepal;Asia
+om;en;Oman;Asia
+ph;en;Philippines;Asia
+pk;en;Pakistan;Asia
+ps;en;Palestinian Territories;Asia
+qa;en;Qatar;Asia
+sa;en;Saudi Arabia;Asia
+sg;en;Singapore;Asia
+sy;en;Syria;Asia
+th;en;Thailand;Asia
+tl;pt;East Timor;Asia
+tw;en;Taiwan;Asia
+uz;en;Uzbekistan;Asia
+vn;en;Vietnam;Asia
+ye;en;Yemen;Asia
+ai;en;Anguilla;Central America/Antilla
+aw;nl;Aruba;Central America/Antilla
+bl;fr;Saint Barthelemy;Central America/Antilla
+bz;en;Belize;Central America/Antilla
+cr;es;Costa Rica;Central America/Antilla
+cu;es;Cuba;Central America/Antilla
+dm;en;Dominica;Central America/Antilla
+do;es;Dominican Republic;Central America/Antilla
+fk;en;Falkland Islands;Central America/Antilla
+gd;en;Grenada;Central America/Antilla
+gp;fr;Guadeloupe;Central America/Antilla
+gt;es;Guatemala;Central America/Antilla
+hn;es;Honduras;Central America/Antilla
+ht;fr;Haiti;Central America/Antilla
+jm;en;Jamaica;Central America/Antilla
+kn;en;Saint Kitts and Nevis;Central America/Antilla
+ky;en;Cayman Islands;Central America/Antilla
+lc;en;Saint Lucia;Central America/Antilla
+mf;fr;Saint Martin;Central America/Antilla
+mq;fr;Martinique;Central America/Antilla
+ms;en;Montserrat;Central America/Antilla
+ni;es;Nicaragua;Central America/Antilla
+pa;es;Panama;Central America/Antilla
+pm;fr;Saint Pierre and Miquelon;Central America/Antilla
+pr;en;Puerto Rico;Central America/Antilla
+sr;nl;Suriname;Central America/Antilla
+sv;es;El Salvador;Central America/Antilla
+tc;en;Turks and Caicos Islands;Central America/Antilla
+vc;en;Saint Vincent and the Grenadines;Central America/Antilla
+at;de;Austria;Europe
+ba;en;Bosnia and Herzegovina;Europe
+be;de;Belgium;Europe
+bg;bg;Bulgaria;Europe
+cy;el;Cyprus;Europe
+cz;cs;Czech Republic;Europe
+de;de;Germany;Europe
+dk;da;Denmark;Europe
+ee;et;Estonia;Europe
+es;en;Spain;Europe
+fi;fi;Finland;Europe
+fr;en;France;Europe
+gb;en;United Kingdom;Europe
+gr;el;Greece;Europe
+hu;hu;Hungary;Europe
+ie;en;Ireland;Europe
+it;en;Italy;Europe
+li;de;Liechtenstein;Europe
+lt;lt;Lithuania;Europe
+lu;de;Luxemburg;Europe
+lv;lv;Latvia;Europe
+mt;en;Malta;Europe
+nl;nl;Netherlands;Europe
+pl;pl;Poland;Europe
+pt;pt;Portugal;Europe
+ro;ro;Romania;Europe
+se;en;Sweden;Europe
+si;en;Slovenia;Europe
+sk;sk;Slovakia;Europe
+ua;ru;Ukraine;Europe
+ad;en;Andorra;Europe (non-EU)
+al;en;Albania;Europe (non-EU)
+ax;sv;Åland Islands;Europe (non-EU)
+by;en;Belarus;Europe (non-EU)
+ch;de;Switzerland;Europe (non-EU)
+fo;en;Faroe Islands;Europe (non-EU)
+gg;en;Guernsey;Europe (non-EU)
+gi;en;Gibraltar;Europe (non-EU)
+gl;da;Greenland;Europe (non-EU)
+hr;hr;Croatia;Europe (non-EU)
+im;en;Man Island;Europe (non-EU)
+is;en;Iceland;Europe (non-EU)
+je;en;Jersey;Europe (non-EU)
+mc;fr;Monaco;Europe (non-EU)
+md;ro;Moldova;Europe (non-EU)
+me;en;Montenegro;Europe (non-EU)
+mk;en;Macedonia;Europe (non-EU)
+no;en;Norway;Europe (non-EU)
+rs;en;Serbia;Europe (non-EU)
+ru;en;Russian Federation;Europe (non-EU)
+sj;en;Svalbard and Jan Mayen;Europe (non-EU)
+sm;it;San Marino;Europe (non-EU)
+tr;en;Turkey;Europe (non-EU)
+ag;en;Antigua and Barbuda;North America
+as;en;American Samoa;North America
+bb;en;Barbados;North America
+bm;en;Bermuda;North America
+bs;en;Bahamas;North America
+ca;en;Canada;North America
+mx;es;Mexico;North America
+us;en;United States;North America
+vg;en;Virgin Islands (British);North America
+vi;en;Virgin Islands (U.S.);North America
+au;en;Australia;Oceania
+ck;en;Cook Islands;Oceania
+fj;en;Fiji;Oceania
+fm;en;Micronesia;Oceania
+gu;en;Guam;Oceania
+io;en;British Indian Ocean Territory;Oceania
+ki;en;Kiribati;Oceania
+mh;en;Marshall Islands;Oceania
+mp;en;Northern Mariana Islands;Oceania
+nc;fr;New Caledonia;Oceania
+nf;en;Norfolk Island;Oceania
+nr;en;Nauru;Oceania
+nu;en;Niue;Oceania
+nz;en;New Zealand;Oceania
+pf;fr;French Polynesia;Oceania
+pg;en;Papua New Guinea;Oceania
+pn;en;Pitcairn;Oceania
+pw;en;Palau;Oceania
+sb;en;Solomon Islands;Oceania
+tk;en;Tokelau;Oceania
+to;en;Tonga;Oceania
+tv;en;Tuvalu;Oceania
+vu;en;Vanuatu;Oceania
+wf;fr;Wallis and Futuna;Oceania
+ws;en;Samoa;Oceania
+ar;es;Argentina;South America
+bo;es;Bolivia;South America
+br;pt;Brazil;South America
+cl;es;Chile;South America
+co;es;Colombia;South America
+ec;es;Ecuador;South America
+gf;fr;French Guiana;South America
+gy;en;Guyana;South America
+pe;es;Peru;South America
+py;es;Paraguay;South America
+tt;en;Trinidad and Tobago;South America
+uy;es;Uruguay;South America
+ve;es;Venezuela;South America
