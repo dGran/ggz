@@ -7,33 +7,33 @@
 {% block title %}Sign in{% endblock %}
 
 {% block content %}
-        {% for flash_error in app.flashes('verify_email_error') %}
-            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-        {% endfor %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
 
     <div class="container mx-auto px-4">
         <div class="flex flex-col items-center justify-center h-screen">
-            <div class="w-[22rem] mx-auto text-center">
+            <div class="sm:w-[22rem] mx-auto text-center">
                 <p class="text-white font-ubuntu font-bold text-5xl pb-16">Sign in</p>
 
-                <div class="flex flex-col space-y-2.5">
-                    <button type="button" class="w-full font-medium bg-white hover:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-lg py-2.5 text-center flex items-center justify-center space-x-1.5">
+                <div class="flex flex-col space-y-3">
+                    <button type="button" class="w-full font-medium bg-white hover:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
                         <img src="https://static.vecteezy.com/system/resources/previews/012/871/371/original/google-search-icon-google-product-illustration-free-png.png" alt="Google icon" class="w-4 h-4 object-cover">
                         <span>Continue with Google</span>
                     </button>
-                    <button type="button" class="w-full font-medium bg-white hover:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-lg py-2.5 text-center flex items-center justify-center space-x-1.5">
+                    <button type="button" class="w-full font-medium bg-white hover:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1024px-2021_Facebook_icon.svg.png" alt="Facebook icon" class="w-4 h-4 object-cover">
                         <span>Continue with Facebook</span>
                     </button>
                 </div>
 
-                <hr class="bg-white mx-2.5 h-0.5 my-9">
+                <hr class="bg-[#E7D6F8] mx-2.5 h-0.5 my-9">
 
                 <form method="post">
                     {% if error %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
-                    <div class="flex flex-col space-y-4">
+                    <div class="flex flex-col space-y-3">
                         <input type="email"
                                value="{{ last_username }}"
                                name="email"
@@ -55,27 +55,27 @@
 
                     <div class="pt-3 w-full flex items-center justify-between">
                         <div class="flex items-center">
-                            <input id="default-checkbox" type="checkbox" name="_remember_me" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-checkbox" class="ml-2 text-sm font-medium font-lato text-white dark:text-gray-300">Remember me</label>
+                            <input id="default-checkbox" type="checkbox" name="_remember_me" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-checkbox" class="ml-2 text-sm text-white dark:text-gray-300">Remember me</label>
                         </div>
-                        <a href="#" class="ml-auto text-[13px] font-medium font-lato text-white dark:text-gray-300 uppercase">Forgot my password</a>
+                        <a href="#" class="text-[13px] font-medium font-lato text-white dark:text-gray-300 uppercase">Forgot my password</a>
                     </div>
 {#                    <button type="submit" class="w-full text-[#878787] bg-[#CCCCCC] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center">#}
 {#                        Sign in#}
 {#                    </button>#}
-                    <button type="submit" class="my-5 w-full font-bold bg-[#C7FD69] hover:bg-[#B3FF2E] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-bold font-ubuntu rounded-lg text-md py-2.5 text-center shadow-md shadow-[#6700BC]">
+                    <button type="submit" class="my-5 w-full font-bold bg-[#C7FD69] hover:bg-[#B3FF2E] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-bold font-ubuntu rounded-md text-md py-2.5 text-center shadow-md shadow-[#6700BC]">
                         Sign in
                     </button>
                 </form>
 
-                <div class="font-lato text-white flex items-center justify-center">
-                    New user?
-                    <a href="{{ path('customer_sign_up') }}" class="ml-2 font-bold uppercase">SIGN UP HERE</a>
+                <div class="font-lato text-white flex items-center justify-center space-x-2">
+                    <span>New user?</span>
+                    <a href="{{ path('customer_sign_up') }}" class="font-bold uppercase">SIGN UP HERE</a>
                 </div>
             </div>
 
 
-            <div class="pt-12 font-lato flex items-center">
+            <div class="sm:w-[40rem] pt-12 font-lato text-center px-4">
                 <span class="text-[#C4C4C4] font-regular">By logging in, you acknowledge that you have read and agree to accept Gengemz’s</span><a href="#" class="pl-1 text-white font-bold underline">Terms & Conditions</a><span class="pl-1 text-[#C4C4C4] font-regular">and</span><a href="#" class="pl-1 text-white font-bold underline">Privacy Policy</a>
             </div>
         </div>
