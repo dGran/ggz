@@ -24,6 +24,12 @@ class Country
     #[ORM\Column]
     protected bool $active = false;
 
+    #[ORM\Column]
+    protected \DateTime $dateCreated;
+
+    #[ORM\Column]
+    protected ?\DateTime $dateUpdated;
+
     public function getId(): int
     {
         return $this->id;
@@ -63,6 +69,26 @@ class Country
         $this->active = $active;
 
         return $this;
+    }
+
+    public function getDateCreated(): \DateTime
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(\DateTime $dateCreated): void
+    {
+        $this->dateCreated = $dateCreated;
+    }
+
+    public function getDateUpdated(): ?\DateTime
+    {
+        return $this->dateUpdated;
+    }
+
+    public function setDateUpdated(?\DateTime $dateUpdated): void
+    {
+        $this->dateUpdated = $dateUpdated;
     }
 
     public function __toString()

@@ -24,6 +24,12 @@ class Currency
     #[ORM\Column(precision: 10, scale: 0, nullable: true)]
     protected ?float $conversionRate = null;
 
+    #[ORM\Column]
+    protected \DateTime $dateCreated;
+
+    #[ORM\Column]
+    protected ?\DateTime $dateUpdated;
+
     public function getId(): int
     {
         return $this->id;
@@ -63,5 +69,25 @@ class Currency
         $this->conversionRate = $conversionRate;
 
         return $this;
+    }
+
+    public function getDateCreated(): \DateTime
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(\DateTime $dateCreated): void
+    {
+        $this->dateCreated = $dateCreated;
+    }
+
+    public function getDateUpdated(): ?\DateTime
+    {
+        return $this->dateUpdated;
+    }
+
+    public function setDateUpdated(?\DateTime $dateUpdated): void
+    {
+        $this->dateUpdated = $dateUpdated;
     }
 }
