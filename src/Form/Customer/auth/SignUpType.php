@@ -23,7 +23,8 @@ class SignUpType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'E-mail address',
-                    'class' => 'white-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-white bg-gray-50 border-b-2 border-white rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2 bg-opacity-25',
+                    'class' => 'w-full text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300',
+                    'id' => 'input-email',
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -31,8 +32,9 @@ class SignUpType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Password',
-                    'class' => 'white-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-white bg-gray-50 border-b-2 border-white rounded-t-md focus:ring-blue-500 focus:border-blue-500 bg-opacity-25',
+                    'class' => 'w-full text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300',
                     'autocomplete' => 'new-password',
+                    'id' => 'input-password',
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -48,7 +50,8 @@ class SignUpType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Proceed with your e-mail',
                 'attr' => [
-                    'class' => 'w-full py-2.5 px-4 text-[#878787] bg-[#CCCCCC] focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 mb-2',
+                    'class' => 'my-5 w-full font-bold bg-[#CCCC] hover:bg-[#DDD] focus:bg-[#DDD] focus:outline-none focus:ring-0 font-bold font-ubuntu rounded-md py-2.5 text-center shadow-md shadow-[#6700BC]',
+                    'id' => 'button-send-form',
                 ],
             ])
         ;

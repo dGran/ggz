@@ -7,91 +7,91 @@
 {% block title %}Sign in{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4">
-    <div class="flex flex-col items-center justify-center h-screen">
-        <div class="sm:w-[22rem] mx-auto text-center">
-            <p class="text-white font-ubuntu font-bold text-5xl pb-16">Sign in</p>
-
-            <div class="flex flex-col space-y-3">
-                <button tabindex="0" type="button" class="w-full font-medium bg-white hover:bg-gray-200 focus:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
-                    <img src="https://static.vecteezy.com/system/resources/previews/012/871/371/original/google-search-icon-google-product-illustration-free-png.png" alt="Google icon" class="w-4 h-4 object-cover">
-                    <span>Continue with Google</span>
-                </button>
-                <button tabindex="0" type="button" class="w-full font-medium bg-white hover:bg-gray-200 focus:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1024px-2021_Facebook_icon.svg.png" alt="Facebook icon" class="w-4 h-4 object-cover">
-                    <span>Continue with Facebook</span>
-                </button>
-            </div>
-
-            <hr class="bg-[#E7D6F8] mx-2.5 h-0.5 my-9">
-
-            <form method="post">
-                {% if error %}
-                    <div id="alert-border-2" class="flex p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
-                        <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                        <div class="ml-3 text-sm font-medium">
-                            {{ error.messageKey|trans(error.messageData, 'security') }}
-                        </div>
-                        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"  data-dismiss-target="#alert-border-2" aria-label="Close">
-                            <span class="sr-only">Dismiss</span>
-                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </button>
-                    </div>
-                {% endif %}
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col items-center justify-center h-screen">
+            <div class="sm:w-[22rem] mx-auto text-center">
+                <p class="text-white font-ubuntu font-bold text-5xl pb-16">Sign in</p>
 
                 <div class="flex flex-col space-y-3">
-                    <input type="email"
-                           value="{{ last_username }}"
-                           name="email"
-                           id="input-email"
-                           class="text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300"
-                           placeholder="E-mail address"
-                           autocomplete="email"
-                           required
-                           autofocus>
-                    <input type="password"
-                           name="password"
-                           id="input-password"
-                           class="text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300"
-                           placeholder="Password"
-                           autocomplete="current-password"
-                           required>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <button tabindex="0" type="button" class="w-full font-medium bg-white hover:bg-gray-200 focus:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
+                        <img src="https://static.vecteezy.com/system/resources/previews/012/871/371/original/google-search-icon-google-product-illustration-free-png.png" alt="Google icon" class="w-4 h-4 object-cover">
+                        <span>Continue with Google</span>
+                    </button>
+                    <button tabindex="0" type="button" class="w-full font-medium bg-white hover:bg-gray-200 focus:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1024px-2021_Facebook_icon.svg.png" alt="Facebook icon" class="w-4 h-4 object-cover">
+                        <span>Continue with Facebook</span>
+                    </button>
                 </div>
 
-                <div class="pt-3 w-full flex items-center justify-between">
-                    <div class="flex items-center">
-                        <input id="default-checkbox" type="checkbox" name="_remember_me" class="w-4 h-4 text-blue-600 rounded bg-gray-100 border-transparent focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 focus:outline-none">
-                        <label for="default-checkbox" class="ml-2 text-sm text-white dark:text-gray-300">Remember me</label>
+                <hr class="bg-[#E7D6F8] mx-2.5 h-0.5 my-9">
+
+                <form method="post">
+                    {% if error %}
+                        <div id="alert-border-2" class="flex p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
+                            <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                            <div class="ml-3 text-sm font-medium">
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </div>
+                            <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"  data-dismiss-target="#alert-border-2" aria-label="Close">
+                                <span class="sr-only">Dismiss</span>
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                        </div>
+                    {% endif %}
+
+                    <div class="flex flex-col space-y-3">
+                        <input type="email"
+                               value="{{ last_username }}"
+                               name="email"
+                               id="sign_in_email"
+                               class="text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300"
+                               placeholder="E-mail address"
+                               autocomplete="email"
+                               required
+                               autofocus>
+                        <input type="password"
+                               name="password"
+                               id="sign_in_plainPassword"
+                               class="text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300"
+                               placeholder="Password"
+                               autocomplete="current-password"
+                               required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     </div>
-                    <a href="#" class="text-[13px] font-medium font-lato text-white uppercase hover:underline focus:underline focus:outline-none">Forgot my password</a>
+
+                    <div class="pt-3 w-full flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="default-checkbox" type="checkbox" name="_remember_me" class="w-4 h-4 text-blue-600 rounded bg-gray-100 border-transparent focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 focus:outline-none">
+                            <label for="default-checkbox" class="ml-2 text-sm text-white dark:text-gray-300">Remember me</label>
+                        </div>
+                        <a href="#" class="text-[13px] font-medium font-lato text-white uppercase hover:underline focus:underline focus:outline-none">Forgot my password</a>
+                    </div>
+
+                    <button type="submit" id="sign_in_submit" class="my-5 w-full font-bold bg-[#CCCC] hover:bg-[#DDD] focus:bg-[#DDD] focus:outline-none focus:ring-0 font-bold font-ubuntu rounded-md py-2.5 text-center shadow-md shadow-[#6700BC]">
+                        Sign in
+                    </button>
+                </form>
+
+                <div class="font-lato text-white flex items-center justify-center space-x-2">
+                    <span>New user?</span>
+                    <a href="{{ path('customer_sign_up') }}" class="font-bold uppercase hover:underline focus:underline focus:outline-none">SIGN UP HERE</a>
                 </div>
+            </div>
 
-                <button type="submit" id="button-send-form" class="my-5 w-full font-bold bg-[#CCCC] hover:bg-[#DDD] focus:bg-[#DDD] focus:outline-none focus:ring-0 font-bold font-ubuntu rounded-md py-2.5 text-center shadow-md shadow-[#6700BC]">
-                    Sign in
-                </button>
-            </form>
-
-            <div class="font-lato text-white flex items-center justify-center space-x-2">
-                <span>New user?</span>
-                <a href="{{ path('customer_sign_up') }}" class="font-bold uppercase hover:underline focus:underline focus:outline-none">SIGN UP HERE</a>
+            <div class="sm:w-[40rem] pt-12 font-lato text-center px-4">
+                <span class="text-[#C4C4C4] font-regular">By logging in, you acknowledge that you have read and agree to accept Gengemz’s</span><a href="#" class="pl-1 text-white font-bold hover:underline focus:underline focus:outline-none">Terms & Conditions</a><span class="pl-1 text-[#C4C4C4] font-regular">and</span><a href="#" class="pl-1 text-white font-bold  hover:underline focus:underline focus:outline-none">Privacy Policy</a>
             </div>
         </div>
-
-        <div class="sm:w-[40rem] pt-12 font-lato text-center px-4">
-            <span class="text-[#C4C4C4] font-regular">By logging in, you acknowledge that you have read and agree to accept Gengemz’s</span><a href="#" class="pl-1 text-white font-bold hover:underline focus:underline focus:outline-none">Terms & Conditions</a><span class="pl-1 text-[#C4C4C4] font-regular">and</span><a href="#" class="pl-1 text-white font-bold  hover:underline focus:underline focus:outline-none">Privacy Policy</a>
-        </div>
     </div>
-</div>
 {% endblock %}
 
 {% block css %}
-<style>
-    @import url({{ asset('build/app/styles/customer/auth/sign/sing-in.scss') }});
-</style>
+    <style>
+        @import url({{ asset('build/app/styles/customer/auth/sign/sing-in.scss') }});
+    </style>
 {% endblock %}
 
 {% block js %}
-<script src="{{ asset('build/app/js/customer/auth/sign-in.js') }}"></script>
+    <script src="{{ asset('build/app/js/customer/auth/sign-in.js') }}"></script>
 {% endblock %}
 

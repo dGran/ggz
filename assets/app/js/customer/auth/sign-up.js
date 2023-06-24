@@ -1,6 +1,6 @@
-let inputEmail = $('#sign_in_email');
-let inputPassword = $('#sign_in_plainPassword');
-let buttonSendForm = $('#sign_in_submit');
+let inputEmail = $('#sign_up_email');
+let inputPassword = $('#sign_up_plainPassword');
+let buttonSendForm = $('#sign_up_submit');
 
 buttonSendFormChangeState();
 

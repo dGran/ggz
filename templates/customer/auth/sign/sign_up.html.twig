@@ -7,44 +7,62 @@
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-
     <div class="container mx-auto px-4">
-        <div class="flex flex-col items-center justify-start h-screen">
-            <h1 class="text-white font-ubuntu font-bold text-5xl py-16 text-center">Sign up</h1>
-            <section class="flex flex-col items-center">
+        <div class="flex flex-col items-center justify-center h-screen">
+            <div class="sm:w-[22rem] mx-auto text-center">
+                <p class="text-white font-ubuntu font-bold text-5xl pb-16">Sign up</p>
 
-                <button type="button" style="width: 22rem;" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 mb-2">
-                    <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
-                    Sign up with Google
-                </button>
-                <button type="button" style="width: 22rem;" class="px-16 text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium font-ubuntu rounded-lg text-md py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#3b5998]/55 mb-2">
-                    <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path></svg>
-                    Sign up with Facebook
-                </button>
-                <hr class="w-80 h-0.5 mx-auto my-4 bg-white border-0 rounded">
+                <div class="flex flex-col space-y-3">
+                    <button tabindex="0" type="button" class="w-full font-medium bg-white hover:bg-gray-200 focus:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
+                        <img src="https://static.vecteezy.com/system/resources/previews/012/871/371/original/google-search-icon-google-product-illustration-free-png.png" alt="Google icon" class="w-4 h-4 object-cover">
+                        <span>Continue with Google</span>
+                    </button>
+                    <button tabindex="0" type="button" class="w-full font-medium bg-white hover:bg-gray-200 focus:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1024px-2021_Facebook_icon.svg.png" alt="Facebook icon" class="w-4 h-4 object-cover">
+                        <span>Continue with Facebook</span>
+                    </button>
+                </div>
+
+                <hr class="bg-[#E7D6F8] mx-2.5 h-0.5 my-9">
 
                 {{ form_start(sign_up_form) }}
-                {{ form_row(sign_up_form.email) }}
-                {{ form_row(sign_up_form.plainPassword) }}
-                <div class="text-center mt-1.5 font-lato text-xs font-bold text-white">
-                    <p>Must be at least 8 characters long</p>
-                    <p>Must include numbers and letters</p>
+{#                {% if error %}#}
+{#                    <div id="alert-border-2" class="flex p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">#}
+{#                        <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>#}
+{#                        <div class="ml-3 text-sm font-medium">#}
+{#                            {{ error.messageKey|trans(error.messageData, 'security') }}#}
+{#                        </div>#}
+{#                        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"  data-dismiss-target="#alert-border-2" aria-label="Close">#}
+{#                            <span class="sr-only">Dismiss</span>#}
+{#                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                {% endif %}#}
+                <div class="flex flex-col space-y-3">
+                    {{ form_row(sign_up_form.email) }}
+                    {{ form_row(sign_up_form.plainPassword) }}
                 </div>
-                <div class="py-6">
-                    {{ form_widget(sign_up_form.submit) }}
-                </div>
+                {{ form_widget(sign_up_form.submit) }}
                 {{ form_end(sign_up_form) }}
 
-                <p class="font-lato text-white">Already registered?<a href="{{ path('customer_sign_in') }}" class="pl-2 font-lato text-white font-bold">SIGN IN</a></p>
-
-            </section>
-
-            <p class="mt-8 py-8 font-lato text-[#C4C4C4] font-regular text-center">
-                In order to sign up, you will need to accept Gengemz’s <a href="#" class="px-1 text-white font-bold underline">Terms & Conditions</a><span class="text-[#C4C4C4] font-regular">and</span><a href="#" class="px-1 text-white font-bold underline">Privacy Policy</a>
-            </p>
+                <div class="font-lato text-white flex items-center justify-center space-x-2">
+                    <span>Already registered?</span>
+                    <a href="{{ path('customer_sign_in') }}" class="font-bold uppercase hover:underline focus:underline focus:outline-none">SIGN IN</a>
+                </div>
+            </div>
+            <div class="sm:w-[40rem] pt-12 font-lato text-center px-4">
+                <span class="text-[#C4C4C4] font-regular">In order to sign up, you will need to accept Gengemz’s</span><a href="#" class="pl-1 text-white font-bold hover:underline focus:underline focus:outline-none">Terms & Conditions</a><span class="pl-1 text-[#C4C4C4] font-regular">and</span><a href="#" class="pl-1 text-white font-bold  hover:underline focus:underline focus:outline-none">Privacy Policy</a>
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block css %}
+    <style>
+        @import url({{ asset('build/app/styles/customer/auth/sign/sing-up.scss') }});
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('build/app/js/customer/auth/sign-up.js') }}"></script>
 {% endblock %}
