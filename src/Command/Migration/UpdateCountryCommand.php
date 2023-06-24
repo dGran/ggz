@@ -43,7 +43,7 @@ class UpdateCountryCommand extends Command
         $output->writeln(\date(DATE_W3C).' - Started processing country update data');
 
         $countries = [];
-        $countriesFromSource = $this->csvService->getArrayDataFromCsvFile(self::DATA_SOURCE);
+        $countriesFromSource = $this->csvService->getArrayDataFromCsvFile(self::DATA_SOURCE, CsvService::DELIMITER_SEMICOLON);
 
         foreach ($countriesFromSource as $countryFromSource) {
             $country = $this->countryManager->findByIsoCode($countryFromSource['iso_code']);

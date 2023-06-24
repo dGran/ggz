@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\Language;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,5 +40,17 @@ class LanguageRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByIsoCode(string $isoCode): ?Language
+    {
+        return $this->createQueryBuilder('language')
+            ->where('language.isoCode = :iso_code')
+            ->setParameter('iso_code', $isoCode)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

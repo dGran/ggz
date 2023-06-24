@@ -7,6 +7,7 @@ namespace App\Manager;
 use App\Entity\Language;
 use App\Repository\LanguageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 
 class LanguageManager
 {
@@ -64,5 +65,29 @@ class LanguageManager
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
     {
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @param Language[] $languages
+     *
+     * @return Language[]
+     */
+    public function saveCollection(array $languages): array
+    {
+        foreach ($languages as $language) {
+            $this->entityManager->persist($language);
+        }
+
+        $this->entityManager->flush();
+
+        return $languages;
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByIsoCode(string $isoCode): ?Language
+    {
+        return $this->repository->findByIsoCode($isoCode);
     }
 }

@@ -10,10 +10,13 @@ use Symfony\Component\Serializer\Serializer;
 
 class CsvService
 {
-    public function getArrayDataFromCsvFile(string $dataSource): array
+    public const DELIMITER_COMMA = ',';
+    public const DELIMITER_SEMICOLON = ';';
+
+    public function getArrayDataFromCsvFile(string $dataSource, string $delimiter): array
     {
         $dataSource = \file_get_contents($dataSource);
 
-        return (new Serializer([new ObjectNormalizer()], [new CsvEncoder()]))->decode($dataSource, 'csv', [CsvEncoder::DELIMITER_KEY => ';']);
+        return (new Serializer([new ObjectNormalizer()], [new CsvEncoder()]))->decode($dataSource, 'csv', [CsvEncoder::DELIMITER_KEY => $delimiter]);
     }
 }

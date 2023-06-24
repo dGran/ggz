@@ -52,6 +52,5 @@ class CountryRepository extends ServiceEntityRepository
             ->setParameter('iso_code', $isoCode)
             ->getQuery()
             ->getOneOrNullResult();
-        ;
     }
 }
