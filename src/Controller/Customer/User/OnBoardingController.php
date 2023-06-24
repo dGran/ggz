@@ -15,136 +15,82 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class OnBoardingController extends AbstractController
 {
-    private AuthorizationCheckerInterface $authorizationChecker;
+    public const STEP_ONE_NAME = 'one';
+    public const STEP_TWO_NAME = 'two';
+    public const STEP_THREE_NAME = 'three';
+
     private UserManager $userManager;
 
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker, UserManager $userManager)
+    public function __construct(UserManager $userManager)
     {
-        $this->authorizationChecker = $authorizationChecker;
         $this->userManager = $userManager;
     }
 
-    #[Route('/onboarding/step-one', name: 'customer_onboarding_step_one')]
+    #[Route('/onboarding/step/{step}', name: 'customer_onboarding', requirements: ['step' => 'one|two|three'])]
     #[Security('is_granted("ROLE_USER")')]
-    public function onBoardingStepOne(Request $request): Response
+    public function onBoarding(Request $request, string $step): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
-
-        if ($user === null) {
-            return $this->redirectToRoute('customer_sign_in');
-        }
 
         if ($user->isOnBoardingComplete()) {
             return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
         }
 
-        $form = $this->createForm(OnBoardingStepOneType::class, $user);
+        $formType = match ($step) {
+            self::STEP_ONE_NAME => OnBoardingStepOneType::class,
+            self::STEP_TWO_NAME => OnBoardingStepTwoType::class,
+            self::STEP_THREE_NAME => OnBoardingStepThreeType::class,
+            default => throw new \InvalidArgumentException('Invalid onboarding step.'),
+        };
+
+        $form = $this->createForm($formType, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setDateUpdated(new \DateTime());
-
             $this->userManager->save($user);
 
-            return $this->redirectToRoute('customer_onboarding_step_two', ['user' => $user->getId()]);
-        }
+            if ($step === 'three') {
+                /** @var UploadedFile $profilePicFile */
+                $profilePicFile = $form['profilePic']->getData();
 
-        return $this->render('customer/user/onboarding/step_one.html.twig',
-            [
-                'user' => $user,
-                'on_boarding_step_one_form' => $form->createView(),
-            ]
-        );
-    }
+                if ($profilePicFile) {
+                    $destination = $this->getParameter('kernel.project_dir') . '/public/' . User::PROFILE_PIC_PATH;
+                    $filename = uniqid('', true) . '.' . $profilePicFile->guessExtension();
+                    $profilePicFile->move($destination, $filename);
+                    $user->setProfilePic($filename);
+                }
 
-    #[Route('/onboarding/step-two', name: 'customer_onboarding_step_two')]
-    #[Security('is_granted("ROLE_USER")')]
-    public function onBoardingStepTwo(Request $request): Response
-    {
-        $user = $this->getUser();
+                $user->setOnBoardingComplete(true);
+                $this->userManager->save($user);
 
-        if ($user === null) {
-            return $this->redirectToRoute('customer_sign_in');
-        }
-
-        if ($user->isOnBoardingComplete()) {
-            return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
-        }
-
-        $form = $this->createForm(OnBoardingStepTwoType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setDateUpdated(new \DateTime());
-
-            $this->userManager->save($user);
-
-            return $this->redirectToRoute('customer_onboarding_step_three', ['user' => $user->getId()]);
-        }
-
-        return $this->render('customer/user/onboarding/step_two.html.twig',
-            [
-                'user' => $user,
-                'on_boarding_step_two_form' => $form->createView(),
-            ]
-        );
-    }
-
-    #[Route('/onboarding/step-three', name: 'customer_onboarding_step_three')]
-    #[Security('is_granted("ROLE_USER")')]
-    public function onBoardingStepThree(Request $request): Response
-    {
-        $user = $this->getUser();
-
-        if ($user === null) {
-            return $this->redirectToRoute('customer_sign_in');
-        }
-
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        $userId = $user->getId();
-
-        if ($user->isOnBoardingComplete()) {
-            return $this->redirectToRoute('customer_profile', ['user' => $userId]);
-        }
-
-        $form = $this->createForm(OnBoardingStepThreeType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $profilePicFile */
-            $profilePicFile = $form['profilePic']->getData();
-
-            if ($profilePicFile) {
-                $destination = $this->getParameter('kernel.project_dir').'/public/'.User::PROFILE_PIC_PATH;
-                $filename = uniqid().'.'.$profilePicFile->guessExtension();
-                $profilePicFile->move($destination, $filename);
-
-                $user->setProfilePic($filename);
+                return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
             }
 
-            $user->setOnBoardingComplete(true);
-            $user->setDateUpdated(new \DateTime());
+            $nextStep = $step === self::STEP_ONE_NAME ? self::STEP_TWO_NAME : self::STEP_THREE_NAME;
 
-            $this->userManager->save($user);
-
-            return $this->redirectToRoute('customer_profile', ['user' => $userId]);
+            return $this->redirectToRoute('customer_onboarding', ['step' => $nextStep]);
         }
 
-        return $this->render('customer/user/onboarding/step_three.html.twig',
-            [
-                'user' => $user,
-                'on_boarding_step_three_form' => $form->createView(),
-            ]
-        );
+        $template = 'customer/user/onboarding/step_' . $step . '.html.twig';
+
+        return $this->render($template, [
+            'user' => $user,
+            'on_boarding_step_' . $step . '_form' => $form->createView(),
+        ]);
     }
 
-    #[Route('/onboarding/{user}/step-three/skip', name: 'customer_skip_onboarding_step_three')]
-    public function skipOnBoardingStepThree(User $user): Response
+    #[Route('/onboarding/skip', name: 'customer_skip_onboarding')]
+    #[Security('is_granted("ROLE_USER")')]
+    public function skipOnBoarding(): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         $user->setOnBoardingComplete(true);
         $user->setDateUpdated(new \DateTime());
 

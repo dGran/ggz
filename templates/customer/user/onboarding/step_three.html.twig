@@ -38,7 +38,6 @@
         <button id="addProfilePicButton" type="button" class="mt-8 text-[#FFFFFF] bg-[#7D00E2] focus:ring-4 focus:outline-none focus:ring-[#C6C6C6] hover:bg-[#6B00C1] font-bold font-ubuntu rounded-lg text-2xl py-2.5 text-center inline-flex mx-auto px-6 mb-2">
             ADD PROFILE PIC
         </button>
-        </div>
         <div class="flex flex-col w-3/5 mx-auto mt-8">
             <p class="ml-2 text-2xl font-bold font-lato text-blacktext dark:text-gray-300 text-center">Lastly, please choose who you will be sharing your content with (you will be able to change this again later, if you wish)</p>
             <div class="flex justify-center mt-4">
@@ -48,12 +47,11 @@
 
 
             <div class="flex flex-row items-center mt-2">
-                <a href="{{ path('customer_skip_onboarding_step_three', {user: user.id}) }}" class="font-ubuntu font-bold text-purpleggz text-xl mx-auto">SKIP THIS STEP</a>
+                <a href="{{ path('customer_skip_onboarding') }}" class="font-ubuntu font-bold text-purpleggz text-xl mx-auto">SKIP THIS STEP</a>
             </div>
         </div>
         {{ form_end(on_boarding_step_three_form) }}
     </div>
-
 </div>
 
 <script>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Customer\Auth;
 
+use App\Controller\Customer\User\OnBoardingController;
 use App\Entity\User;
 use App\Form\Customer\auth\SignUpType;
 use App\Security\EmailVerifier;
@@ -92,7 +93,7 @@ class SignController extends AbstractController
 //                    ->htmlTemplate('customer/auth/signup/confirmation_email.html.twig')
 //            );
 
-            return $this->redirectToRoute('customer_onboarding_step_one', ['user' => $user->getId()]);
+            return $this->redirectToRoute('customer_onboarding', ['step' => OnBoardingController::STEP_ONE_NAME]);
         }
 
         return $this->render('customer/auth/sign/sign_up.html.twig', [
