@@ -74,8 +74,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
       <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/rate-limiter" />
       <path value="$PROJECT_DIR$/vendor/spomky-labs/otphp" />
       <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
@@ -149,6 +147,9 @@
       <path value="$PROJECT_DIR$/vendor/symfonycasts/verify-email-bundle" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/symfonycasts/reset-password-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
