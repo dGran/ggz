@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Customer;
+namespace App\Service;
 
 class UserService
 {

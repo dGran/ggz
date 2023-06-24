@@ -30,6 +30,11 @@ class Country
     #[ORM\Column]
     protected ?\DateTime $dateUpdated;
 
+    public function __construct()
+    {
+        $this->dateCreated = new \DateTime();
+    }
+
     public function getId(): int
     {
         return $this->id;
