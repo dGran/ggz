@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\Country;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,5 +40,18 @@ class CountryRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByIsoCode(string $isoCode): ?Country
+    {
+        return $this->createQueryBuilder('country')
+            ->where('country.isoCode = :iso_code')
+            ->setParameter('iso_code', $isoCode)
+            ->getQuery()
+            ->getOneOrNullResult();
+        ;
     }
 }

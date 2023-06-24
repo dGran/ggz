@@ -7,6 +7,7 @@ namespace App\Manager;
 use App\Entity\Country;
 use App\Repository\CountryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 
 class CountryManager
 {
@@ -64,5 +65,29 @@ class CountryManager
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
     {
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @param Country[] $countries
+     *
+     * @return Country[]
+     */
+    public function saveCollection(array $countries): array
+    {
+        foreach ($countries as $country) {
+            $this->entityManager->persist($country);
+        }
+
+        $this->entityManager->flush();
+
+        return $countries;
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByIsoCode(string $isoCode): ?Country
+    {
+        return $this->repository->findByIsoCode($isoCode);
     }
 }
