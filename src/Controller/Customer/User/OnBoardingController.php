@@ -28,11 +28,15 @@ class OnBoardingController extends AbstractController
         $this->userManager = $userManager;
     }
 
-    #[Route('/onboarding/{user}/step-one', name: 'customer_onboarding_step_one')]
+    #[Route('/onboarding/step-one', name: 'customer_onboarding_step_one')]
     #[Security('is_granted("ROLE_USER")')]
-    public function onBoardingStepOne(Request $request, User $user): Response
+    public function onBoardingStepOne(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = $this->getUser();
+
+        if ($user === null) {
+            return $this->redirectToRoute('customer_sign_in');
+        }
 
         if ($user->isOnBoardingComplete()) {
             return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
@@ -57,11 +61,15 @@ class OnBoardingController extends AbstractController
         );
     }
 
-    #[Route('/onboarding/{user}/step-two', name: 'customer_onboarding_step_two')]
+    #[Route('/onboarding/step-two', name: 'customer_onboarding_step_two')]
     #[Security('is_granted("ROLE_USER")')]
-    public function onBoardingStepTwo(Request $request, User $user): Response
+    public function onBoardingStepTwo(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = $this->getUser();
+
+        if ($user === null) {
+            return $this->redirectToRoute('customer_sign_in');
+        }
 
         if ($user->isOnBoardingComplete()) {
             return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
@@ -86,10 +94,16 @@ class OnBoardingController extends AbstractController
         );
     }
 
-    #[Route('/onboarding/{user}/step-three', name: 'customer_onboarding_step_three')]
+    #[Route('/onboarding/step-three', name: 'customer_onboarding_step_three')]
     #[Security('is_granted("ROLE_USER")')]
-    public function onBoardingStepThree(Request $request, User $user): Response
+    public function onBoardingStepThree(Request $request): Response
     {
+        $user = $this->getUser();
+
+        if ($user === null) {
+            return $this->redirectToRoute('customer_sign_in');
+        }
+
         $this->denyAccessUnlessGranted('ROLE_USER');
         $userId = $user->getId();
 
