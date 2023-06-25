@@ -57,12 +57,12 @@
     </div>
 {% endblock %}
 
-{% block css %}
-    <style>
-        @import url({{ asset('build/app/styles/customer/auth/sign/sing-up.scss') }});
-    </style>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/app/styles/customer/auth/sign/sign-up.css') }}">
 {% endblock %}
 
-{% block js %}
-    <script src="{{ asset('build/app/js/customer/auth/sign-up.js') }}"></script>
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/app/js/customer/auth/sign-up.js') }}" defer></script>
 {% endblock %}

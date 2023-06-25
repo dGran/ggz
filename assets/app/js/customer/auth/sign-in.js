@@ -2,12 +2,12 @@ let inputEmail = $('#sign_in_email');
 let inputPassword = $('#sign_in_plainPassword');
 let buttonSendForm = $('#sign_in_submit');
 
-buttonSendFormChangeState();
+toggleButtonSendForm();
 
-inputEmail.on("input", buttonSendFormChangeState);
-inputPassword.on("input", buttonSendFormChangeState);
+inputEmail.on("input", toggleButtonSendForm);
+inputPassword.on("input", toggleButtonSendForm);
 
-function buttonSendFormChangeState() {
+function toggleButtonSendForm() {
     let isInputFilled = inputEmail.val().length > 0 && inputPassword.val().length > 0;
 
     buttonSendForm.toggleClass('filled', isInputFilled);

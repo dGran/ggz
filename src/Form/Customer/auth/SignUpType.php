@@ -24,7 +24,6 @@ class SignUpType extends AbstractType
                 'attr' => [
                     'placeholder' => 'E-mail address',
                     'class' => 'w-full text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300',
-                    'id' => 'input-email',
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -34,7 +33,6 @@ class SignUpType extends AbstractType
                     'placeholder' => 'Password',
                     'class' => 'w-full text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300',
                     'autocomplete' => 'new-password',
-                    'id' => 'input-password',
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -51,7 +49,6 @@ class SignUpType extends AbstractType
                 'label' => 'Proceed with your e-mail',
                 'attr' => [
                     'class' => 'my-5 w-full font-bold bg-[#CCCC] hover:bg-[#DDD] focus:bg-[#DDD] focus:outline-none focus:ring-0 font-bold font-ubuntu rounded-md py-2.5 text-center shadow-md shadow-[#6700BC]',
-                    'id' => 'button-send-form',
                 ],
             ])
         ;

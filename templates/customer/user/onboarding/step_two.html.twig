@@ -2,63 +2,63 @@
 
 {% set whithoutHeader = true %}
 {% set whithoutFooter = true %}
+{% set bodyBackgroundClass = 'bg-[#F7F7F7]' %}
 
 {% block title %}Brief policy review{% endblock %}
 
 {% block content %}
-<div class="container mx-auto mt-10">
-    <div class="flex flex-row">
-        <p class="pl-16 font-lato text-4xl font-extrabold text-[#C4C4C4] tracking-wider">2/3</p>
-    </div>
-    <div class="flex flex-col mt-4">
-        <div class="flex justify-center">
-            <p class="font-ubuntu text-5xl font-bold text-purpleggz">Brief policy review</p>
-        </div>
-        <div class="flex justify-center">
-            <p class="font-lato text-xl font-bold text-blacktext">In order to use our site, we need to confirm your age and that you agree to comply with our policies, terms and conditions.</p>
-        </div>
-        <div class="flex flex-col justify-center w-9/12 mx-auto mt-8">
-            <p class="flex mt-2 font-ubuntu justify-center text-2xl font-bold text-purpleggz">Date of birth</p>
+    <div class="container mx-auto p-10">
+        <p class="font-lato text-4xl font-extrabold text-[#C4C4C4] tracking-wider">2/3</p>
+        <div class="my-4">
+            <p class="font-ubuntu text-center text-4xl font-lato font-bold text-purpleggz">Brief policy review</p>
+            <p class="mt-2.5 mb-6 text-center font-lato font-bold text-blacktext">In order to use our site, we need to confirm your age and that you agree to comply with our policies, terms and conditions.</p>
+
             {{ form_start(on_boarding_step_two_form) }}
-            {{ form_row(on_boarding_step_two_form.birthdate) }}
-
-            <div class="flex flex-row items-center justify-end w-9/12 mx-auto mt-10">
-                <p class="font-ubuntu text-xl font-bold text-blacktext"><span class="text-lg"><span class="text-purpleggz">*</span> Required</span></p>
-            </div>
-            <div class="flex flex-col w-2/5 mx-auto mt-8">
-                <div class="flex flex-row items-center mb-1">
-                    <input id="checkbox1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="checkbox1" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I confirm I have read and accept the <span class="text-purpleggz font-bold">Terms and Conditions</span> of the site <span class="text-purpleggz">*</span></label>
-                </div>
-                <div class="flex flex-row items-center mb-1">
-                    <input id="checkbox2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="checkbox2" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I confirm I have read and accept the <span class="text-purpleggz font-bold">Privacy policy</span> of the site <span class="text-purpleggz">*</span></label>
-                </div>
-                <div class="flex flex-row items-center mb-1 ml-8">
-                    <div class="flex flex-col my-4">
-                        <p class="font-lato font-medium text-[#969696] text-sm my-1"><span class="font-bold">Data we store:</span> Mes ac ante ipsum primis in faucibus. Etiam sed laoreet diam, a faucibus</p>
-                        <p class="font-lato font-medium text-[#969696] text-sm"><span class="font-bold">Who we share it with:</span> Etiam sed laoreet diam, a faucibus</p>
-                        <p class="font-lato font-medium text-[#969696] text-sm my-1"><span class="font-bold">Purpose:</span>  Etiam sed laoreet diam, a faucibus</p>
-                    </div>
-                </div>
-                <div class="flex flex-row items-center mb-1">
-                    <input id="checkbox3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="checkbox3" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I agree to receive Gengemz’s e-mail communications about special promotions, offers or Marketing campaigns</label>
-                </div>
-                <div class="flex flex-row items-center mb-1">
-                    <input id="checkbox4" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="checkbox4" class="ml-2 text-lg font-medium font-lato text-blacktext dark:text-gray-300">I acknowledge that only original and official items can be traded in this site. Reproductions, fake or counterfeit items are not accepted or tolerated.</label>
-                </div>
-                <div class="flex flex-row items-center mt-12">
-                    <button type="button" id="acceptAllButton" class="font-ubuntu font-bold text-purpleggz text-lg mx-auto accept-all bg-transparent border-none outline-none cursor-pointer focus:outline-none">Accept all</button>
-                </div>
+            <div class="sm:w-[18rem] mt-10 mx-auto text-center">
+                <label for="on_boarding_step_two_birthdate" class="flex mb-5 font-ubuntu justify-center text-2xl font-bold text-purpleggz">Date of birth</label>
+                {{ form_row(on_boarding_step_two_form.birthdate) }}
             </div>
 
-            <div class="py-6">
+            <div class="sm:w-[34rem] mt-10 mx-auto flex flex-col items-start space-y-1">
+                <label class="ml-[26px]" style="text-indent: -26px">
+                    <input type="checkbox" id="on_boarding_step_two_terms_and_conditions" class="appearance-none checked:bg-purpleggz rounded focus:outline-none ring-0 focus:ring-0" />
+                    <span class="font font-ubuntu ml-1.5">I confirm have read and accept the <a href="#" class="text-purpleggz font-bold hover:underline focus:underline">Terms and Conditions</a> of the site</span>
+                </label>
+                <label class="ml-[26px]" style="text-indent: -26px">
+                    <input type="checkbox" id="on_boarding_step_two_policy_privacy" class="appearance-none checked:bg-purpleggz rounded focus:outline-none ring-0 focus:ring-0" />
+                    <span class="font font-ubuntu ml-1.5">I confirm have read and accept the <a href="#" class="text-purpleggz font-bold hover:underline focus:underline">Privacy Policy</a> of the site</span>
+                </label>
+                <div class="pl-6 py-2.5 text-gray-400 text-sm">
+                    <p><strong>Data we store:</strong> Mes ac ante ipsum primis in faucibus. Etiam sed laoreet diam, a faucibus</p>
+                    <p><strong>Who we share it with:</strong> Etiam sed laoreet diam, a faucibus</p>
+                    <p><strong>Purpose:</strong> Etiam sed laoreet diam, a faucibus</p>
+                </div>
+                <label class="ml-[26px]" style="text-indent: -26px">
+                    <input type="checkbox" id="on_boarding_step_two_email_communications" class="appearance-none checked:bg-purpleggz rounded focus:outline-none ring-0 focus:ring-0" />
+                    <span class="font font-ubuntu ml-1.5">I agree to receive Gengemz’s e-mail communications about special promotions, offers or Marketing campaigns</span>
+                </label>
+                <label class="ml-[26px]" style="text-indent: -26px">
+                    <input type="checkbox" id="on_boarding_step_two_official_items" class="appearance-none checked:bg-purpleggz rounded focus:outline-none ring-0 focus:ring-0" />
+                    <span class="font font-ubuntu ml-1.5">I acknowledge that only original and official items can be traded in this site. Reproductions, fake or counterfeit items are not accepted or tolerated.</span>
+                </label>
+                <div class="py-5 flex justify-center w-full">
+                    <button type="button" id="accept_all" class="font-ubuntu font-bold text-purpleggz hover:underline focus:underline text-lg focus:outline-none">Accept all</button>
+                </div>
                 {{ form_widget(on_boarding_step_two_form.submit) }}
+
             </div>
             {{ form_end(on_boarding_step_two_form) }}
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/app/styles/customer/onboarding/step-two.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/app/js/customer/user/onboarding/step-two.js') }}" defer></script>
 {% endblock %}

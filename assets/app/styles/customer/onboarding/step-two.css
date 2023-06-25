@@ -1,0 +1,15 @@
+#on_boarding_step_two_submit.filled {
+  background-color: #7D00E2 !important;
+  color: #FFFFFF !important;
+}
+
+#on_boarding_step_two_submit.filled:hover,
+#on_boarding_step_two_submit.filled:focus {
+  background-color: #6701b9 !important;
+}
+
+#on_boarding_step_two_submit.empty {
+  background-color: #CCCC !important;
+  color: #878787 !important;
+  pointer-events: none;
+}
