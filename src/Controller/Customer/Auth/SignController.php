@@ -9,7 +9,6 @@ use App\Entity\User;
 use App\Form\Customer\auth\SignUpType;
 use App\Security\EmailVerifier;
 use App\Manager\UserManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,9 +16,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -67,7 +66,7 @@ class SignController extends AbstractController
     }
 
     #[Route('/sign-up', name: 'customer_sign_up')]
-    public function signUp(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function signUp(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         if (
             $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')
@@ -86,7 +85,7 @@ class SignController extends AbstractController
 
             $this->userManager->save($user);
 
-            $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
+            $token = new PostAuthenticationToken($user, 'main', $user->getRoles());
             $this->tokenStorage->setToken($token);
 
             // generate a signed url and email it to the user
