@@ -19,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -29,17 +28,20 @@ class SignController extends AbstractController
     private EmailVerifier $emailVerifier;
     private UserManager $userManager;
     private MailerInterface $mailer;
+    private TokenStorageInterface $tokenStorage;
     private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EmailVerifier $emailVerifier,
         UserManager $userManager,
         MailerInterface $mailer,
+        TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->emailVerifier = $emailVerifier;
         $this->userManager = $userManager;
         $this->mailer = $mailer;
+        $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -83,6 +85,9 @@ class SignController extends AbstractController
             $user->setDateCreated(new \DateTime());
 
             $this->userManager->save($user);
+
+            $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
+            $this->tokenStorage->setToken($token);
 
             // generate a signed url and email it to the user
 //            $this->emailVerifier->sendEmailConfirmation('customer_verify_email', $user,
