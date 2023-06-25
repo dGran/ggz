@@ -22,7 +22,7 @@ class OnBoardingStepThreeType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    'class' => 'hidden black-placeholder text-whiteblock p-2.5 pl-4 resize-none font-ubuntu text-blacktext bg-[#F2EDF6] border-b-2 border-[#303030] rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2',
+                    'class' => 'hidden',
                 ],
             ])
             ->add('shareContent', ChoiceType::class, [
@@ -34,13 +34,14 @@ class OnBoardingStepThreeType extends AbstractType
                 'placeholder' => 'Share my content with',
                 'label' => false,
                 'attr' => [
-                    'class' => 'black-placeholder text-whiteblock p-2.5 pl-4 text-xl font-ubuntu text-blacktext bg-[#F2EDF6] border-b-2 border-[#303030] rounded-t-md focus:ring-blue-500 focus:border-blue-500 mt-6 mb-2',
+                    'class' => 'w-full py-2.5 px-4 font-ubuntu bg-[#F2EDF6] border-0 border-b-2 border-[#6C5D73] focus:bg-white focus:border-purpleggz hover:border-purpleggz rounded-t-md placeholder-gray-500 focus:outline-none focus:ring-0',
                 ],
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'COMPLETE REGISTRATION',
                 'attr' => [
-                    'class' => 'mt-12 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-bold font-ubuntu rounded-lg text-2xl py-2.5 text-center inline-flex mx-auto px-6 mb-2 disabled',
+                    'class' => 'w-full text-white text-base md:text-lg font-ubuntu py-2.5 px-4 font-extrabold bg-[#7D00E2] hover:bg-[#6B00C1] focus:bg-[#6B00C1] font-bold rounded-md focus:outline-none',
                 ],
             ])
         ;
