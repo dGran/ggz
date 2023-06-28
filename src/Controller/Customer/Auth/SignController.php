@@ -121,7 +121,7 @@ class SignController extends AbstractController
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
-            return $this->redirectToRoute('customer_signup');
+            return $this->redirectToRoute('customer_sign_up');
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates

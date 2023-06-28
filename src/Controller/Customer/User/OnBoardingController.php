@@ -37,7 +37,7 @@ class OnBoardingController extends AbstractController
         $user = $this->getUser();
 
         if ($user->isOnBoardingComplete()) {
-            return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
+            return $this->redirectToRoute('customer_profile');
         }
 
         $formType = match ($step) {
@@ -68,7 +68,7 @@ class OnBoardingController extends AbstractController
                 $user->setOnBoardingComplete(true);
                 $this->userManager->save($user);
 
-                return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
+                return $this->redirectToRoute('customer_profile');
             }
 
             $nextStep = $step === self::STEP_ONE_NAME ? self::STEP_TWO_NAME : self::STEP_THREE_NAME;
@@ -96,6 +96,6 @@ class OnBoardingController extends AbstractController
 
         $this->userManager->save($user);
 
-        return $this->redirectToRoute('customer_profile', ['user' => $user->getId()]);
+        return $this->redirectToRoute('customer_profile');
     }
 }
