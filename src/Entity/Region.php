@@ -31,7 +31,7 @@ class Region
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): Region
     {
         $this->name = $name;
 
@@ -43,7 +43,7 @@ class Region
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): Region
     {
         $this->description = $description;
 

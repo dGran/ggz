@@ -59,7 +59,7 @@ class Platform
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): Platform
     {
         $this->name = $name;
 
@@ -71,7 +71,7 @@ class Platform
         return $this->alternateName;
     }
 
-    public function setAlternateName(?string $alternateName): static
+    public function setAlternateName(?string $alternateName): Platform
     {
         $this->alternateName = $alternateName;
 
@@ -83,7 +83,7 @@ class Platform
         return $this->dateRelease;
     }
 
-    public function setDateRelease(?\DateTimeInterface $dateRelease): static
+    public function setDateRelease(?\DateTimeInterface $dateRelease): Platform
     {
         $this->dateRelease = $dateRelease;
 
@@ -95,7 +95,7 @@ class Platform
         return $this->generation;
     }
 
-    public function setGeneration(?int $generation): static
+    public function setGeneration(?int $generation): Platform
     {
         $this->generation = $generation;
 
@@ -107,7 +107,7 @@ class Platform
         return $this->locked;
     }
 
-    public function setLocked(bool $locked): static
+    public function setLocked(bool $locked): Platform
     {
         $this->locked = $locked;
 
@@ -119,7 +119,7 @@ class Platform
         return $this->picture;
     }
 
-    public function setPicture(?string $picture): static
+    public function setPicture(?string $picture): Platform
     {
         $this->picture = $picture;
 
@@ -131,7 +131,7 @@ class Platform
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): Platform
     {
         $this->description = $description;
 
@@ -143,7 +143,7 @@ class Platform
         return $this->links;
     }
 
-    public function setLinks(?string $links): static
+    public function setLinks(?string $links): Platform
     {
         $this->links = $links;
 
@@ -155,7 +155,7 @@ class Platform
         return $this->type;
     }
 
-    public function setType(?PlatformType $type): static
+    public function setType(?PlatformType $type): Platform
     {
         $this->type = $type;
 
@@ -167,7 +167,7 @@ class Platform
         return $this->platformFamily;
     }
 
-    public function setPlatformFamily(?PlatformFamily $platformFamily): static
+    public function setPlatformFamily(?PlatformFamily $platformFamily): Platform
     {
         $this->platformFamily = $platformFamily;
 
@@ -179,7 +179,7 @@ class Platform
         return $this->company;
     }
 
-    public function setCompany(?Company $company): static
+    public function setCompany(?Company $company): Platform
     {
         $this->company = $company;
 

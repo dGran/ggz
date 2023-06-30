@@ -31,7 +31,7 @@ class ContributionState
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): ContributionState
     {
         $this->name = $name;
 
@@ -43,7 +43,7 @@ class ContributionState
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): ContributionState
     {
         $this->description = $description;
 

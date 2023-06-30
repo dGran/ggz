@@ -47,7 +47,7 @@ class Company
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): Company
     {
         $this->name = $name;
 
@@ -59,7 +59,7 @@ class Company
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): Company
     {
         $this->description = $description;
 
@@ -71,7 +71,7 @@ class Company
         return $this->picture;
     }
 
-    public function setPicture(?string $picture): static
+    public function setPicture(?string $picture): Company
     {
         $this->picture = $picture;
 
@@ -83,7 +83,7 @@ class Company
         return $this->type;
     }
 
-    public function setType(?CompanyType $type): static
+    public function setType(?CompanyType $type): Company
     {
         $this->type = $type;
 
@@ -98,7 +98,7 @@ class Company
         return $this->platforms;
     }
 
-    public function addPlatform(Platform $platform): static
+    public function addPlatform(Platform $platform): Company
     {
         if (!$this->platforms->contains($platform)) {
             $this->platforms->add($platform);
@@ -108,7 +108,7 @@ class Company
         return $this;
     }
 
-    public function removePlatform(Platform $platform): static
+    public function removePlatform(Platform $platform): Company
     {
         if ($this->platforms->removeElement($platform)) {
             // set the owning side to null (unless already changed)

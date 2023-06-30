@@ -41,7 +41,7 @@ class CompanyType
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): CompanyType
     {
         $this->name = $name;
 
@@ -53,7 +53,7 @@ class CompanyType
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): CompanyType
     {
         $this->description = $description;
 
@@ -68,7 +68,7 @@ class CompanyType
         return $this->companies;
     }
 
-    public function addCompany(Company $company): static
+    public function addCompany(Company $company): CompanyType
     {
         if (!$this->companies->contains($company)) {
             $this->companies->add($company);
@@ -78,7 +78,7 @@ class CompanyType
         return $this;
     }
 
-    public function removeCompany(Company $company): static
+    public function removeCompany(Company $company): CompanyType
     {
         if ($this->companies->removeElement($company)) {
             // set the owning side to null (unless already changed)
