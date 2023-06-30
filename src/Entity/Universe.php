@@ -32,7 +32,7 @@ class Universe
     #[ORM\Column(nullable: true)]
     private ?int $universeId = null;
 
-    #[ORM\OneToMany(mappedBy: 'universe', targetEntity: Series::class)]
+    #[ORM\OneToMany(mappedBy: 'universe', targetEntity: Serie::class)]
     private Collection $series;
 
     public function __construct()
@@ -106,14 +106,14 @@ class Universe
     }
 
     /**
-     * @return Collection<int, Series>
+     * @return Collection<int, Serie>
      */
     public function getSeries(): Collection
     {
         return $this->series;
     }
 
-    public function addSeries(Series $series): Universe
+    public function addSeries(Serie $series): Universe
     {
         if (!$this->series->contains($series)) {
             $this->series->add($series);
@@ -123,7 +123,7 @@ class Universe
         return $this;
     }
 
-    public function removeSeries(Series $series): Universe
+    public function removeSeries(Serie $series): Universe
     {
         if ($this->series->removeElement($series)) {
             // set the owning side to null (unless already changed)
