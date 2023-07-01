@@ -7,8 +7,10 @@ namespace App\Entity;
 use App\Repository\UserListRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserListRepository::class)]
+#[UniqueEntity(fields: ['user', 'type', 'edition'], message: 'This edition already exists.')]
 class UserList
 {
     #[ORM\Id]
