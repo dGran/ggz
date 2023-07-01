@@ -24,17 +24,6 @@ class Currency
     #[ORM\Column(precision: 10, scale: 0, nullable: true)]
     protected ?float $conversionRate = null;
 
-    #[ORM\Column]
-    protected \DateTime $dateCreated;
-
-    #[ORM\Column(nullable: true)]
-    protected ?\DateTime $dateUpdated;
-
-    public function __construct()
-    {
-        $this->dateCreated = new \DateTime();
-    }
-
     public function getId(): int
     {
         return $this->id;
@@ -76,23 +65,8 @@ class Currency
         return $this;
     }
 
-    public function getDateCreated(): \DateTime
+    public function __toString()
     {
-        return $this->dateCreated;
-    }
-
-    public function setDateCreated(\DateTime $dateCreated): void
-    {
-        $this->dateCreated = $dateCreated;
-    }
-
-    public function getDateUpdated(): ?\DateTime
-    {
-        return $this->dateUpdated;
-    }
-
-    public function setDateUpdated(?\DateTime $dateUpdated): void
-    {
-        $this->dateUpdated = $dateUpdated;
+        return $this->isoCode;
     }
 }

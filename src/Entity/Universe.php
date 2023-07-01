@@ -38,10 +38,17 @@ class Universe
     #[ORM\OneToMany(mappedBy: 'universe', targetEntity: Edition::class)]
     private Collection $editions;
 
+    #[ORM\Column]
+    protected \DateTime $dateCreated;
+
+    #[ORM\Column(nullable: true)]
+    protected ?\DateTime $dateUpdated;
+
     public function __construct()
     {
         $this->series = new ArrayCollection();
         $this->editions = new ArrayCollection();
+        $this->dateCreated = new \DateTime();
     }
 
     public function getId(): int
@@ -167,5 +174,34 @@ class Universe
         }
 
         return $this;
+    }
+
+    public function getDateCreated(): \DateTime
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(\DateTime $dateCreated): Universe
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getDateUpdated(): ?\DateTime
+    {
+        return $this->dateUpdated;
+    }
+
+    public function setDateUpdated(?\DateTime $dateUpdated): Universe
+    {
+        $this->dateUpdated = $dateUpdated;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

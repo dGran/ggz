@@ -26,12 +26,6 @@ class Language
     #[ORM\ManyToMany(targetEntity: Currency::class, inversedBy: 'Language')]
     protected Collection $currencies;
 
-    #[ORM\Column]
-    protected \DateTime $dateCreated;
-
-    #[ORM\Column(nullable: true)]
-    protected ?\DateTime $dateUpdated;
-
     public function __construct()
     {
         $this->currencies = new ArrayCollection();
@@ -79,23 +73,8 @@ class Language
         return $this;
     }
 
-    public function getDateCreated(): \DateTime
+    public function __toString()
     {
-        return $this->dateCreated;
-    }
-
-    public function setDateCreated(\DateTime $dateCreated): void
-    {
-        $this->dateCreated = $dateCreated;
-    }
-
-    public function getDateUpdated(): ?\DateTime
-    {
-        return $this->dateUpdated;
-    }
-
-    public function setDateUpdated(?\DateTime $dateUpdated): void
-    {
-        $this->dateUpdated = $dateUpdated;
+        return $this->name;
     }
 }

@@ -27,17 +27,6 @@ class Country
     #[ORM\Column(nullable: true)]
     protected ?string $countryZoneName = null;
 
-    #[ORM\Column]
-    protected \DateTime $dateCreated;
-
-    #[ORM\Column(nullable: true)]
-    protected ?\DateTime $dateUpdated;
-
-    public function __construct()
-    {
-        $this->dateCreated = new \DateTime();
-    }
-
     public function getId(): int
     {
         return $this->id;
@@ -85,26 +74,6 @@ class Country
     public function setCountryZoneName(?string $countryZoneName): void
     {
         $this->countryZoneName = $countryZoneName;
-    }
-
-    public function getDateCreated(): \DateTime
-    {
-        return $this->dateCreated;
-    }
-
-    public function setDateCreated(\DateTime $dateCreated): void
-    {
-        $this->dateCreated = $dateCreated;
-    }
-
-    public function getDateUpdated(): ?\DateTime
-    {
-        return $this->dateUpdated;
-    }
-
-    public function setDateUpdated(?\DateTime $dateUpdated): void
-    {
-        $this->dateUpdated = $dateUpdated;
     }
 
     public function __toString()

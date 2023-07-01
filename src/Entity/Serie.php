@@ -38,9 +38,16 @@ class Serie
     #[ORM\OneToMany(mappedBy: 'serie', targetEntity: Edition::class)]
     private Collection $editions;
 
+    #[ORM\Column]
+    protected \DateTime $dateCreated;
+
+    #[ORM\Column(nullable: true)]
+    protected ?\DateTime $dateUpdated;
+
     public function __construct()
     {
         $this->editions = new ArrayCollection();
+        $this->dateCreated = new \DateTime();
     }
 
     public function getId(): int
@@ -148,5 +155,34 @@ class Serie
         }
 
         return $this;
+    }
+
+    public function getDateCreated(): \DateTime
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(\DateTime $dateCreated): Serie
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getDateUpdated(): ?\DateTime
+    {
+        return $this->dateUpdated;
+    }
+
+    public function setDateUpdated(?\DateTime $dateUpdated): Serie
+    {
+        $this->dateUpdated = $dateUpdated;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

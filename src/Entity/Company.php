@@ -17,7 +17,7 @@ class Company
     #[ORM\Column]
     private int $id;
 
-    #[ORM\Column(length: 75)]
+    #[ORM\Column(length: 100)]
     private string $name;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -32,9 +32,16 @@ class Company
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Platform::class)]
     private Collection $platforms;
 
+    #[ORM\Column]
+    protected \DateTime $dateCreated;
+
+    #[ORM\Column(nullable: true)]
+    protected ?\DateTime $dateUpdated;
+
     public function __construct()
     {
         $this->platforms = new ArrayCollection();
+        $this->dateCreated = new \DateTime();
     }
 
     public function getId(): int
@@ -118,5 +125,34 @@ class Company
         }
 
         return $this;
+    }
+
+    public function getDateCreated(): \DateTime
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(\DateTime $dateCreated): Company
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getDateUpdated(): ?\DateTime
+    {
+        return $this->dateUpdated;
+    }
+
+    public function setDateUpdated(?\DateTime $dateUpdated): Company
+    {
+        $this->dateUpdated = $dateUpdated;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
