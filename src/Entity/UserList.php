@@ -29,10 +29,12 @@ class UserList
     private ?Edition $edition = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateCreated = null;
+    private \DateTimeInterface $dateCreated;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateUpdated = null;
+    public function __construct()
+    {
+        $this->dateCreated = new \DateTime();
+    }
 
     public function getId(): int
     {
@@ -75,7 +77,7 @@ class UserList
         return $this;
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDateCreated(): \DateTimeInterface
     {
         return $this->dateCreated;
     }
@@ -83,18 +85,6 @@ class UserList
     public function setDateCreated(\DateTimeInterface $dateCreated): UserList
     {
         $this->dateCreated = $dateCreated;
-
-        return $this;
-    }
-
-    public function getDateUpdated(): ?\DateTimeInterface
-    {
-        return $this->dateUpdated;
-    }
-
-    public function setDateUpdated(?\DateTimeInterface $dateUpdated): UserList
-    {
-        $this->dateUpdated = $dateUpdated;
 
         return $this;
     }
