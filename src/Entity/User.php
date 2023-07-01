@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -60,9 +62,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     protected ?\DateTime $dateUpdated;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserList::class)]
+    private Collection $userLists;
+
     public function __construct()
     {
         $this->dateCreated = new \DateTime();
+        $this->userLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -251,5 +257,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->email;
+    }
+
+    /**
+     * @return Collection<int, UserList>
+     */
+    public function getUserLists(): Collection
+    {
+        return $this->userLists;
+    }
+
+    public function addUserList(UserList $userList): static
+    {
+        if (!$this->userLists->contains($userList)) {
+            $this->userLists->add($userList);
+            $userList->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserList(UserList $userList): static
+    {
+        if ($this->userLists->removeElement($userList)) {
+            // set the owning side to null (unless already changed)
+            if ($userList->getUser() === $this) {
+                $userList->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
