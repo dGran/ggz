@@ -6,7 +6,6 @@ namespace App\Command\Migration;
 
 use App\Entity\ListType;
 use App\Manager\ListTypeManager;
-use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -40,9 +39,6 @@ class InitializeListTypeCommand extends Command
         );
     }
 
-    /**
-     * @throws NonUniqueResultException
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(\date(DATE_W3C).' - Started processing list type initialize data');
