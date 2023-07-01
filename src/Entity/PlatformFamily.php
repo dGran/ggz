@@ -83,7 +83,7 @@ class PlatformFamily
         return $this->platforms;
     }
 
-    public function addPlatform(Platform $platform): static
+    public function addPlatform(Platform $platform): PlatformFamily
     {
         if (!$this->platforms->contains($platform)) {
             $this->platforms->add($platform);
@@ -93,7 +93,7 @@ class PlatformFamily
         return $this;
     }
 
-    public function removePlatform(Platform $platform): static
+    public function removePlatform(Platform $platform): PlatformFamily
     {
         if ($this->platforms->removeElement($platform)) {
             // set the owning side to null (unless already changed)

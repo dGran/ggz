@@ -28,8 +28,8 @@ class Platform
     #[ORM\Column(nullable: true)]
     private ?int $generation = null;
 
-    #[ORM\Column]
-    private ?bool $locked = null;
+    #[ORM\Column(options: ['default' => false])]
+    private bool $locked = false;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
@@ -102,7 +102,7 @@ class Platform
         return $this;
     }
 
-    public function isLocked(): ?bool
+    public function isLocked(): bool
     {
         return $this->locked;
     }

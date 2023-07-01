@@ -44,7 +44,7 @@ class UserList
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?User $user): UserList
     {
         $this->user = $user;
 
@@ -56,7 +56,7 @@ class UserList
         return $this->type;
     }
 
-    public function setType(?ListType $type): static
+    public function setType(?ListType $type): UserList
     {
         $this->type = $type;
 
@@ -68,7 +68,7 @@ class UserList
         return $this->edition;
     }
 
-    public function setEdition(?Edition $edition): static
+    public function setEdition(?Edition $edition): UserList
     {
         $this->edition = $edition;
 
@@ -80,7 +80,7 @@ class UserList
         return $this->dateCreated;
     }
 
-    public function setDateCreated(\DateTimeInterface $dateCreated): static
+    public function setDateCreated(\DateTimeInterface $dateCreated): UserList
     {
         $this->dateCreated = $dateCreated;
 
@@ -92,7 +92,7 @@ class UserList
         return $this->dateUpdated;
     }
 
-    public function setDateUpdated(?\DateTimeInterface $dateUpdated): static
+    public function setDateUpdated(?\DateTimeInterface $dateUpdated): UserList
     {
         $this->dateUpdated = $dateUpdated;
 

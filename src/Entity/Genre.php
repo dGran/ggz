@@ -68,7 +68,7 @@ class Genre
         return $this->editions;
     }
 
-    public function addEdition(Edition $edition): static
+    public function addEdition(Edition $edition): Genre
     {
         if (!$this->editions->contains($edition)) {
             $this->editions->add($edition);
@@ -78,7 +78,7 @@ class Genre
         return $this;
     }
 
-    public function removeEdition(Edition $edition): static
+    public function removeEdition(Edition $edition): Genre
     {
         if ($this->editions->removeElement($edition)) {
             // set the owning side to null (unless already changed)

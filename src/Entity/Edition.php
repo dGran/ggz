@@ -28,8 +28,8 @@ class Edition
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\Column]
-    private ?bool $locked = null;
+    #[ORM\Column(options: ['default' => false])]
+    private bool $locked = false;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateRelease = null;
@@ -94,7 +94,7 @@ class Edition
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): Edition
     {
         $this->name = $name;
 
@@ -106,7 +106,7 @@ class Edition
         return $this->originalName;
     }
 
-    public function setOriginalName(?string $originalName): static
+    public function setOriginalName(?string $originalName): Edition
     {
         $this->originalName = $originalName;
 
@@ -118,7 +118,7 @@ class Edition
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): Edition
     {
         $this->description = $description;
 
@@ -130,19 +130,19 @@ class Edition
         return $this->picture;
     }
 
-    public function setPicture(?string $picture): static
+    public function setPicture(?string $picture): Edition
     {
         $this->picture = $picture;
 
         return $this;
     }
 
-    public function isLocked(): ?bool
+    public function isLocked(): bool
     {
         return $this->locked;
     }
 
-    public function setLocked(bool $locked): static
+    public function setLocked(bool $locked): Edition
     {
         $this->locked = $locked;
 
@@ -154,7 +154,7 @@ class Edition
         return $this->dateRelease;
     }
 
-    public function setDateRelease(?\DateTimeInterface $dateRelease): static
+    public function setDateRelease(?\DateTimeInterface $dateRelease): Edition
     {
         $this->dateRelease = $dateRelease;
 
@@ -166,7 +166,7 @@ class Edition
         return $this->dateCreation;
     }
 
-    public function setDateCreation(?\DateTimeInterface $dateCreation): static
+    public function setDateCreation(?\DateTimeInterface $dateCreation): Edition
     {
         $this->dateCreation = $dateCreation;
 
@@ -178,7 +178,7 @@ class Edition
         return $this->dateLastUpdate;
     }
 
-    public function setDateLastUpdate(?\DateTimeInterface $dateLastUpdate): static
+    public function setDateLastUpdate(?\DateTimeInterface $dateLastUpdate): Edition
     {
         $this->dateLastUpdate = $dateLastUpdate;
 
@@ -190,7 +190,7 @@ class Edition
         return $this->contributionState;
     }
 
-    public function setContributionState(?ContributionState $contributionState): static
+    public function setContributionState(?ContributionState $contributionState): Edition
     {
         $this->contributionState = $contributionState;
 
@@ -202,7 +202,7 @@ class Edition
         return $this->genre;
     }
 
-    public function setGenre(?Genre $genre): static
+    public function setGenre(?Genre $genre): Edition
     {
         $this->genre = $genre;
 
@@ -214,7 +214,7 @@ class Edition
         return $this->numberOfPlayers;
     }
 
-    public function setNumberOfPlayers(?NumberOfPlayers $numberOfPlayers): static
+    public function setNumberOfPlayers(?NumberOfPlayers $numberOfPlayers): Edition
     {
         $this->numberOfPlayers = $numberOfPlayers;
 
@@ -226,7 +226,7 @@ class Edition
         return $this->region;
     }
 
-    public function setRegion(?Region $region): static
+    public function setRegion(?Region $region): Edition
     {
         $this->region = $region;
 
@@ -238,7 +238,7 @@ class Edition
         return $this->country;
     }
 
-    public function setCountry(?Country $country): static
+    public function setCountry(?Country $country): Edition
     {
         $this->country = $country;
 
@@ -250,7 +250,7 @@ class Edition
         return $this->language;
     }
 
-    public function setLanguage(?Language $language): static
+    public function setLanguage(?Language $language): Edition
     {
         $this->language = $language;
 
@@ -262,7 +262,7 @@ class Edition
         return $this->platform;
     }
 
-    public function setPlatform(?Platform $platform): static
+    public function setPlatform(?Platform $platform): Edition
     {
         $this->platform = $platform;
 
@@ -274,7 +274,7 @@ class Edition
         return $this->serie;
     }
 
-    public function setSerie(?Serie $serie): static
+    public function setSerie(?Serie $serie): Edition
     {
         $this->serie = $serie;
 
@@ -286,7 +286,7 @@ class Edition
         return $this->developerCompany;
     }
 
-    public function setDeveloperCompany(?Company $developerCompany): static
+    public function setDeveloperCompany(?Company $developerCompany): Edition
     {
         $this->developerCompany = $developerCompany;
 
@@ -298,7 +298,7 @@ class Edition
         return $this->publisherCompany;
     }
 
-    public function setPublisherCompany(?Company $publisherCompany): static
+    public function setPublisherCompany(?Company $publisherCompany): Edition
     {
         $this->publisherCompany = $publisherCompany;
 
@@ -310,7 +310,7 @@ class Edition
         return $this->universe;
     }
 
-    public function setUniverse(?Universe $universe): static
+    public function setUniverse(?Universe $universe): Edition
     {
         $this->universe = $universe;
 

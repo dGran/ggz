@@ -38,7 +38,7 @@ class NumberOfPlayers
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): NumberOfPlayers
     {
         $this->name = $name;
 
@@ -53,7 +53,7 @@ class NumberOfPlayers
         return $this->editions;
     }
 
-    public function addEdition(Edition $edition): static
+    public function addEdition(Edition $edition): NumberOfPlayers
     {
         if (!$this->editions->contains($edition)) {
             $this->editions->add($edition);
@@ -63,7 +63,7 @@ class NumberOfPlayers
         return $this;
     }
 
-    public function removeEdition(Edition $edition): static
+    public function removeEdition(Edition $edition): NumberOfPlayers
     {
         if ($this->editions->removeElement($edition)) {
             // set the owning side to null (unless already changed)

@@ -28,7 +28,7 @@ class ListType
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): ListType
     {
         $this->name = $name;
 

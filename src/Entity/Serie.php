@@ -135,7 +135,7 @@ class Serie
         return $this->editions;
     }
 
-    public function addEdition(Edition $edition): static
+    public function addEdition(Edition $edition): Serie
     {
         if (!$this->editions->contains($edition)) {
             $this->editions->add($edition);
@@ -145,7 +145,7 @@ class Serie
         return $this;
     }
 
-    public function removeEdition(Edition $edition): static
+    public function removeEdition(Edition $edition): Serie
     {
         if ($this->editions->removeElement($edition)) {
             // set the owning side to null (unless already changed)

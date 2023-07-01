@@ -68,7 +68,7 @@ class Region
         return $this->editions;
     }
 
-    public function addEdition(Edition $edition): static
+    public function addEdition(Edition $edition): Region
     {
         if (!$this->editions->contains($edition)) {
             $this->editions->add($edition);
@@ -78,7 +78,7 @@ class Region
         return $this;
     }
 
-    public function removeEdition(Edition $edition): static
+    public function removeEdition(Edition $edition): Region
     {
         if ($this->editions->removeElement($edition)) {
             // set the owning side to null (unless already changed)
