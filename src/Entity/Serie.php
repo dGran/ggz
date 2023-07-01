@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\SerieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
@@ -32,6 +34,14 @@ class Serie
 
     #[ORM\ManyToOne(inversedBy: 'series')]
     private ?Universe $universe = null;
+
+    #[ORM\OneToMany(mappedBy: 'serie', targetEntity: Edition::class)]
+    private Collection $editions;
+
+    public function __construct()
+    {
+        $this->editions = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -106,6 +116,36 @@ class Serie
     public function setUniverse(?Universe $universe): Serie
     {
         $this->universe = $universe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Edition>
+     */
+    public function getEditions(): Collection
+    {
+        return $this->editions;
+    }
+
+    public function addEdition(Edition $edition): static
+    {
+        if (!$this->editions->contains($edition)) {
+            $this->editions->add($edition);
+            $edition->setSerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEdition(Edition $edition): static
+    {
+        if ($this->editions->removeElement($edition)) {
+            // set the owning side to null (unless already changed)
+            if ($edition->getSerie() === $this) {
+                $edition->setSerie(null);
+            }
+        }
 
         return $this;
     }

@@ -35,9 +35,13 @@ class Universe
     #[ORM\OneToMany(mappedBy: 'universe', targetEntity: Serie::class)]
     private Collection $series;
 
+    #[ORM\OneToMany(mappedBy: 'universe', targetEntity: Edition::class)]
+    private Collection $editions;
+
     public function __construct()
     {
         $this->series = new ArrayCollection();
+        $this->editions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -129,6 +133,36 @@ class Universe
             // set the owning side to null (unless already changed)
             if ($series->getUniverse() === $this) {
                 $series->setUniverse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Edition>
+     */
+    public function getEditions(): Collection
+    {
+        return $this->editions;
+    }
+
+    public function addEdition(Edition $edition): static
+    {
+        if (!$this->editions->contains($edition)) {
+            $this->editions->add($edition);
+            $edition->setUniverse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEdition(Edition $edition): static
+    {
+        if ($this->editions->removeElement($edition)) {
+            // set the owning side to null (unless already changed)
+            if ($edition->getUniverse() === $this) {
+                $edition->setUniverse(null);
             }
         }
 
