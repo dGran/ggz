@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public const PROFILE_PIC_PATH = 'img/user/profile/';
+    public const DEFAULT_PROFILE_PIC = 'no-image.png';
     public const SHARE_CONTENT_EVERYBODY = "Everybody";
     public const SHARE_CONTENT_FRIENDS_ONLY = "Friends only";
     public const SHARE_CONTENT_NOBODY = "Nobody";
@@ -170,7 +171,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getProfilePicPath(): ?string
     {
-        return self::PROFILE_PIC_PATH.$this->profilePic;
+        return $this->profilePic ? self::PROFILE_PIC_PATH.$this->profilePic : self::PROFILE_PIC_PATH.self::DEFAULT_PROFILE_PIC;
     }
 
     public function getShareContent(): ?string
@@ -267,7 +268,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->userLists;
     }
 
-    public function addUserList(UserList $userList): static
+    public function addUserList(UserList $userList): User
     {
         if (!$this->userLists->contains($userList)) {
             $this->userLists->add($userList);
@@ -277,7 +278,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeUserList(UserList $userList): static
+    public function removeUserList(UserList $userList): User
     {
         if ($this->userLists->removeElement($userList)) {
             // set the owning side to null (unless already changed)

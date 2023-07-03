@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/profile', name: 'customer_profile')]
+#[Route('/profile', name: 'customer_user_profile')]
 #[Security('is_granted("ROLE_USER")')]
 class ProfileController extends AbstractController
 {

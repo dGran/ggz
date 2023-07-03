@@ -1,0 +1,18 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %}Lists{% endblock %}
+
+{% block content %}
+<div class="container mx-auto my-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {% for list in list_types %}
+            <a href="{{ path('customer_user_list_show', {slug: list.slug}) }}" class="px-8 py-16 flex flex-col items-center space-y-4 rounded-lg bg-white hover:bg-[#F5EBFD] focus:bg-[#F5EBFD] focus:outline-none">
+                <div class="text-center">
+                    <i class="{{ list['icon_class'] }} text-[#7d00e2] text-[42px]"></i>
+                    <h3 class="font-ubuntu text-lg font-semibold text-purpleggz capitalize">{{ list['name'] }}</h3>
+                </div>
+                <p class="font-lato text-gray-600 text-center">{{ list['description'] }}</p>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

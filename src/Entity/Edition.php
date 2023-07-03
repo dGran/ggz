@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: EditionRepository::class)]
 class Edition
 {
+    public const PICTURE_PATH = 'img/editions/';
+    public const DEFAULT_PICTURE = 'no-image.png';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -135,6 +138,11 @@ class Edition
         $this->picture = $picture;
 
         return $this;
+    }
+
+    public function getPicturePath(): string
+    {
+        return $this->picture ? self::PICTURE_PATH.$this->picture : self::PICTURE_PATH.self::DEFAULT_PICTURE;
     }
 
     public function isLocked(): bool

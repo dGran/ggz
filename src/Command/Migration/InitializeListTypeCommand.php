@@ -36,15 +36,18 @@ class InitializeListTypeCommand extends Command
 
         $counterAdded = 0;
 
-        foreach (ListType::LIST_TYPE_DATA_INDEXED_BY_ID as $listTypeId => $listTypeName) {
+        foreach (ListType::LIST_TYPE_DATA_INDEXED_BY_ID as $listTypeId => $listTypeDatum) {
             $listType = $this->listTypeManager->create();
             $listType->setId($listTypeId);
-            $listType->setName($listTypeName);
+            $listType->setName($listTypeDatum['name']);
+            $listType->setDescription($listTypeDatum['description']);
+            $listType->setIconClass($listTypeDatum['icon_class']);
+            $listType->setSlug($listTypeDatum['slug']);
 
             try {
                 $this->listTypeManager->save($listType);
                 $counterAdded++;
-                $output->writeln(\date(DATE_W3C).' - Added "'.$listTypeName.'" list type');
+                $output->writeln(\date(DATE_W3C).' - Added "'.$listType.'" list type');
             } catch (\Throwable $exception) {
                 continue;
             }

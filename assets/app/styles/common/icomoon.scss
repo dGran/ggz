@@ -25,6 +25,24 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-want-list:before {
+    content: "\e90b";
+}
+.icon-full-completed-list:before {
+    content: "\e90c";
+}
+.icon-completed-list:before {
+    content: "\e90d";
+}
+.icon-done-list:before {
+    content: "\e90e";
+}
+.icon-want-to-play-list:before {
+    content: "\e90f";
+}
+.icon-playing-list:before {
+    content: "\e910";
+}
 .icon-sign-up:before {
     content: "\e909";
 }

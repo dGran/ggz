@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Customer;
+namespace App\Controller\Customer\User;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/user-settings', name: 'customer_user_settings')]
-class UsersettingsController extends AbstractController
+class SettingsController extends AbstractController
 {
     public function __invoke(): Response
     {
-        return $this->render('customer/user_settings/index.html.twig');
+        return $this->render('customer/user/settings/index.html.twig');
     }
 }

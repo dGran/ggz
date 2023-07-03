@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace App\Manager;
 
+use App\Entity\Edition;
+use App\Entity\ListType;
+use App\Entity\User;
 use App\Entity\UserList;
 use App\Repository\UserListRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 
 class UserListManager
 {
@@ -64,5 +68,36 @@ class UserListManager
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
     {
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @return UserList[]
+     */
+    public function findByUser(User $user): array
+    {
+        return $this->repository->findByUser($user);
+    }
+
+    /**
+     * @return UserList[]
+     */
+    public function findEditionsByUserAndListType(int $userId, int $listTypeId): array
+    {
+        $userLists = $this->repository->findEditionsByUserAndListType($userId, $listTypeId);
+        $editions = [];
+
+        foreach ($userLists as $userList) {
+            $editions[] = $userList->getEdition();
+        }
+
+        return $editions;
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByUserAndEditionAndListType(User $user, Edition $edition, ListType $listType): ?UserList
+    {
+        return $this->repository->findByUserAndEditionAndListType($user, $edition, $listType);
     }
 }

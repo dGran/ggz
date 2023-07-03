@@ -10,25 +10,23 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserListRepository::class)]
-#[UniqueEntity(fields: ['user', 'type', 'edition'], message: 'This edition already exists.')]
+#[UniqueEntity(fields: ['user', 'type', 'edition'], message: 'This edition already exists in the list.')]
 class UserList
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private int $id;
-
     #[ORM\ManyToOne(inversedBy: 'userLists')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private User $user;
 
+    #[ORM\Id]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ListType $type = null;
+    private ListType $type;
 
+    #[ORM\Id]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Edition $edition = null;
+    private Edition $edition;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private \DateTimeInterface $dateCreated;
@@ -38,41 +36,36 @@ class UserList
         $this->dateCreated = new \DateTime();
     }
 
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): UserList
+    public function setUser(User $user): UserList
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getType(): ?ListType
+    public function getType(): ListType
     {
         return $this->type;
     }
 
-    public function setType(?ListType $type): UserList
+    public function setType(ListType $type): UserList
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getEdition(): ?Edition
+    public function getEdition(): Edition
     {
         return $this->edition;
     }
 
-    public function setEdition(?Edition $edition): UserList
+    public function setEdition(Edition $edition): UserList
     {
         $this->edition = $edition;
 
