@@ -7,6 +7,7 @@ namespace App\Manager;
 use App\Entity\Company;
 use App\Repository\CompanyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 
 class CompanyManager
 {
@@ -80,5 +81,13 @@ class CompanyManager
         $this->entityManager->flush();
 
         return $companies;
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByName(string $name): ?Company
+    {
+        return $this->repository->findByName($name);
     }
 }

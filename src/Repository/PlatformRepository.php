@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\Platform;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,5 +22,17 @@ class PlatformRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Platform::class);
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByName(string $name): ?Platform
+    {
+        return $this->createQueryBuilder('platform')
+            ->where('platform.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

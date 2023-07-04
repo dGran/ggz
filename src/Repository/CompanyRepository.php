@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\Company;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,5 +22,17 @@ class CompanyRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Company::class);
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByName(string $name): ?Company
+    {
+        return $this->createQueryBuilder('company')
+            ->where('company.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
