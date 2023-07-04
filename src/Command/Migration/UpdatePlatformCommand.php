@@ -56,12 +56,12 @@ class UpdatePlatformCommand extends Command
         $output->writeln(\date(DATE_W3C).' - Started processing platform update data');
 
         $platformsFromSource = $this->csvService->getArrayDataFromCsvFile(self::DATA_SOURCE, CsvService::DELIMITER_SEMICOLON);
-        $platforms = [];
+        $countUpdated = 0;
 
         foreach ($platformsFromSource as $platformFromSource) {
-            $platformFromSourceName = $platformFromSource["name"];
+            $platformFromSourceName = \trim($platformFromSource["name"]);
 
-            if ($platformFromSourceName === null) {
+            if (empty($platformFromSourceName) === null) {
                 continue;
             }
 
@@ -78,9 +78,9 @@ class UpdatePlatformCommand extends Command
                 $platform->setName($platformFromSourceName);
             }
 
-            $platformFromSourceTypeName = $platformFromSource["type"];
+            $platformFromSourceTypeName = \trim($platformFromSource["type"]);
 
-            if ($platformFromSourceTypeName !== null) {
+            if (!empty($platformFromSourceTypeName)) {
                 $platformType = $this->platformTypeManager->findByName($platformFromSourceTypeName);
 
                 if ($platformType === null) {
@@ -92,9 +92,9 @@ class UpdatePlatformCommand extends Command
                 $platform->setType($platformType);
             }
 
-            $platformFromSourceFamilyName = $platformFromSource["family"];
+            $platformFromSourceFamilyName = \trim($platformFromSource["family"]);
 
-            if ($platformFromSourceFamilyName !== null) {
+            if (!empty($platformFromSourceFamilyName)) {
                 $platformFamily = $this->platformFamilyManager->findByName($platformFromSourceFamilyName);
 
                 if ($platformFamily === null) {
@@ -106,9 +106,9 @@ class UpdatePlatformCommand extends Command
                 $platform->setPlatformFamily($platformFamily);
             }
 
-            $platformFromSourceCompanyName = $platformFromSource["company"];
+            $platformFromSourceCompanyName = \trim($platformFromSource["company"]);
 
-            if ($platformFromSourceCompanyName !== null) {
+            if (!empty($platformFromSourceCompanyName)) {
                 $company = $this->companyManager->findByName($platformFromSourceCompanyName);
 
                 if ($company === null) {
@@ -124,12 +124,11 @@ class UpdatePlatformCommand extends Command
             $platform->setGeneration((int)$platformFromSource["generation"]);
             $platform->setLocked((bool)$platformFromSource["locked"]);
 
-            $platforms[] = $platform;
+            $this->platformManager->save($platform);
+            $countUpdated++;
         }
 
-        $this->platformManager->saveCollection($platforms);
-
-        $output->writeln(\date(DATE_W3C).' - Finished processing platform update data. Platforms updated: '.\count($platforms));
+        $output->writeln(\date(DATE_W3C).' - Finished processing platform update data. Platforms updated: '.$countUpdated);
 
         return Command::SUCCESS;
     }
