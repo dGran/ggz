@@ -7,6 +7,7 @@ namespace App\Manager;
 use App\Entity\PlatformType;
 use App\Repository\PlatformTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 
 class PlatformTypeManager
 {
@@ -80,5 +81,13 @@ class PlatformTypeManager
         $this->entityManager->flush();
 
         return $platformTypes;
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByName(string $name): ?PlatformType
+    {
+        return $this->repository->findByName($name);
     }
 }
