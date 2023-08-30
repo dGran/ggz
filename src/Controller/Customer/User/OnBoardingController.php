@@ -109,9 +109,7 @@ class OnBoardingController extends AbstractController
             return false;
         }
 
-        $emailPattern = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/';
-
-        if (!preg_match($emailPattern, $nickname)) {
+        if (strlen($nickname) < 4 || strlen($nickname) > 24) {
             return false;
         }
 
