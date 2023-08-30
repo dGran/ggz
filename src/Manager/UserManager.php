@@ -65,4 +65,20 @@ class UserManager
     {
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
+
+    /**
+     * @return User[]|null
+     */
+    public function findByEmail(string $email): ?array
+    {
+        return $this->repository->findByEmail($email);
+    }
+
+    /**
+     * @return User[]|null
+     */
+    public function findByNickname(string $nickname): ?array
+    {
+        return $this->repository->findByNickname($nickname);
+    }
 }

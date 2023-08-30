@@ -25,6 +25,15 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-eye-close:before {
+    content: "\e911";
+}
+.icon-eye-open:before {
+    content: "\e912";
+}
+.icon-done-list:before {
+    content: "\e913";
+}
 .icon-want-list:before {
     content: "\e90b";
 }
@@ -33,9 +42,6 @@ i {
 }
 .icon-completed-list:before {
     content: "\e90d";
-}
-.icon-done-list:before {
-    content: "\e90e";
 }
 .icon-want-to-play-list:before {
     content: "\e90f";

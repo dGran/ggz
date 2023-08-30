@@ -51,6 +51,10 @@ class OnBoardingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (($step === 'one') && !$this->isValidNickname($form->get('nickname')->getData())) {
+                return $this->redirectToRoute('customer_onboarding', ['step' => $step]);
+            }
+
             $user->setDateUpdated(new \DateTime());
             $this->userManager->save($user);
 
@@ -97,5 +101,26 @@ class OnBoardingController extends AbstractController
         $this->userManager->save($user);
 
         return $this->redirectToRoute('customer_user_profile');
+    }
+
+    private function isValidNickname(string $nickname = null): bool
+    {
+        if ($nickname === null) {
+            return false;
+        }
+
+        $emailPattern = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/';
+
+        if (!preg_match($emailPattern, $nickname)) {
+            return false;
+        }
+
+        $user = $this->userManager->findByNickname($nickname);
+
+        if ($user) {
+            return false;
+        }
+
+        return true;
     }
 }

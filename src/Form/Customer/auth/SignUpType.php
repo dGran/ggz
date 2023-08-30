@@ -23,7 +23,7 @@ class SignUpType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'E-mail address',
-                    'class' => 'w-full text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300',
+                    'class' => 'w-full text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b-2 border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300',
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -31,24 +31,15 @@ class SignUpType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Password',
-                    'class' => 'w-full text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300',
+                    'class' => 'w-full text-white py-2.5 px-4 font-ubuntu bg-[#B063FD] border-0 border-b-2 border-[#c5b7d4] focus:border-white hover:border-white focus:bg-[#bc7cfd] rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-300',
+                    'style' => 'padding-right: 3rem',
                     'autocomplete' => 'new-password',
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Choose your password',
-                    ]),
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        'max' => 4096,
-                    ]),
-                ],
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Proceed with your e-mail',
                 'attr' => [
-                    'class' => 'my-5 w-full font-bold bg-[#CCCC] hover:bg-[#DDD] focus:bg-[#DDD] focus:outline-none focus:ring-0 font-bold font-ubuntu rounded-md py-2.5 text-center shadow-md shadow-[#6700BC]',
+                    'class' => 'empty my-5 w-full font-bold bg-[#CCC] hover:bg-[#DDD] focus:bg-[#DDD] focus:outline-none focus:ring-0 font-bold font-ubuntu rounded-md py-2.5 text-[#E5E7EB] text-center shadow-md shadow-[#6700BC]',
                 ],
             ])
         ;

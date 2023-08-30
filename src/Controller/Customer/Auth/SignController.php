@@ -83,8 +83,10 @@ class SignController extends AbstractController
         $user = new User();
         $form = $this->createForm(SignUpType::class, $user);
         $form->handleRequest($request);
+        $email = $form->get('email')->getData();
+        $password = $form->get('plainPassword')->getData();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && ($this->isValidEmail($email) && $this->isValidPassword($password))) {
             $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
             $user->setDateCreated(new \DateTime());
 
@@ -128,5 +130,35 @@ class SignController extends AbstractController
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('customer_onboarding_step_one');
+    }
+
+    private function isValidEmail(string $email = null): bool
+    {
+        if ($email === null) {
+            return false;
+        }
+
+        $emailPattern = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/';
+
+        if (!preg_match($emailPattern, $email)) {
+            return false;
+        }
+
+        $user = $this->userManager->findByEmail($email);
+
+        if ($user) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function isValidPassword(string $password): bool
+    {
+        $hasUppercase = preg_match('/[A-Z]/', $password);
+        $hasNumber = preg_match('/\d/', $password);
+        $isValidLength = strlen($password) >= 8 && strlen($password) <= 32;
+
+        return $hasUppercase && $hasNumber && $isValidLength;
     }
 }
