@@ -15,8 +15,11 @@
 
             {{ form_start(on_boarding_step_two_form) }}
             <div class="sm:w-[18rem] mt-10 mx-auto text-center">
-                <label for="on_boarding_step_two_birthdate" class="flex mb-5 font-ubuntu justify-center text-2xl font-bold text-purpleggz">Date of birth</label>
-                {{ form_row(on_boarding_step_two_form.birthdate) }}
+                <div class="flex items-baseline justify-center font-ubuntu font-bold">
+                    {{ form_label(on_boarding_step_two_form.birthdate, null, {'label_attr': {'class': 'flex mb-5 font-ubuntu justify-center text-2xl font-bold text-purpleggz'}}) }}
+                    <span class="pl-2.5 text-xs uppercase text-gray-600">Required</span>
+                </div>
+                {{ form_widget(on_boarding_step_two_form.birthdate) }}
             </div>
 
             <div class="sm:w-[34rem] mt-10 mx-auto flex flex-col items-start space-y-1">

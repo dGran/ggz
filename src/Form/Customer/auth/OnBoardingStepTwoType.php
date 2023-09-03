@@ -18,11 +18,9 @@ class OnBoardingStepTwoType extends AbstractType
     {
         $builder
             ->add('birthdate', DateType::class, [
-                'label' => false,
+                'label' => 'Date of birth',
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
                 'attr' => [
-                    'placeholder' => 'Choose a username',
                     'class' => 'w-full py-2.5 px-4 font-ubuntu bg-[#F2EDF6] border-0 border-b-2 border-[#6C5D73] focus:bg-white focus:border-purpleggz hover:border-purpleggz rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-500',
                 ],
             ])
