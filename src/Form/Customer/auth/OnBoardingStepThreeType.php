@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class OnBoardingStepThreeType extends AbstractType
 {
@@ -23,6 +24,20 @@ class OnBoardingStepThreeType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'hidden',
+                    'accept' => 'image/jpeg, image/jpg, image/png, image/tiff, image/webp',
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '40M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png',
+                            'image/tiff',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Please upload an image in JPEG, JPG, PNG, TIFF or WEBP format and not exceeding 40 MB.',
+                    ]),
                 ],
             ])
             ->add('shareContent', ChoiceType::class, [
