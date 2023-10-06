@@ -14,8 +14,6 @@ $(document).ready(function() {
         let fileSize = file.size;
         let fileExtension = file.extension;
 
-        console.log(fileExtension);
-
         if (allowedExtensions.indexOf(fileName) === -1) {
             alert('Please select a file with an allowed extension.');
             $(this).value = '';
