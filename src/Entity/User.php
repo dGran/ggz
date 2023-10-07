@@ -22,6 +22,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public const SHARE_CONTENT_EVERYBODY = "Everybody";
     public const SHARE_CONTENT_FRIENDS_ONLY = "Friends only";
     public const SHARE_CONTENT_NOBODY = "Nobody";
+    public const NICKNAME_MIN_CHARACTERS = 4;
+    public const NICKNAME_MAX_CHARACTERS = 24;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

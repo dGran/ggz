@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Entity\User;
 use App\Manager\UserManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -23,15 +24,32 @@ class UserService
      */
     public function isValidNickname(string $nickname, ?int $userId = null): bool
     {
+        $isValidNicknameLength = $this->isValidNicknameLength($nickname);
+        $isNicknameAvailable = $this->isNicknameAvailable($nickname, $userId);
+
+        return $isValidNicknameLength && $isNicknameAvailable;
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function isNicknameAvailable(string $nickname, ?int $userId = null): bool
+    {
+        if (!$this->userManager->isNicknameAvailable($nickname, $userId)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function isValidNicknameLength(string $nickname): bool
+    {
         if ($nickname === '') {
             return false;
         }
 
-        if (\strlen($nickname) < 4 || \strlen($nickname) > 24) {
-            return false;
-        }
-
-        if (!$this->userManager->isNicknameAvailable($nickname, $userId)) {
+        if (\strlen($nickname) < User::NICKNAME_MIN_CHARACTERS || \strlen($nickname) > User::NICKNAME_MAX_CHARACTERS) {
             return false;
         }
 
