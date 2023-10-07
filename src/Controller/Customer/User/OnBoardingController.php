@@ -10,6 +10,8 @@ use App\Form\Customer\auth\OnBoardingStepThreeType;
 use App\Form\Customer\auth\OnBoardingStepTwoType;
 use App\Manager\UserManager;
 use App\Service\UserService;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -30,6 +32,10 @@ class OnBoardingController extends AbstractController
         $this->userService = $userService;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     #[Route('/step-one', name: 'customer_onboarding_step_one')]
     #[Security('is_granted("ROLE_USER")')]
     public function stepOne(Request $request): Response
@@ -43,10 +49,13 @@ class OnBoardingController extends AbstractController
 
         $formType = OnBoardingStepOneType::class;
         $form = $this->createForm($formType, $user);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$this->userService->isValidNickname($form->get('nickname')->getData())) {
+            $nickname = $form->get('nickname')->getData();
+
+            if (!$this->userService->isValidNickname($nickname, $user->getId())) {
                 return $this->redirectToRoute('customer_onboarding_step_one');
             }
 
@@ -90,7 +99,7 @@ class OnBoardingController extends AbstractController
 
     #[Route('/step-three', name: 'customer_onboarding_step_three')]
     #[Security('is_granted("ROLE_USER")')]
-    public function stepThree(Request $request, string $step): Response
+    public function stepThree(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();

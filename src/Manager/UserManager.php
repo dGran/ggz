@@ -7,6 +7,8 @@ namespace App\Manager;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 class UserManager
 {
@@ -84,10 +86,11 @@ class UserManager
     }
 
     /**
-     * @return User[]|null
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
-    public function findByNickname(string $nickname): ?array
+    public function isNicknameAvailable(string $nickname, ?int $userId = null): bool
     {
-        return $this->repository->findByNickname($nickname);
+        return $this->repository->isNicknameAvailable($nickname, $userId);
     }
 }

@@ -15,7 +15,8 @@
 
             <div class="sm:w-[18rem] mt-10 mx-auto text-center">
                 {{ form_start(on_boarding_step_one_form) }}
-                <input type="hidden" id="check-nickname-url" data-url="{{ path('customer_onboarding_check_nickname') }}">
+
+                <input type="hidden" id="check-nickname-url" data-url="{{ path('customer_onboarding_check_nickname', {userId: user.id}) }}">
                 <div class="flex items-baseline justify-center mb-5 font-ubuntu font-bold">
                     {{ form_label(on_boarding_step_one_form.nickname, null, {'label_attr': {'class': 'text-2xl text-purpleggz'}}) }}
                     <span class="pl-2.5 text-xs uppercase text-gray-600">Required</span>
@@ -23,6 +24,7 @@
                 {{ form_widget(on_boarding_step_one_form.nickname) }}
                 <div id="nickname-info" class="mt-1.5 text-center text-sm font-medium text-gray-600"></div>
                 {{ form_widget(on_boarding_step_one_form.submit) }}
+
                 {{ form_end(on_boarding_step_one_form) }}
             </div>
         </div>

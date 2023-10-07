@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Manager\UserManager;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 class UserService
 {
@@ -15,19 +17,21 @@ class UserService
         $this->userManager = $userManager;
     }
 
-    public function isValidNickname(string $nickname = null): bool
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function isValidNickname(string $nickname, ?int $userId = null): bool
     {
-        if ($nickname === null) {
+        if ($nickname === '') {
             return false;
         }
 
-        if (strlen($nickname) < 4 || strlen($nickname) > 24) {
+        if (\strlen($nickname) < 4 || \strlen($nickname) > 24) {
             return false;
         }
 
-        $user = $this->userManager->findByNickname($nickname);
-
-        if ($user) {
+        if ($this->userManager->isNicknameAvailable($nickname, $userId)) {
             return false;
         }
 
