@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Customer\Auth;
 
-use App\Controller\Customer\User\OnBoardingController;
 use App\Entity\User;
 use App\Form\Customer\auth\SignInType;
 use App\Form\Customer\auth\SignUpType;
@@ -26,6 +25,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class SignController extends AbstractController
 {
+    private const EMAIL_PATTERN = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/';
     private EmailVerifier $emailVerifier;
     private UserManager $userManager;
     private MailerInterface $mailer;
@@ -104,7 +104,7 @@ class SignController extends AbstractController
 //                    ->htmlTemplate('customer/auth/signup/confirmation_email.html.twig')
 //            );
 
-            return $this->redirectToRoute('customer_onboarding', ['step' => OnBoardingController::STEP_ONE_NAME]);
+            return $this->redirectToRoute('customer_onboarding_step_one');
         }
 
         return $this->render('customer/auth/sign/sign_up.html.twig', [
@@ -138,9 +138,7 @@ class SignController extends AbstractController
             return false;
         }
 
-        $emailPattern = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/';
-
-        if (!preg_match($emailPattern, $email)) {
+        if (!preg_match(self::EMAIL_PATTERN, $email)) {
             return false;
         }
 

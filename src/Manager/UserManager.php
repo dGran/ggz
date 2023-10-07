@@ -32,6 +32,15 @@ class UserManager
         return $user;
     }
 
+    public function update($user): User
+    {
+        $user->setDateUpdated(new \DateTime());
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        return $user;
+    }
+
     public function delete(User $user): User
     {
         $this->entityManager->remove($user);
