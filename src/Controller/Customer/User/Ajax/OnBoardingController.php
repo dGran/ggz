@@ -27,21 +27,21 @@ class OnBoardingController extends AbstractController
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
-    #[Route('/onboarding/check-nickname/{userId}', name: 'customer_onboarding_check_nickname')]
-    public function checkNickname(Request $request, int $userId): JsonResponse
+    #[Route('/onboarding/check-nickname-availability/{userId}', name: 'customer_onboarding_check_nickname_availability')]
+    public function checkNicknameAvailability(Request $request, int $userId): JsonResponse
     {
         if (!$request->request->has('nickname')) {
-            $response = ['isValid' => false, 'error' => 'Nickname is missing',];
+            $response = ['isAvailable' => false, 'message' => 'Nickname must be specified to check its availability',];
 
             return new JsonResponse($response, Response::HTTP_BAD_REQUEST);
         }
 
         $nickname = $request->get('nickname');
 
-        if ($this->userService->isValidNickname($nickname, $userId)) {
-            $response = ['isValid' => true];
+        if ($this->userService->isNicknameAvailable($nickname, $userId)) {
+            $response = ['isAvailable' => true];
         } else {
-            $response = ['isValid' => false];
+            $response = ['isAvailable' => false, 'message' => 'There is already an account with this nickname'];
         }
 
         return new JsonResponse($response);

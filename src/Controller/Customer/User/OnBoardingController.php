@@ -22,6 +22,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/onboarding')]
 class OnBoardingController extends AbstractController
 {
+    private const PROJECT_DIR = 'kernel.project_dir';
+
+    private const PUBLIC_FOLDER = '/public/';
+
     private UserManager $userManager;
 
     private UserService $userService;
@@ -117,8 +121,8 @@ class OnBoardingController extends AbstractController
             $profilePicFile = $form['profilePic']->getData();
 
             if ($profilePicFile) {
-                $destination = $this->getParameter('kernel.project_dir') . '/public/' . User::PROFILE_PIC_PATH;
-                $filename = uniqid('', true) . '.' . $profilePicFile->guessExtension();
+                $destination = $this->getParameter(self::PROJECT_DIR).self::PUBLIC_FOLDER.User::PROFILE_PIC_PATH;
+                $filename = uniqid('', true).'.'.$profilePicFile->guessExtension();
                 $profilePicFile->move($destination, $filename);
                 $user->setProfilePic($filename);
             }

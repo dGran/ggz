@@ -1,9 +1,24 @@
-let inputNickname = $('#on_boarding_step_one_nickname');
-let nicknameInfo = $('#nickname-info');
-let buttonSendForm = $('#on_boarding_step_one_submit');
-let errorClasses = 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]';
-let validClasses = 'border-green-500 focus:border-green-500 hover:border-green-500';
-let initialClasses = 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz';
+const inputNickname = $('#on_boarding_step_one_nickname');
+const nicknameInfo = $('#nickname-info');
+const buttonSendForm = $('#on_boarding_step_one_submit');
+
+const inputNicknameErrorClasses = 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]';
+const inputNicknameValidClasses = 'border-green-500 focus:border-green-500 hover:border-green-500';
+const inputNicknameInitialClasses = 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz';
+const inputNicknameClassMap = {
+    'valid': inputNicknameValidClasses,
+    'error': inputNicknameErrorClasses,
+    'initial': inputNicknameInitialClasses,
+};
+const nicknameInfoValidClasses = 'text-green-500';
+const nicknameInfoErrorClasses = 'text-red-500';
+const nicknameInfoInitialClasses = 'text-gray-600';
+const nicknameInfoClassMap = {
+    'valid': nicknameInfoValidClasses,
+    'error': nicknameInfoErrorClasses,
+    'initial': nicknameInfoInitialClasses,
+};
+
 
 $(document).ready(function () {
     inputNickname.on("input", checkValidations);
@@ -40,59 +55,35 @@ $(document).ready(function () {
             let nickname = inputNickname.val();
             let default_message = 'You must enter between 4 and 24 characters';
 
-            if (!nickname || !isValidNickname(nickname)) {
+            if (!nickname || !isValidNicknameLength(nickname)) {
                 nicknameInfo.text(default_message);
-
-                if (nicknameInfo.hasClass('text-red-500')) {
-                    nicknameInfo.removeClass('text-red-500');
-                }
-
-                if (nicknameInfo.hasClass('text-green-500')) {
-                    nicknameInfo.removeClass('text-green-500');
-                }
-
-                inputNickname.removeClass(errorClasses);
-                inputNickname.removeClass(validClasses);
-                inputNickname.addClass(initialClasses);
+                setClassesToInputNickname('initial');
+                setClassesToNicknameInfo('initial');
 
                 resolve(false);
+
                 return;
             }
 
-            let checkNicknameUrl = $('#check-nickname-url').data('url');
+            let checkNicknameAvailabilityUrl = $('#check-nickname-availability-url').data('url');
 
             $.ajax({
                 type: 'POST',
-                url: checkNicknameUrl,
+                url: checkNicknameAvailabilityUrl,
                 data: {
                     nickname: nickname
                 },
                 success: function(response) {
-                    if (!response.isValid) {
-                        let message = 'There is already an account with this nickname';
-                        nicknameInfo.text(message);
-                        inputNickname.addClass(errorClasses);
-                        inputNickname.removeClass(initialClasses);
-                        inputNickname.removeClass(validClasses);
-
-                        if (nicknameInfo.hasClass('text-green-500')) {
-                            nicknameInfo.removeClass('text-green-500');
-                        }
-
-                        nicknameInfo.addClass('text-red-500');
+                    if (!response.isAvailable) {
+                        nicknameInfo.text(response.message);
+                        setClassesToInputNickname('error');
+                        setClassesToNicknameInfo('error');
 
                         resolve(false);
                     } else {
                         nicknameInfo.text(default_message);
-                        inputNickname.addClass(validClasses);
-                        inputNickname.removeClass(initialClasses);
-                        inputNickname.removeClass(errorClasses);
-
-                        if (nicknameInfo.hasClass('text-red-500')) {
-                            nicknameInfo.removeClass('text-red-500');
-                        }
-
-                        nicknameInfo.addClass('text-green-500');
+                        setClassesToInputNickname('valid');
+                        setClassesToNicknameInfo('valid');
 
                         resolve(true);
                     }
@@ -107,7 +98,25 @@ $(document).ready(function () {
         });
     }
 
-    function isValidNickname(nickname) {
+    function isValidNicknameLength(nickname) {
         return nickname.length >= 4 && nickname.length <= 24;
+    }
+
+    function setClassesToInputNickname(classesToSet) {
+        inputNickname.toggleClass(inputNicknameValidClasses + ' ' + inputNicknameErrorClasses + ' ' + inputNicknameInitialClasses, false);
+        const classesToAdd = inputNicknameClassMap[classesToSet];
+
+        if (classesToAdd) {
+            inputNickname.addClass(classesToAdd);
+        }
+    }
+
+    function setClassesToNicknameInfo(classesToSet) {
+        nicknameInfo.toggleClass(nicknameInfoValidClasses + ' ' + nicknameInfoErrorClasses + ' ' + nicknameInfoInitialClasses, false);
+        const classesToAdd = nicknameInfoClassMap[classesToSet];
+
+        if (classesToAdd) {
+            nicknameInfo.addClass(classesToAdd);
+        }
     }
 });
