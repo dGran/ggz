@@ -99,7 +99,7 @@ $(document).ready(function () {
     }
 
     function isValidNicknameLength(nickname) {
-        return nickname.length >= 4 && nickname.length <= 24;
+        return nickname.length >= nicknameMinCharacters && nickname.length <= nicknameMaxCharacters;
     }
 
     function setClassesToInputNickname(classesToSet) {

@@ -38,6 +38,10 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        const nicknameMinCharacters = {{ constant('App\\Entity\\User::NICKNAME_MIN_CHARACTERS') }};
+        const nicknameMaxCharacters = {{ constant('App\\Entity\\User::NICKNAME_MAX_CHARACTERS') }};
+    </script>
     <script src="{{ asset('build/app/js/customer/user/onboarding/step-one.js') }}" defer></script>
 {% endblock %}
 
