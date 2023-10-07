@@ -10,6 +10,7 @@ use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class OnBoardingController extends AbstractController
@@ -29,13 +30,18 @@ class OnBoardingController extends AbstractController
     #[Route('/onboarding/check-nickname/{userId}', name: 'customer_onboarding_check_nickname')]
     public function checkNickname(Request $request, int $userId): JsonResponse
     {
+        if (!$request->request->has('nickname')) {
+            $response = ['isValid' => false, 'error' => 'Nickname is missing',];
+
+            return new JsonResponse($response, Response::HTTP_BAD_REQUEST);
+        }
+
         $nickname = $request->get('nickname');
-        $response = ['exists' => false];
 
-        $user = $this->userService->isValidNickname($nickname, $userId);
-
-        if ($user) {
-            $response['exists'] = true;
+        if ($this->userService->isValidNickname($nickname, $userId)) {
+            $response = ['isValid' => true];
+        } else {
+            $response = ['isValid' => false];
         }
 
         return new JsonResponse($response);

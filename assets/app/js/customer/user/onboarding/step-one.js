@@ -68,7 +68,7 @@ $(document).ready(function () {
                     nickname: nickname
                 },
                 success: function(response) {
-                    if (response.exists) {
+                    if (!response.isValid) {
                         let message = 'There is already an account with this nickname';
                         nicknameInfo.text(message);
                         inputNickname.addClass(errorClasses);

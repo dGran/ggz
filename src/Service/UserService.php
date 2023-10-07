@@ -31,7 +31,7 @@ class UserService
             return false;
         }
 
-        if ($this->userManager->isNicknameAvailable($nickname, $userId)) {
+        if (!$this->userManager->isNicknameAvailable($nickname, $userId)) {
             return false;
         }
 
