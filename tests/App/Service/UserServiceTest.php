@@ -36,49 +36,49 @@ class UserServiceTest extends TestCase
 
     public function isValidNicknameProvider(): \iterator
     {
-        yield 'available nickname: length less than the minimum required characters' => [
+        yield 'nickname available: length less than the minimum required characters' => [
             'nickname' => $this->getNickname(3),
             'available' => true,
             'expected' => false,
         ];
 
-        yield 'available nickname: length greater than the maximum number of characters allowed' => [
+        yield 'nickname available: length greater than the maximum number of characters allowed' => [
             'nickname' => $this->getNickname(25),
             'available' => true,
             'expected' => false,
         ];
 
-        yield 'available nickname: minimum length of characters required' => [
+        yield 'nickname available: minimum length of characters required' => [
             'nickname' => $this->getNickname(4),
             'available' => true,
             'expected' => true,
         ];
 
-        yield 'not available nickname: minimum length of characters required' => [
+        yield 'nickname not available: minimum length of characters required' => [
             'nickname' => $this->getNickname(4),
             'available' => false,
             'expected' => false,
         ];
 
-        yield 'available nickname: maximum length of characters allowed' => [
+        yield 'nickname available: maximum length of characters allowed' => [
             'nickname' => $this->getNickname(24),
             'available' => true,
             'expected' => true,
         ];
 
-        yield 'not available nickname: maximum length of characters allowed' => [
+        yield 'nickname not available: maximum length of characters allowed' => [
             'nickname' => $this->getNickname(24),
             'available' => false,
             'expected' => false,
         ];
 
-        yield 'available nickname: length greater than the minimum number of characters required and less than the maximum number of characters allowed' => [
+        yield 'nickname available: length greater than the minimum number of characters required and less than the maximum number of characters allowed' => [
             'nickname' => $this->getNickname(8),
             'available' => true,
             'expected' => true,
         ];
 
-        yield 'not available nickname: length greater than the minimum number of characters required and less than the maximum number of characters allowed' => [
+        yield 'nickname not available: length greater than the minimum number of characters required and less than the maximum number of characters allowed' => [
             'nickname' => $this->getNickname(8),
             'available' => false,
             'expected' => false,
