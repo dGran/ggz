@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -24,6 +23,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public const SHARE_CONTENT_NOBODY = "Nobody";
     public const NICKNAME_MIN_CHARACTERS = 4;
     public const NICKNAME_MAX_CHARACTERS = 24;
+    public const PASSWORD_MIN_CHARACTERS = 8;
+    public const PASSWORD_MAX_CHARACTERS = 32;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -34,15 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     protected string $email;
 
     #[ORM\Column]
-    protected string $password;
+    protected ?string $password = null;
 
     #[ORM\Column(type: "string", length: 24, unique: true, nullable: true)]
-//    #[Assert\Length(
-//        min: 4,
-//        max: 24,
-//        minMessage: "Nickname must be at least {{ limit }} characters long",
-//        maxMessage: "Nickname cannot be longer than {{ limit }} characters"
-//    )]
     protected ?string $nickname = null;
 
     #[ORM\Column]
@@ -64,7 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     protected bool $acceptMailing = false;
 
     #[ORM\Column]
-    protected bool $isVerified = false;
+    protected bool $verified = false;
 
     #[ORM\Column]
     protected \DateTime $dateCreated;
@@ -94,12 +89,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): User
+    public function setPassword(?string $password): User
     {
         $this->password = $password;
 
@@ -230,12 +225,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isVerified(): bool
     {
-        return $this->isVerified;
+        return $this->verified;
     }
 
-    public function setIsVerified(bool $isVerified): User
+    public function setVerified(bool $verified): User
     {
-        $this->isVerified = $isVerified;
+        $this->verified = $verified;
 
         return $this;
     }
