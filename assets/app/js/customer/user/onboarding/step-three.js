@@ -1,6 +1,6 @@
-let profilePicInput = $('#on_boarding_step_three_profilePic');
+document.addEventListener('DOMContentLoaded', () => {
+    const profilePicInput = $('#on_boarding_step_three_profilePic');
 
-$(document).ready(function() {
     $('#profile-pic-img, #add-profile-pic-btn').click(function() {
         profilePicInput.click();
     });
