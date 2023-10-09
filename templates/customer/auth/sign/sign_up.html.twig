@@ -17,10 +17,10 @@
                         <img src="https://static.vecteezy.com/system/resources/previews/012/871/371/original/google-search-icon-google-product-illustration-free-png.png" alt="Google icon" class="w-4 h-4 object-cover">
                         <span>Continue with Google</span>
                     </button>
-                    <button tabindex="0" type="button" class="w-full font-medium bg-white hover:bg-gray-200 focus:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
+                    <a href="{{ path('connect_facebook_check') }}" tabindex="0" type="button" class="w-full font-medium bg-white hover:bg-gray-200 focus:bg-gray-200 shadow-md shadow-[#6700BC] focus:outline-none rounded-md py-2.5 text-center flex items-center justify-center space-x-1.5">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1024px-2021_Facebook_icon.svg.png" alt="Facebook icon" class="w-4 h-4 object-cover">
                         <span>Continue with Facebook</span>
-                    </button>
+                    </a>
                 </div>
 
                 <hr class="bg-[#E7D6F8] mx-2.5 h-0.5 my-9">
@@ -29,7 +29,7 @@
 
                 <div class="flex flex-col space-y-3">
                     {{ form_widget(sign_up_form.email) }}
-                    <input type="hidden" id="check-email-url" data-url="{{ path('customer_sign_up_check_email') }}">
+                    <input type="hidden" id="check-email-url" data-url="{{ path('customer_sign_up_check_email_availability') }}">
                     <div id="email-info" class="hidden text-center text-sm font-medium text-[#f5989a]"></div>
 
                     <div class="relative">
@@ -61,5 +61,9 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        const passwordMinCharacters = {{ constant('App\\Entity\\User::PASSWORD_MIN_CHARACTERS') }};
+        const passwordMaxCharacters = {{ constant('App\\Entity\\User::PASSWORD_MAX_CHARACTERS') }};
+    </script>
     <script src="{{ asset('build/app/js/customer/auth/sign-up.js') }}" defer></script>
 {% endblock %}

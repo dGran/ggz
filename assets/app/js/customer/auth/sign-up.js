@@ -1,181 +1,165 @@
-let inputEmail = $('#sign_up_email');
-let emailInfo = $('#email-info');
-let inputPassword = $('#sign_up_plainPassword');
-let passwordInfo = $('#password-info');
-let buttonSendForm = $('#sign_up_submit');
-let viewPassword = $('#view-password');
-let errorClasses = 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]';
-let validClasses = 'border-[#B3FF2E] focus:border-[#B3FF2E] hover:border-[#B3FF2E]';
-let initialClasses = 'border-[#c5b7d4] focus:border-white hover:border-white';
+document.addEventListener('DOMContentLoaded', () => {
+    const $formElements = {
+        email: $('#sign_up_email'),
+        emailInfo: $('#email-info'),
+        password: $('#sign_up_plainPassword'),
+        passwordInfo: $('#password-info'),
+        buttonSendForm: $('#sign_up_submit'),
+        viewPassword: $('#view-password'),
+    };
 
-$(document).ready(function () {
-    inputEmail.on('blur', checkValidations);
-    inputPassword.on('input', checkValidations);
-    viewPassword.on('click', toggleViewPassword);
+    const inputStyles = {
+        valid: 'border-[#B3FF2E] focus:border-[#B3FF2E] hover:border-[#B3FF2E]',
+        error: 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]',
+        initial: 'border-[#c5b7d4] focus:border-white hover:border-white',
+    };
+    const inputClassMap = {
+        'valid': inputStyles.valid,
+        'error': inputStyles.error,
+        'initial': inputStyles.initial,
+    };
+    const passwordInfoStyles = {
+        valid: 'text-[#B3FF2E]',
+        initial: 'text-[#C4C4C4]',
+    };
+    const passwordInfoClassMap = {
+        'valid': passwordInfoStyles.valid,
+        'initial': passwordInfoStyles.initial,
+    };
 
-    checkValidations();
+    $formElements.email.on('blur', updateFormState);
+    $formElements.password.on('input', updateFormState);
+    $formElements.viewPassword.on('click', toggleViewPassword);
 
-    function checkValidations() {
-        Promise.all([validateEmail(), validatePassword()]).then(results => {
-            const isEmailValid = results[0];
-            const isPasswordValid = results[1];
+    updateFormState();
 
-            if (isEmailValid && isPasswordValid) {
-                toggleButtonSendForm(true);
-            } else {
-                toggleButtonSendForm(false);
-            }
-        });
-    }
+    function updateFormState() {
+        Promise.all([validateEmail(), validatePassword()])
+            .then(([isEmailValid, isPasswordValid]) => {
+                const enable = isEmailValid && isPasswordValid;
 
-    function toggleButtonSendForm(enable) {
-        if (enable) {
-            buttonSendForm.addClass('filled');
-            buttonSendForm.removeClass('empty');
-
-            return;
-        }
-
-        buttonSendForm.addClass('empty');
-        buttonSendForm.removeClass('filled');
-    }
-
-    function toggleViewPassword() {
-        if (viewPassword.hasClass('icon-eye-close')) {
-            viewPassword.removeClass('icon-eye-close');
-            viewPassword.addClass('icon-eye-open');
-            inputPassword.attr('type', 'text');
-        } else {
-            viewPassword.removeClass('icon-eye-open');
-            viewPassword.addClass('icon-eye-close');
-            inputPassword.attr('type', 'password');
-        }
+                $formElements.buttonSendForm.toggleClass('filled', enable).toggleClass('empty', !enable);
+            });
     }
 
     function validateEmail() {
         return new Promise((resolve, reject) => {
-            let email = inputEmail.val();
+            const email = $formElements.email.val();
 
             if (!email) {
-                renderInputEmail(false, null, true);
+                renderInput($formElements.email, 'initial', null, true);
 
                 resolve(false);
+
                 return;
             }
 
             if (!isValidEmail(email)) {
-                let message = 'You must enter a valid email';
-                renderInputEmail(false, message);
+                const message = 'You must enter a valid email';
+                renderInput($formElements.email, 'error', message);
 
                 resolve(false);
+
                 return;
             }
 
-            let checkEmailUrl = $('#check-email-url').data('url');
+            const checkEmailAvailabilityUrl = $('#check-email-url').data('url');
 
             $.ajax({
                 type: 'POST',
-                url: checkEmailUrl,
+                url: checkEmailAvailabilityUrl,
                 data: {
-                    sign_up_email: email
+                    sign_up_email: email,
                 },
-                success: function(response) {
-                    if (response.exists) {
-                        let message = 'There is already an account with this email';
-                        renderInputEmail(false, message);
+                success: function (response) {
+                    if (!response.isAvailable) {
+                        const message = 'There is already an account with this email';
+                        renderInput($formElements.email, 'error', message);
 
                         resolve(false);
                     } else {
-                        renderInputEmail(true);
+                        renderInput($formElements.email, 'valid');
 
                         resolve(true);
                     }
                 },
-                error: function() {
-                    let message = 'Email verification failed';
-                    renderInputEmail(false, message);
+                error: function () {
+                    const message = 'Email verification failed';
+                    renderInput($formElements.email, 'error', message);
 
                     resolve(false);
-                }
+                },
             });
         });
     }
 
+    function isValidEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/;
+
+        return emailRegex.test(email);
+    }
+
     function validatePassword() {
-        let password = inputPassword.val();
+        const password = $formElements.password.val();
 
         if (!password) {
-            renderInputPassword(false, true);
+            renderInput($formElements.password, 'initial', null, true);
 
             return false;
         }
 
         if (!isValidPassword(password)) {
-            renderInputPassword(false);
+            renderInput($formElements.password, 'initial');
 
             return false;
         }
 
-        renderInputPassword(true);
+        renderInput($formElements.password, 'valid');
 
         return true;
     }
 
-    function isValidEmail(email) {
-        let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/;
-
-        return emailPattern.test(email);
-    }
-
     function isValidPassword(password) {
-        let hasUppercase = /[A-Z]/.test(password);
-        let hasNumber = /[0-9]/.test(password);
-        let isValidLength = password.length >= 8 && password.length <= 32;
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const isValidLength = password.length >= passwordMinCharacters && password.length <= passwordMaxCharacters;
 
         return hasUppercase && hasNumber && isValidLength;
     }
 
-    function renderInputEmail(valid, message = null, empty = false) {
-        if (!valid && message) {
-            inputEmail.removeClass(initialClasses);
-            inputEmail.removeClass(validClasses);
-            inputEmail.addClass(errorClasses);
-            emailInfo.removeClass('hidden');
-            emailInfo.text(message);
+    function renderInput(inputElement, state, message = null, empty = false) {
+        inputElement.removeClass(Object.values(inputStyles).join(' '));
 
-            return;
+        const classToAdd = inputClassMap[state];
+
+        if (classToAdd) {
+            inputElement.addClass(classToAdd);
         }
 
-        inputEmail.removeClass(errorClasses);
-
-        if (empty) {
-            inputEmail.removeClass(validClasses);
-            inputEmail.removeClass(errorClasses);
-            inputEmail.addClass(initialClasses);
+        if (message) {
+            $formElements.emailInfo.removeClass('hidden');
+            $formElements.emailInfo.text(message);
         } else {
-            inputEmail.removeClass(initialClasses);
-            inputEmail.removeClass(errorClasses);
-            inputEmail.addClass(validClasses);
-        }
+            if (empty) {
+                inputElement.val('');
+            }
 
-        if (!emailInfo.hasClass('hidden')) {
-            emailInfo.addClass('hidden');
+            $formElements.emailInfo.addClass('hidden');
         }
     }
 
-    function renderInputPassword(valid, empty = false) {
-        if (!valid) {
-            inputPassword.removeClass(validClasses);
-            inputPassword.addClass(initialClasses);
-            passwordInfo.removeClass('text-[#B3FF2E]');
-            passwordInfo.addClass('text-[#C4C4C4]');
+    function toggleViewPassword() {
+        const iconClasses = {
+            close: 'icon-eye-close',
+            open: 'icon-eye-open',
+        };
 
-            return;
+        if ($formElements.viewPassword.hasClass(iconClasses.close)) {
+            $formElements.viewPassword.removeClass(iconClasses.close).addClass(iconClasses.open);
+            $formElements.password.attr('type', 'text');
+        } else {
+            $formElements.viewPassword.removeClass(iconClasses.open).addClass(iconClasses.close);
+            $formElements.password.attr('type', 'password');
         }
-
-        inputPassword.removeClass(initialClasses);
-        inputPassword.addClass(validClasses);
-        passwordInfo.removeClass('text-[#C4C4C4]');
-        passwordInfo.addClass('text-[#B3FF2E]');
     }
 });

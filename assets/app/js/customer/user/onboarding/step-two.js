@@ -1,60 +1,71 @@
-let inputBirthdate = $('#on_boarding_step_two_birthdate');
-let inputTermsAndConditions = $('#on_boarding_step_two_terms_and_conditions');
-let inputPolicyPrivacy = $('#on_boarding_step_two_policy_privacy');
-let inputOfficialItems = $('#on_boarding_step_two_official_items');
-let buttonSendForm = $('#on_boarding_step_two_submit');
-let acceptAll = $('#accept_all');
-let errorClasses = 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]';
-let initialClasses = 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz';
+document.addEventListener('DOMContentLoaded', () => {
+    const $formElements = {
+        birthdate: $('#on_boarding_step_two_birthdate'),
+        termsAndConditions: $('#on_boarding_step_two_terms_and_conditions'),
+        policyPrivacy: $('#on_boarding_step_two_policy_privacy'),
+        officialItems: $('#on_boarding_step_two_official_items'),
+        buttonSendForm: $('#on_boarding_step_two_submit'),
+        acceptAll: $('#accept_all'),
+    };
 
-$(document).ready(function () {
-    inputBirthdate.on("input", toggleButtonSendForm);
-    inputTermsAndConditions.on("change", toggleButtonSendForm);
-    inputPolicyPrivacy.on("change", toggleButtonSendForm);
-    inputOfficialItems.on("change", toggleButtonSendForm);
-    acceptAll.on("click", function () {
+    const inputBirthdateStyles = {
+        valid: 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]',
+        initial: 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz',
+    };
+    const inputBirthdateClassMap = {
+        'valid': inputBirthdateStyles.valid,
+        'initial': inputBirthdateStyles.initial,
+    };
+
+    $formElements.birthdate.on("input change", updateFormState);
+    $formElements.termsAndConditions.on("change", updateFormState);
+    $formElements.policyPrivacy.on("change", updateFormState);
+    $formElements.officialItems.on("change", updateFormState);
+    $formElements.acceptAll.on("click", () => {
         markAllCheckboxes();
-        toggleButtonSendForm();
+        updateFormState();
     });
 
-    toggleButtonSendForm();
+    updateFormState();
 
-    function toggleButtonSendForm() {
-        let isInputFilled = inputBirthdate.val().length > 0 && inputTermsAndConditions.is(':checked') && inputPolicyPrivacy.is(':checked') && inputOfficialItems.is(':checked');
-        let isValidBirthdate = validateDate(inputBirthdate.val());
+    function updateFormState() {
+        const birthdateValue = $formElements.birthdate.val();
+        const isRequiredChecksMarked = $formElements.termsAndConditions.is(':checked') && $formElements.policyPrivacy.is(':checked') && $formElements.officialItems.is(':checked');
+        const isValidBirthdate = validateDate(birthdateValue);
 
-        if (!isValidBirthdate) {
-            inputBirthdate.removeClass(initialClasses);
-            inputBirthdate.addClass(errorClasses);
-        } else {
-            inputBirthdate.removeClass(errorClasses);
-            inputBirthdate.addClass(initialClasses);
-        }
+        setClassesToInputBirthdate(isValidBirthdate ? 'initial' : 'error');
 
-        buttonSendForm.toggleClass('filled', isInputFilled && isValidBirthdate);
-        buttonSendForm.toggleClass('empty', !isInputFilled || !isValidBirthdate);
+        $formElements.buttonSendForm.toggleClass('filled', isRequiredChecksMarked && isValidBirthdate)
+            .toggleClass('empty', !isRequiredChecksMarked || !isValidBirthdate);
     }
 
-    function markAllCheckboxes() {
-        $('input[type="checkbox"]').prop('checked', true);
-    }
-
-    function validateDate() {
-        let birthdate = inputBirthdate.val();
-        var dateRegex = /^\d{4}-(?:\d{2}-\d{2}|\d{2}-\d{2}-\d{4})$/;
+    function validateDate(birthdate) {
+        const dateRegex = /^\d{4}-(?:\d{2}-\d{2}|\d{2}-\d{2}-\d{4})$/;
 
         if (!dateRegex.test(birthdate)) {
             return false;
         }
 
-        let dateSplit = birthdate.split('-');
-        let year = parseInt(dateSplit[0], 10);
-        let month = parseInt(dateSplit[1], 10);
-        let day = parseInt(dateSplit[2], 10);
-        let dateObject = new Date(year, month - 1, day);
+        const dateSplit = birthdate.split('-');
+        const year = parseInt(dateSplit[0], 10);
+        const month = parseInt(dateSplit[1], 10);
+        const day = parseInt(dateSplit[2], 10);
+        const dateObject = new Date(year, month - 1, day);
 
-        return dateObject.getDate() === day &&
-            dateObject.getMonth() === month -1 &&
-            dateObject.getFullYear() === year;
+        return dateObject.getDate() === day && dateObject.getMonth() === month - 1 && dateObject.getFullYear() === year;
+    }
+
+    function setClassesToInputBirthdate(classesToSet) {
+        $formElements.birthdate.removeClass(inputBirthdateStyles.valid + ' ' + inputBirthdateStyles.initial);
+
+        const classToAdd = inputBirthdateClassMap[classesToSet];
+
+        if (classToAdd) {
+            $formElements.birthdate.addClass(classToAdd);
+        }
+    }
+
+    function markAllCheckboxes() {
+        $('input[type="checkbox"]').prop('checked', true);
     }
 });

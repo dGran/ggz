@@ -85,6 +85,44 @@ class UserServiceTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider isValidPasswordProvider
+     */
+    public function testIsValidPassword(string $password, bool $expected): void
+    {
+        $isValidPassword = $this->userService->isValidPassword($password);
+
+        self::assertEquals($expected, $isValidPassword);
+    }
+
+    public function isValidPasswordProvider(): \iterator
+    {
+        yield 'password length less than the minimum required characters' => [
+            'password' => 'Secret7',
+            'expected' => false,
+        ];
+
+        yield 'password length greater than the maximum number of characters allowed' => [
+            'password' => 'Secret.........................33',
+            'expected' => false,
+        ];
+
+        yield 'password length correct but without any capital letters' => [
+            'password' => 'secret.8',
+            'expected' => false,
+        ];
+
+        yield 'password length correct with capital letters but without any numbers' => [
+            'password' => 'Secret...',
+            'expected' => false,
+        ];
+
+        yield 'password length correct with capital letters and with numbers' => [
+            'password' => 'Secret..9',
+            'expected' => true,
+        ];
+    }
+
     private function getNickname($length): string
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

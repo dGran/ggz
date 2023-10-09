@@ -1,71 +1,58 @@
-const inputNickname = $('#on_boarding_step_one_nickname');
-const nicknameInfo = $('#nickname-info');
-const buttonSendForm = $('#on_boarding_step_one_submit');
+document.addEventListener('DOMContentLoaded', () => {
+    const $formElements = {
+        inputNickname: $('#on_boarding_step_one_nickname'),
+        nicknameInfo: $('#nickname-info'),
+        buttonSendForm: $('#on_boarding_step_one_submit')
+    };
 
-const inputNicknameErrorClasses = 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]';
-const inputNicknameValidClasses = 'border-green-500 focus:border-green-500 hover:border-green-500';
-const inputNicknameInitialClasses = 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz';
-const inputNicknameClassMap = {
-    'valid': inputNicknameValidClasses,
-    'error': inputNicknameErrorClasses,
-    'initial': inputNicknameInitialClasses,
-};
-const nicknameInfoValidClasses = 'text-green-500';
-const nicknameInfoErrorClasses = 'text-red-500';
-const nicknameInfoInitialClasses = 'text-gray-600';
-const nicknameInfoClassMap = {
-    'valid': nicknameInfoValidClasses,
-    'error': nicknameInfoErrorClasses,
-    'initial': nicknameInfoInitialClasses,
-};
+    const inputNicknameStyles = {
+        valid: 'border-green-500 focus:border-green-500 hover:border-green-500',
+        error: 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]',
+        initial: 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz',
+    };
+    const inputNicknameClassMap = {
+        'valid': inputNicknameStyles['valid'],
+        'error': inputNicknameStyles['error'],
+        'initial': inputNicknameStyles['initial'],
+    };
 
+    const nicknameInfoStyles = {
+        valid: 'text-green-500',
+        error: 'text-red-500',
+        initial: 'text-gray-600',
+    };
+    const nicknameInfoClassMap = {
+        'valid': nicknameInfoStyles['valid'],
+        'error': nicknameInfoStyles['error'],
+        'initial': nicknameInfoStyles['initial'],
+    };
 
-$(document).ready(function () {
-    inputNickname.on("input", checkValidations);
-    inputNickname.focus();
+    $formElements.inputNickname.focus();
+    $formElements.inputNickname.on("input", updateFormState);
 
-    checkValidations();
+    updateFormState();
 
-    function checkValidations() {
-        Promise.all([validateNickname()]).then(results => {
-            const isNicknameValid = results[0];
-
-            if (isNicknameValid) {
-                toggleButtonSendForm(true);
-            } else {
-                toggleButtonSendForm(false);
-            }
+    function updateFormState() {
+        validateNickname().then(isNicknameValid => {
+            $formElements.buttonSendForm.toggleClass('filled', isNicknameValid).toggleClass('empty', !isNicknameValid);
         });
-    }
-
-    function toggleButtonSendForm(enable) {
-        if (enable) {
-            buttonSendForm.addClass('filled');
-            buttonSendForm.removeClass('empty');
-
-            return;
-        }
-
-        buttonSendForm.addClass('empty');
-        buttonSendForm.removeClass('filled');
     }
 
     function validateNickname() {
         return new Promise((resolve, reject) => {
-            let nickname = inputNickname.val();
-            let default_message = 'You must enter between 4 and 24 characters';
+            const nickname = $formElements.inputNickname.val();
+            const default_message = 'You must enter between 4 and 24 characters';
 
             if (!nickname || !isValidNicknameLength(nickname)) {
-                nicknameInfo.text(default_message);
-                setClassesToInputNickname('initial');
-                setClassesToNicknameInfo('initial');
+                $formElements.nicknameInfo.text(default_message);
+                setClassesToElements($formElements.inputNickname, inputNicknameClassMap, 'initial');
+                setClassesToElements($formElements.nicknameInfo, nicknameInfoClassMap, 'initial');
 
                 resolve(false);
-
                 return;
             }
 
-            let checkNicknameAvailabilityUrl = $('#check-nickname-availability-url').data('url');
+            const checkNicknameAvailabilityUrl = $('#check-nickname-availability-url').data('url');
 
             $.ajax({
                 type: 'POST',
@@ -75,22 +62,22 @@ $(document).ready(function () {
                 },
                 success: function(response) {
                     if (!response.isAvailable) {
-                        nicknameInfo.text(response.message);
-                        setClassesToInputNickname('error');
-                        setClassesToNicknameInfo('error');
+                        $formElements.nicknameInfo.text(response.message);
+                        setClassesToElements($formElements.inputNickname, inputNicknameClassMap, 'error');
+                        setClassesToElements($formElements.nicknameInfo, nicknameInfoClassMap, 'error');
 
                         resolve(false);
                     } else {
-                        nicknameInfo.text(default_message);
-                        setClassesToInputNickname('valid');
-                        setClassesToNicknameInfo('valid');
+                        $formElements.nicknameInfo.text(default_message);
+                        setClassesToElements($formElements.inputNickname, inputNicknameClassMap, 'valid');
+                        setClassesToElements($formElements.nicknameInfo, nicknameInfoClassMap, 'valid');
 
                         resolve(true);
                     }
                 },
                 error: function() {
-                    let message = 'Nickname verification failed';
-                    nicknameInfo.text(message);
+                    const message = 'Nickname verification failed';
+                    $formElements.nicknameInfo.text(message);
 
                     resolve(false);
                 }
@@ -102,21 +89,10 @@ $(document).ready(function () {
         return nickname.length >= nicknameMinCharacters && nickname.length <= nicknameMaxCharacters;
     }
 
-    function setClassesToInputNickname(classesToSet) {
-        inputNickname.toggleClass(inputNicknameValidClasses + ' ' + inputNicknameErrorClasses + ' ' + inputNicknameInitialClasses, false);
-        const classesToAdd = inputNicknameClassMap[classesToSet];
+    function setClassesToElements($element, classMap, state) {
+        const classesToRemove = Object.values(classMap).join(' ');
+        const classesToAdd = classMap[state];
 
-        if (classesToAdd) {
-            inputNickname.addClass(classesToAdd);
-        }
-    }
-
-    function setClassesToNicknameInfo(classesToSet) {
-        nicknameInfo.toggleClass(nicknameInfoValidClasses + ' ' + nicknameInfoErrorClasses + ' ' + nicknameInfoInitialClasses, false);
-        const classesToAdd = nicknameInfoClassMap[classesToSet];
-
-        if (classesToAdd) {
-            nicknameInfo.addClass(classesToAdd);
-        }
+        $element.toggleClass(classesToRemove, false).toggleClass(classesToAdd, !!classesToAdd);
     }
 });

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Customer\User;
 
 use App\Entity\User;
-use App\Form\Customer\auth\OnBoardingStepOneType;
-use App\Form\Customer\auth\OnBoardingStepThreeType;
-use App\Form\Customer\auth\OnBoardingStepTwoType;
+use App\Form\Customer\User\OnBoardingStepOneType;
+use App\Form\Customer\User\OnBoardingStepThreeType;
+use App\Form\Customer\User\OnBoardingStepTwoType;
 use App\Manager\UserManager;
 use App\Service\UserService;
 use Doctrine\ORM\NonUniqueResultException;

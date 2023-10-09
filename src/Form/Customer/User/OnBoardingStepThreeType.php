@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Customer\auth;
+namespace App\Form\Customer\User;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
