@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const inputBirthdateStyles = {
-        valid: 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]',
+        error: 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]',
         initial: 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz',
     };
     const inputBirthdateClassMap = {
-        'valid': inputBirthdateStyles.valid,
+        'error': inputBirthdateStyles.error,
         'initial': inputBirthdateStyles.initial,
     };
 
@@ -40,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function validateDate(birthdate) {
+        if (birthdate.length == 0) {
+            return true;
+        }
+
         const dateRegex = /^\d{4}-(?:\d{2}-\d{2}|\d{2}-\d{2}-\d{4})$/;
 
         if (!dateRegex.test(birthdate)) {
@@ -56,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setClassesToInputBirthdate(classesToSet) {
-        $formElements.birthdate.removeClass(inputBirthdateStyles.valid + ' ' + inputBirthdateStyles.initial);
+        $formElements.birthdate.removeClass(inputBirthdateStyles.error + ' ' + inputBirthdateStyles.initial);
 
         const classToAdd = inputBirthdateClassMap[classesToSet];
 
