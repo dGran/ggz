@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = $formElements.email.val();
 
             if (!email) {
-                renderInput($formElements.email, 'initial', null, true);
+                renderInputEmail('initial', null, true);
 
                 resolve(false);
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!isValidEmail(email)) {
                 const message = 'You must enter a valid email';
-                renderInput($formElements.email, 'error', message);
+                renderInputEmail('error', message);
 
                 resolve(false);
 
@@ -74,18 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 success: function (response) {
                     if (!response.isAvailable) {
                         const message = 'There is already an account with this email';
-                        renderInput($formElements.email, 'error', message);
+                        renderInputEmail('error', message);
 
                         resolve(false);
                     } else {
-                        renderInput($formElements.email, 'valid');
+                        renderInputEmail('valid');
 
                         resolve(true);
                     }
                 },
                 error: function () {
                     const message = 'Email verification failed';
-                    renderInput($formElements.email, 'error', message);
+                    renderInputEmail('error', message);
 
                     resolve(false);
                 },
@@ -103,18 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = $formElements.password.val();
 
         if (!password) {
-            renderInput($formElements.password, 'initial', null, true);
+            renderInputPassword('initial', null, true);
 
             return false;
         }
 
         if (!isValidPassword(password)) {
-            renderInput($formElements.password, 'initial');
+            renderInputPassword('initial');
 
             return false;
         }
 
-        renderInput($formElements.password, 'valid');
+        renderInputPassword('valid');
 
         return true;
     }
@@ -127,13 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return hasUppercase && hasNumber && isValidLength;
     }
 
-    function renderInput(inputElement, state, message = null, empty = false) {
-        inputElement.removeClass(Object.values(inputStyles).join(' '));
+    function renderInputEmail(state, message = null, empty = false) {
+        $formElements.email.removeClass(Object.values(inputStyles).join(' '));
 
         const classToAdd = inputClassMap[state];
 
         if (classToAdd) {
-            inputElement.addClass(classToAdd);
+            $formElements.email.addClass(classToAdd);
         }
 
         if (message) {
@@ -141,10 +141,27 @@ document.addEventListener('DOMContentLoaded', () => {
             $formElements.emailInfo.text(message);
         } else {
             if (empty) {
-                inputElement.val('');
+                $formElements.emailInfo.val('');
             }
 
             $formElements.emailInfo.addClass('hidden');
+        }
+    }
+
+    function renderInputPassword(state, message = null, empty = false) {
+        $formElements.password.removeClass(Object.values(inputStyles).join(' '));
+        $formElements.passwordInfo.removeClass(Object.values(passwordInfoStyles).join(' '));
+
+        const classInputToAdd = inputClassMap[state];
+
+        if (classInputToAdd) {
+            $formElements.password.addClass(classInputToAdd);
+        }
+
+        const classLabelToAdd = passwordInfoClassMap[state];
+
+        if (classLabelToAdd) {
+            $formElements.passwordInfo.addClass(classLabelToAdd);
         }
     }
 
@@ -162,4 +179,10 @@ document.addEventListener('DOMContentLoaded', () => {
             $formElements.password.attr('type', 'password');
         }
     }
+
+    Mousetrap.bind(['ctrl+alt+v', 'command+alt+v'], function() {
+        toggleViewPassword();
+
+        return false;
+    });
 });
