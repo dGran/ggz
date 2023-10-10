@@ -34,9 +34,9 @@
 
                     <div class="relative">
                         {{ form_widget(sign_up_form.plainPassword) }}
-                        <i id="view-password" class="icon-eye-close absolute inset-y-0 right-0 flex items-center pr-4 text-white text-lg"></i>
+                        <i id="view-password" class="icon-eye-close absolute inset-y-0 right-0 flex items-center pr-4 text-white text-lg" title="Ctrl+Alt+v"></i>
                     </div>
-                    <div id="password-info" class="text-center text-sm font-medium text-[#C4C4C4]">You must enter at least 8 characters with at least one number and one uppercase letter</div>
+                    <div id="password-info" class="text-center text-sm font-medium">You must enter at least 8 characters with at least one number and one uppercase letter</div>
                 </div>
                 {{ form_widget(sign_up_form.submit) }}
 
@@ -61,9 +61,12 @@
 
 {% block javascripts %}
     {{ parent() }}
+
     <script>
         const passwordMinCharacters = {{ constant('App\\Entity\\User::PASSWORD_MIN_CHARACTERS') }};
         const passwordMaxCharacters = {{ constant('App\\Entity\\User::PASSWORD_MAX_CHARACTERS') }};
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.6.5/mousetrap.min.js" defer></script>
     <script src="{{ asset('build/app/js/customer/auth/sign-up.js') }}" defer></script>
 {% endblock %}
