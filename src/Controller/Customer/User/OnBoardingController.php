@@ -145,11 +145,8 @@ class OnBoardingController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-
         $user->setOnBoardingComplete(true);
-        $user->setDateUpdated(new \DateTime());
-
-        $this->userManager->save($user);
+        $this->userManager->update($user);
 
         return $this->redirectToRoute('customer_user_profile');
     }
