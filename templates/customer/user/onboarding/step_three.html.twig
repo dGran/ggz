@@ -14,20 +14,32 @@
             <p class="mt-2.5 mb-6 md:text-lg text-center font-lato font-bold text-blacktext">A picture is worth more than a thousand words</p>
 
             {{ form_start(on_boarding_step_three_form) }}
-            {{ form_row(on_boarding_step_three_form.profilePic) }}
 
+            {{ form_row(on_boarding_step_three_form.profilePic) }}
             <div class="mt-10 mx-auto flex flex-col items-start space-y-6">
-                <figure id="profile-pic-img" class="rounded-full bg-white w-44 h-44 mx-auto flex items-center justify-center focus:outline-none hover:ring-2 focus:ring-2 ring-[#C6C6C6]">
-                    <img src="{{ asset('img/preview_profile_pic.png') }}" alt="" class="w-12 h-12 object-cover">
+                <figure id="profile-pic-preview" class="rounded-full bg-white w-44 h-44 mx-auto flex items-center justify-center focus:outline-none hover:ring-2 focus:ring-2 ring-[#C6C6C6]">
+                    <img id="profile-pic-preview-img" src="{{ asset('img/preview_profile_pic.png') }}" alt="" class="w-12 h-12"
+                         data-profile-pic-default-image = "{{ asset('img/preview_profile_pic.png') }}"
+                         data-profile-pic-default-image-error = "{{ asset('img/preview_profile_pic_error.png') }}"
+                    >
                 </figure>
 
                 <div class="w-full flex flex-col items-center space-y-1.5">
-                    <button type="button" id="add-profile-pic-btn" class="text-white bg-[#7D00E2] hover:bg-[#6B00C1] focus:bg-[#6B00C1] font-bold font-ubuntu rounded-lg py-2.5 px-4 text-sm md:text-base focus:outline-none">
+                    <button type="button" id="delete-uploaded-image-button" class="hidden text-red-500 pb-3 hover:text-red-600 focus:text-red-600 focus:outline-none">Delete image</button>
+                    <button type="button" id="add-profile-pic-button" class="text-white bg-[#7D00E2] hover:bg-[#6B00C1] focus:bg-[#6B00C1] font-bold font-ubuntu rounded-lg py-2.5 px-4 text-sm md:text-base focus:outline-none">
                         ADD PROFILE PIC
                     </button>
-                    <p class="w-full text-[12px] md:text-[14px] font-semibold text-center">
-                        Max size: 40 MB<br>JPEG, JPG, PNG, TIFF, WEBP
-                    </p>
+                    <div class="leading-5 pt-1.5">
+                        <p id="profile-pic-max-size-info" class="w-full text-[12px] md:text-[14px] font-semibold text-center text-gray-600">
+                            Max size: 40 MB
+                        </p>
+                        <p id="profile-pic-extension-info" class="w-full text-[12px] md:text-[14px] font-semibold text-center text-gray-600">
+                            JPEG, JPG, PNG, WEBP
+                        </p>
+                        <p id="image-not-valid-info" class="hidden pt-3 text-red-500 font-bold">
+                            *Invalid image, will not be linked to the account
+                        </p>
+                    </div>
                 </div>
 
                 <p class="pt-4 font-bold font-lato md:text-lg dark:text-gray-300 text-center">Lastly, please choose who you will be sharing your content with (you will be able to change this again later, if you wish)</p>
@@ -47,6 +59,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+
     <script src="{{ asset('build/app/js/customer/user/onboarding/step-three.js') }}" defer></script>
 {% endblock %}
 

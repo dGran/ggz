@@ -33,7 +33,6 @@ class OnBoardingStepThreeType extends AbstractType
                             'image/jpeg',
                             'image/jpg',
                             'image/png',
-                            'image/tiff',
                             'image/webp',
                         ],
                         'mimeTypesMessage' => 'Please upload an image in JPEG, JPG, PNG, TIFF or WEBP format and not exceeding 40 MB.',

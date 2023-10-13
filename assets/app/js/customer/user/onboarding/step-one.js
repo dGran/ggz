@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
         initial: 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz',
     };
     const inputNicknameClassMap = {
-        'valid': inputNicknameStyles['valid'],
-        'error': inputNicknameStyles['error'],
-        'initial': inputNicknameStyles['initial'],
+        valid: inputNicknameStyles['valid'],
+        error: inputNicknameStyles['error'],
+        initial: inputNicknameStyles['initial'],
     };
 
     const nicknameInfoStyles = {
@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
         initial: 'text-gray-600',
     };
     const nicknameInfoClassMap = {
-        'valid': nicknameInfoStyles['valid'],
-        'error': nicknameInfoStyles['error'],
-        'initial': nicknameInfoStyles['initial'],
+        valid: nicknameInfoStyles['valid'],
+        error: nicknameInfoStyles['error'],
+        initial: nicknameInfoStyles['initial'],
     };
 
     $formElements.inputNickname.focus();
