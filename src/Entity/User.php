@@ -17,13 +17,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public const PROFILE_PIC_PATH = 'img/user/profile/';
+
     public const DEFAULT_PROFILE_PIC = 'no-image.png';
+
     public const SHARE_CONTENT_EVERYBODY = "Everybody";
+
     public const SHARE_CONTENT_FRIENDS_ONLY = "Friends only";
+
     public const SHARE_CONTENT_NOBODY = "Nobody";
+
     public const NICKNAME_MIN_CHARACTERS = 4;
+
     public const NICKNAME_MAX_CHARACTERS = 24;
+
     public const PASSWORD_MIN_CHARACTERS = 8;
+
     public const PASSWORD_MAX_CHARACTERS = 32;
 
     #[ORM\Id]
@@ -175,7 +183,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getProfilePicPath(): ?string
     {
-        return $this->profilePic ? self::PROFILE_PIC_PATH.$this->profilePic : self::PROFILE_PIC_PATH.self::DEFAULT_PROFILE_PIC;
+        return $this->profilePic;
     }
 
     public function getShareContent(): ?string

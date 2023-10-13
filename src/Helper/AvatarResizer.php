@@ -77,7 +77,7 @@ class AvatarResizer
         $thumb = \imagecreatetruecolor($newWidth, $newHeight);
         \imagecopyresampled($thumb, $resource, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-        $resizedDirectoryPath = $this->parameterBag->get('kernel.project_dir') . '/var/img/temp/';
+        $resizedDirectoryPath = $this->parameterBag->get('kernel.project_dir').'/var/img/temp/';
         $resizedImagePath = $resizedDirectoryPath.$image->getFilename();
 
         if (!\is_dir($resizedDirectoryPath) && !mkdir($resizedDirectoryPath, 0755, true) && !is_dir($resizedDirectoryPath)) {
