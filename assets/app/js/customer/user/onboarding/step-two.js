@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
         initial: 'border-[#6C5D73] focus:border-purpleggz hover:border-purpleggz',
     };
     const inputBirthdateClassMap = {
-        'error': inputBirthdateStyles.error,
-        'initial': inputBirthdateStyles.initial,
+        error: inputBirthdateStyles.error,
+        initial: inputBirthdateStyles.initial,
     };
 
     $formElements.birthdate.on("input change", updateFormState);

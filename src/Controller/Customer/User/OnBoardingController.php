@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Form\Customer\User\OnBoardingStepOneType;
 use App\Form\Customer\User\OnBoardingStepThreeType;
 use App\Form\Customer\User\OnBoardingStepTwoType;
+use App\Helper\AvatarResizer;
 use App\Manager\UserManager;
 use App\Service\UserService;
 use Doctrine\ORM\NonUniqueResultException;
@@ -30,10 +31,13 @@ class OnBoardingController extends AbstractController
 
     private UserService $userService;
 
-    public function __construct(UserManager $userManager, UserService $userService)
+    private AvatarResizer $avatarResizer;
+
+    public function __construct(UserManager $userManager, UserService $userService, AvatarResizer $avatarResizer)
     {
         $this->userManager = $userManager;
         $this->userService = $userService;
+        $this->avatarResizer = $avatarResizer;
     }
 
     /**
@@ -122,9 +126,9 @@ class OnBoardingController extends AbstractController
 
             if ($profilePicFile) {
                 $destination = $this->getParameter(self::PROJECT_DIR).self::PUBLIC_FOLDER.User::PROFILE_PIC_PATH;
-                $filename = uniqid('', true).'.'.$profilePicFile->guessExtension();
-                $profilePicFile->move($destination, $filename);
-                $user->setProfilePic($filename);
+                $profilePicName = $this->avatarResizer->resizeAndCompressImage($profilePicFile, $destination);
+
+                $user->setProfilePic($profilePicName);
             }
 
             $user->setOnBoardingComplete(true);
