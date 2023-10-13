@@ -77,7 +77,15 @@ class AvatarResizer
         $thumb = \imagecreatetruecolor($newWidth, $newHeight);
         \imagecopyresampled($thumb, $resource, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-        $resizedImagePath = $this->parameterBag->get('kernel.project_dir') . '/var/img/temp/' . $image->getFilename();
+        $resizedDirectoryPath = $this->parameterBag->get('kernel.project_dir') . '/var/img/temp/';
+        $resizedImagePath = $resizedDirectoryPath.$image->getFilename();
+
+        if (!\is_dir($resizedDirectoryPath) && !mkdir($resizedDirectoryPath, 0755, true) && !is_dir($resizedDirectoryPath)) {
+            $this->logger->error(__METHOD__.\sprintf('Temp directory "%s" was not created', $resizedDirectoryPath));
+
+            throw new \RuntimeException(\sprintf('Temp directory "%s" was not created', $resizedImagePath));
+        }
+
         \imagepng($thumb, $resizedImagePath, (int)\round(self::IMAGE_QUALITY / 10));
         \imagedestroy($thumb);
 
