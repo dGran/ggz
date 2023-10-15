@@ -104,3 +104,9 @@ RUN mkdir -p /tmp/sessions && chmod 777 /tmp/sessions && chown -R www-data:www-d
 RUN mkdir -p /root/.ssh && ln -s /run/secrets/dependencies_rsa /root/.ssh/id_rsa
 RUN echo "Host bitbucket.org\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 RUN chown -R root:root /root/.ssh
+
+# Install cron
+RUN apt-get update && apt-get install -y cron
+
+# Start the cron service
+CMD ["cron", "-f"]
