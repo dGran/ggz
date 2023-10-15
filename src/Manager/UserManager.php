@@ -93,4 +93,12 @@ class UserManager
     {
         return $this->repository->isNicknameAvailable($nickname, $userId);
     }
+
+    /**
+     * @return User[]
+     */
+    public function findUnverifiedAndVerificationTimeExceeded(): array
+    {
+        return $this->repository->findUnverifiedAndVerificationTimeExceeded();
+    }
 }

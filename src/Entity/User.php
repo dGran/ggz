@@ -34,6 +34,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public const PASSWORD_MAX_CHARACTERS = 32;
 
+    public const VERIFICATION_ACCOUNT_MAX_TIME = 72;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

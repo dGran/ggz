@@ -93,4 +93,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return $count === 0;
     }
+
+    /**
+     * @return User[]
+     */
+    public function findUnverifiedAndVerificationTimeExceeded(): array
+    {
+        $maxTimeToVerify = (new \DateTime())->modify('-'.User::VERIFICATION_ACCOUNT_MAX_TIME.' hours');
+
+        return $this->createQueryBuilder('user')
+            ->where('user.verified = 0')
+            ->andWhere('user.dateCreated <= :max_time_to_verify')
+            ->setParameter('max_time_to_verify', $maxTimeToVerify)
+            ->getQuery()
+            ->getResult();
+    }
 }
