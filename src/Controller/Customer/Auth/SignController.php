@@ -9,11 +9,14 @@ use App\Form\Customer\Auth\SignUpType;
 use App\Security\EmailVerifier;
 use App\Manager\UserManager;
 use App\Service\UserService;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -72,6 +75,9 @@ class SignController extends AbstractController
     {
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     #[Route('/sign-up', name: 'customer_sign_up')]
     public function signUp(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
@@ -99,14 +105,13 @@ class SignController extends AbstractController
                 $token = new PostAuthenticationToken($user, 'main', $user->getRoles());
                 $this->tokenStorage->setToken($token);
 
-                // generate a signed url and email it to the user
-//            $this->emailVerifier->sendEmailConfirmation('customer_verify_email', $user,
-//                (new TemplatedEmail())
-//                    ->from(new Address('no-reply@gengemz.com', 'Gengemz'))
-//                    ->to($user->getEmail())
-//                    ->subject('Please Confirm your Email')
-//                    ->htmlTemplate('customer/auth/signup/confirmation_email.html.twig')
-//            );
+                $this->emailVerifier->sendEmailConfirmation('customer_verify_email', $user,
+                    (new TemplatedEmail())
+                        ->from(new Address('no-reply@gengemz.com', 'Gengemz'))
+                        ->to($user->getEmail())
+                        ->subject('Please Confirm your Email')
+                        ->htmlTemplate('customer/auth/sign/confirmation_email.html.twig')
+                );
 
                 return $this->redirectToRoute('customer_onboarding_step_one');
             }
@@ -122,7 +127,6 @@ class SignController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
