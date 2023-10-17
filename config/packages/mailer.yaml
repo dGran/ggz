@@ -1,5 +1,3 @@
 framework:
     mailer:
-        dsn: '%env(MAIL_DSN)%'
-#        dsn: 'smtp://c78c20627dd132:2c7574b5568943@sandbox.smtp.mailtrap.io:2525'
-#        dsn: 'smtp://no-reply%40gengemz.com:gondola2023@mail.privateemail.com:587'
+        dsn: '%env(MAILER_DSN)%'
