@@ -1,3 +1,5 @@
-{% if user is defined and not user.verified %}
-    <p class="w-full fixed text-white bg-red-500 text-center px-4 py-1">Your email address has not been verified, click <button id="resend-verify-email" data-url="{{ path('customer_resend_verify_email', {'user': user.id}) }}" class="font-bold hover:underline focus:underline focus:outline-none">here</button> to resend the confirmation email</p>
+{% if app.user is defined and not app.user.verified %}
+    <p class="w-full text-white bg-red-500 text-center px-4 py-1.5">
+        <i class="fa-solid fa-triangle-exclamation mr-1.5"></i>Your email address has not been verified, click <button id="resend-verify-email" data-url="{{ path('customer_resend_verify_email', {'user': app.user.id}) }}" class="font-bold hover:underline focus:underline focus:outline-none">here</button> to resend the confirmation email
+    </p>
 {% endif %}

@@ -37,8 +37,6 @@
     <body class="{% if bodyBackgroundClass is defined %}{{ bodyBackgroundClass }}{% else %}bg-main-bg{% endif %}">
         <div class="{% if whithoutFooter is defined %}block{% else %}flex flex-col h-screen justify-between{% endif %}">
             <main class="mb-auto">
-                {%  include('customer/layout/_user_verification.html.twig') %}
-
                 {% if whithoutHeader is not defined %}
                 <header>
                     {% include "customer/layout/_header.html.twig" %}
