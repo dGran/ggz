@@ -185,6 +185,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getProfilePicPath(): ?string
     {
+        if (!$this->profilePic) {
+            return self::PROFILE_PIC_PATH.self::DEFAULT_PROFILE_PIC;
+        }
+
         return $this->profilePic;
     }
 
