@@ -1,0 +1,48 @@
+<div id="content-account-settings" class="tab-content">
+    <p class="font-ubuntu font-medium text-xl text-black-text">Account information</p>
+    <div class="custom-horizontal-line"></div>
+
+    <p class="font-lato font-medium text-md text-disabled-gray pb-1">Username</p>
+    <div class="flex flex-row items-center">
+        <input type="text" disabled id="username" placeholder="User nickname" value="{{ user.nickname }}"
+               class="w-[22rem] text-black p-2.5 pl-4 resize-none font-ubuntu bg-gray-50 border-b-2 border-gray-200 rounded-t-md mt-2 mb-2 bg-opacity-25 focus:outline-none focus:ring-2 focus:ring-purpleggz2 focus:bg-[#FAF5FE]">
+        <button class="font-lato text-purpleggz2 ml-4 hover:text-purpleggz edit">Edit</button>
+    </div>
+
+    <p class="font-lato fo-medium text-md text-disabled-gray mt-4 pb-1">E-mail address</p>
+    <div class="flex flex-row items-center">
+        <input type="email" disabled id="email" placeholder="account@domain.com" value="{{ user.email }}"
+               class="w-[22rem] text-black p-2.5 pl-4 resize-none font-ubuntu bg-gray-50 border-b-2 border-gray-200 rounded-t-md mt-2 mb-2 bg-opacity-25 focus:outline-none focus:ring-2 focus:ring-purpleggz2 focus:bg-[#FAF5FE]">
+        <button class="font-lato text-purpleggz2 ml-4 hover:text-purpleggz edit">Edit</button>
+    </div>
+
+    <p class="font-ubuntu font-medium text-xl text-black-text mt-2">Password</p>
+    <div class="custom-horizontal-line"></div>
+    <button type="button" class="py-1.5 px-2 mr-2 mb-2 mb-6 mt-2 text-md font-ubuntu font-bold text-purpleggz text-gray-900 focus:outline-none bg-white rounded-lg border-2 border-gray-200 hover:bg-[#F5EBFD] focus:z-10 focus:ring-4 focus:ring-gray-200">
+        <div class="flex flex-row items-center justify-center">
+            <p class="font-ubuntu text-md">Change password</p>
+        </div>
+    </button>
+
+    <p class="font-ubuntu font-medium text-xl text-black-text mt-2">Profile picture</p>
+    <div class="custom-horizontal-line"></div>
+    <div class="flex flex-row items-center mb-6">
+        <img src="{{asset("build/app/img/avatar2 3.png")}}" class="rounded-full basis-1/6 object-cover flex-initial mt-2">
+        <div class="flex flex-col pl-4 place-items-center">
+            <button type="button" class="ml-1 py-1.5 px-2 mr-2 mb-2 mb-6 mt-2 text-md font-ubuntu font-bold text-purpleggz text-gray-900 focus:outline-none bg-white rounded-lg border-2 border-gray-200 hover:bg-[#F5EBFD] focus:z-10 focus:ring-4 focus:ring-gray-200">
+                <div class="flex flex-row items-center justify-center">
+                    <p class="pl-1 font-ubuntu text-md">Change</p>
+                </div>
+            </button>
+            <p class="font-lato font-medium text-md text-disabled-gray">Max size: 10 MB</p>
+            <p class="font-lato font-medium text-md text-disabled-gray">PNG or JPG/JPEG only</p>
+        </div>
+    </div>
+
+    <p class="font-ubuntu font-medium text-xl text-black-text mt-2">Date of birth</p>
+    <div class="custom-horizontal-line"></div>
+    <div class="flex flex-row items-center mb-20">
+        <input type="date" id="dateofbirth" class="text-black p-2.5 pl-4 font-ubuntu bg-gray-50 border-b-2 border-gray-200 rounded-t-md mt-2 mb-2 bg-opacity-25 focus:outline-none focus:ring-2 focus:ring-purpleggz2 focus:bg-[#FAF5FE]" value="1993-06-26" disabled>
+        <p class="font-lato text-md text-purpleggz2 ml-4 edit">Edit</p>
+    </div>
+</div>

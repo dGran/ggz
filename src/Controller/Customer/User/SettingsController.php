@@ -13,6 +13,10 @@ class SettingsController extends AbstractController
 {
     public function __invoke(): Response
     {
-        return $this->render('customer/user/settings/index.html.twig');
+        $user = $this->getUser();
+
+        return $this->render('customer/user/settings/index.html.twig', [
+            'user' => $user,
+        ]);
     }
 }
