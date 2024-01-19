@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
         buttonSendForm: $('#on_boarding_step_one_submit')
     };
 
+    const nicknameMinCharacters = $formElements.inputNickname.data('nickname-min-characters');
+    const nicknameMaxCharacters = $formElements.inputNickname.data('nickname-max-characters');
+
     const inputNicknameStyles = {
         valid: 'border-green-500 focus:border-green-500 hover:border-green-500',
         error: 'border-[#f5989a] focus:border-[#f5989a] hover:border-[#f5989a]',

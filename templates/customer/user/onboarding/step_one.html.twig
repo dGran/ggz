@@ -12,7 +12,6 @@
         <div class="text-center my-4">
             <p class="font-ubuntu text-4xl font-bold text-purpleggz">Thanks for joining us!</p>
             <p class="mt-2.5 mb-6 font-lato font-bold text-blacktext">Complete your registration and start your journey!</p>
-
             <div class="sm:w-[18rem] mt-10 mx-auto text-center">
                 {{ form_start(on_boarding_step_one_form) }}
 
@@ -38,10 +37,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script>
-        const nicknameMinCharacters = {{ constant('App\\Entity\\User::NICKNAME_MIN_CHARACTERS') }};
-        const nicknameMaxCharacters = {{ constant('App\\Entity\\User::NICKNAME_MAX_CHARACTERS') }};
-    </script>
+
     <script src="{{ asset('build/app/js/customer/user/onboarding/step-one.js') }}" defer></script>
 {% endblock %}
 

@@ -22,6 +22,8 @@ class OnBoardingStepOneType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Choose a username',
                     'class' => 'w-full py-2.5 px-4 font-ubuntu bg-[#F2EDF6] border-0 border-b-2 border-[#6C5D73] focus:bg-white focus:border-purpleggz hover:border-purpleggz rounded-t-md focus:outline-none focus:ring-0 ring-white placeholder-gray-500',
+                    'data-nickname-min-characters' => User::NICKNAME_MIN_CHARACTERS,
+                    'data-nickname-max-characters' => User::NICKNAME_MAX_CHARACTERS,
                 ],
                 'constraints' => [
                     new Length([

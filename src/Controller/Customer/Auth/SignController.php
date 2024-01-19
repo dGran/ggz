@@ -15,7 +15,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +30,6 @@ class SignController extends AbstractController
     private EmailVerifier $emailVerifier;
     private UserManager $userManager;
     private UserService $userService;
-    private MailerInterface $mailer;
     private TokenStorageInterface $tokenStorage;
     private AuthorizationCheckerInterface $authorizationChecker;
 
@@ -39,14 +37,12 @@ class SignController extends AbstractController
         EmailVerifier $emailVerifier,
         UserManager $userManager,
         UserService $userService,
-        MailerInterface $mailer,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->emailVerifier = $emailVerifier;
         $this->userManager = $userManager;
         $this->userService = $userService;
-        $this->mailer = $mailer;
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
@@ -99,7 +95,6 @@ class SignController extends AbstractController
             if ($this->userService->isValidEmail($email) && $this->userService->isValidPassword($password)) {
                 $encryptedPassword = $userPasswordHasher->hashPassword($user, $password);
                 $user->setPassword($encryptedPassword);
-
                 $this->userManager->save($user);
 
                 $token = new PostAuthenticationToken($user, 'main', $user->getRoles());
@@ -112,6 +107,9 @@ class SignController extends AbstractController
                         ->subject('Please Confirm your Email')
                         ->htmlTemplate('customer/auth/sign/confirmation_email.html.twig')
                 );
+
+                $user->setDateVerificationEmailSend(new \DateTime());
+                $this->userManager->save($user);
 
                 return $this->redirectToRoute('customer_onboarding_step_one');
             }
@@ -127,16 +125,19 @@ class SignController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        /** @var User $user */
+        $user = $this->getUser();
+
         try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            $this->emailVerifier->handleEmailConfirmation($request, $user);
+            $this->addFlash('success', 'Your email address has been verified.');
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
-
-            return $this->redirectToRoute('customer_sign_up');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        if ($user->isOnBoardingComplete()) {
+            return $this->redirectToRoute('customer_user_profile');
+        }
 
         return $this->redirectToRoute('customer_onboarding_step_one');
     }

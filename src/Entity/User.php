@@ -36,6 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public const VERIFICATION_ACCOUNT_MAX_TIME = 72;
 
+    public const TIME_INTERVAL_FOR_SENDING_VERIFICATION_EMAIL = 5;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -70,6 +72,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     protected bool $verified = false;
+
+    #[ORM\Column(nullable: true)]
+    protected ?\DateTime $dateVerificationEmailSend;
 
     #[ORM\Column]
     protected \DateTime $dateCreated;
@@ -185,6 +190,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getProfilePicPath(): ?string
     {
+        if (!$this->profilePic) {
+            return self::PROFILE_PIC_PATH.self::DEFAULT_PROFILE_PIC;
+        }
+
         return $this->profilePic;
     }
 
@@ -241,6 +250,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $verified): User
     {
         $this->verified = $verified;
+
+        return $this;
+    }
+
+    public function getDateVerificationEmailSend(): ?\DateTime
+    {
+        return $this->dateVerificationEmailSend;
+    }
+
+    public function setDateVerificationEmailSend(?\DateTime $dateVerificationEmailSend): User
+    {
+        $this->dateVerificationEmailSend = $dateVerificationEmailSend;
 
         return $this;
     }
