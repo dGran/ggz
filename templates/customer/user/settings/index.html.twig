@@ -3,7 +3,7 @@
 {% block title %}User settings{% endblock %}
 
 {% block content %}
-    <div class="container flex flex-row mx-auto mt-10 mb-10">
+    <div class="container my-10 mx-auto px-4 xl:px-0">
         <div class="bg-white border border-gray-200 rounded-lg rounded-br-lg shadow-xl w-full min-h-65-screen">
             <div class="flex flex-row">
                 <div class="flex flex-col bg-[#F1F1F1] px-8 w-1/6 min-h-65-screen">
@@ -40,5 +40,5 @@
 {% block javascripts %}
     {{ parent() }}
 
-    <script src="{{ asset('build/app/js/customer/user/settings/settings.js') }}" defer></script>
+    <script src="{{ asset('build/app/js/customer/user/settings.js') }}" defer></script>
 {% endblock %}

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/user-settings', name: 'customer_user_settings')]
-class SettingsController extends AbstractController
+class SettingController extends AbstractController
 {
     public function __invoke(): Response
     {
