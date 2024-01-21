@@ -78,11 +78,12 @@ class UserManager
     }
 
     /**
-     * @return User[]|null
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
-    public function findByEmail(string $email): ?array
+    public function isEmailAvailable(string $email, ?int $userId = null): bool
     {
-        return $this->repository->findByEmail($email);
+        return $this->repository->isEmailAvailable($email, $userId);
     }
 
     /**

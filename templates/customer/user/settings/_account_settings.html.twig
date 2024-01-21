@@ -1,17 +1,24 @@
 <div id="content-account-settings" class="tab-content">
-    {{ form_start(form_nickname) }}
-
     <h3 class="font-ubuntu font-medium text-xl text-black-text border-b-2 border-[#F1F1F1] pb-1.5 mb-2">Account information</h3>
-    <div class="flex flex-col space-y-1.5">
-        <div>
+    <div class="my-6 flex flex-col space-y-3">
+        {{ form_start(form_nickname) }}
             {{ form_label(form_nickname.nickname) }}
             <div class="flex flex-row items-center">
                 {{ form_widget(form_nickname.nickname) }}
                 {{ form_widget(form_nickname.submit) }}
             </div>
+            <span id="nickname_info" class="text-red-500 text-sm"></span>
+        {{ form_end(form_nickname) }}
+
+        {{ form_start(form_email) }}
+        {{ form_label(form_email.email) }}
+        <div class="flex flex-row items-center">
+            {{ form_widget(form_email.email) }}
+            {{ form_widget(form_email.submit) }}
         </div>
+        <span id="email_info" class="text-red-500 text-sm"></span>
+        {{ form_end(form_email) }}
     </div>
-    {{ form_end(form_nickname) }}
 
     <h3 class="font-ubuntu font-medium text-xl text-black-text border-b-2 border-[#F1F1F1] pb-1.5 my-2">Password</h3>
         <button type="button" class="py-1.5 px-2 mr-2 mb-2 mb-6 mt-2 text-md font-ubuntu font-bold text-purpleggz text-gray-900 focus:outline-none bg-white rounded-lg border-2 border-gray-200 hover:bg-[#F5EBFD] focus:z-10 focus:ring-4 focus:ring-gray-200">

@@ -1,46 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // document.querySelectorAll('[id^="tab-"]').forEach(tab => {
-    //     tab.addEventListener('click', () => {
-    //         // Remove the "highlight" class from the previously highlight tab
-    //         document.querySelector('.highlight').classList.remove('highlight');
-    //
-    //         // Add the "highlight" class to the clicked tab
-    //         tab.classList.add('highlight');
-    //
-    //         // Hide all content sections
-    //         document.querySelectorAll('.tab-content').forEach(content => {
-    //             content.classList.add('hidden');
-    //         });
-    //
-    //         // Show the content section corresponding to the clicked tab
-    //         const contentId = 'content' + tab.id.slice(3);
-    //         document.getElementById(contentId).classList.remove('hidden');
-    //     });
-    // });
-    // document.querySelectorAll('.edit').forEach(editButton => {
-    //     editButton.addEventListener('click', () => {
-    //         const input = editButton.previousElementSibling;
-    //         if (input.disabled) {
-    //             input.disabled = false;
-    //             input.focus();
-    //             editButton.textContent = 'Save';
-    //         } else {
-    //             input.disabled = true;
-    //             editButton.textContent = 'Edit';
-    //             // Save the new value, for example, by sending it to the server using AJAX.
-    //         }
-    //     });
-    // });
-
     let nicknameMode = 'show';
     let emailMode = 'show';
 
     const $formElements = {
         formUpdateNickname: $('#customer_user_settings_update_nickname'),
         inputNickname: $('#account_settings_nickname_nickname'),
+        infoNickname: $('#nickname_info'),
         buttonNickname: $('#account_settings_nickname_submit'),
         formUpdateEmail: $('#customer_user_settings_update_email'),
         inputEmail: $('#account_settings_email_email'),
+        infoEmail: $('#email_info'),
         buttonEmail: $('#account_settings_email_submit'),
     };
 
@@ -68,16 +37,64 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             success: function(response) {
                 if (response.result) {
-                    $formElements.buttonNickname.text('Edit');
-                    $formElements.inputNickname.prop('disabled', true);
-                    nicknameMode = 'show';
-                } else {
+                    $formElements.buttonNickname.text('Saved!');
 
+                    setTimeout(function() {
+                        $formElements.infoNickname.text('');
+                        $formElements.buttonNickname.text('Edit');
+                        $formElements.inputNickname.prop('disabled', true);
+                        nicknameMode = 'show';
+                    }, 250);
+                } else {
+                    $formElements.infoNickname.text(response.message);
                 }
             },
             error: function() {
-                // const message = 'Nickname verification failed';
-                // $formElements.nicknameInfo.text(message);
+                $formElements.infoNickname.text('Internal server error');
+
+            }
+        });
+    }
+
+    $formElements.buttonEmail.on('click', function (event) {
+        event.preventDefault();
+
+        if (emailMode === 'show') {
+            emailMode = 'edit';
+            $formElements.inputEmail.prop('disabled', false).focus();
+            $formElements.buttonEmail.text('Save');
+        } else {
+            updateEmail();
+        }
+    });
+
+    function updateEmail() {
+        const url = $formElements.formUpdateEmail.attr('action');
+        const email = $formElements.inputEmail.val();
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                email: email
+            },
+            success: function(response) {
+                if (response.result) {
+                    $formElements.buttonEmail.text('Saved!');
+
+                    setTimeout(function() {
+                        $formElements.infoEmail.text('');
+                        $formElements.buttonEmail.text('Edit');
+                        $formElements.inputEmail.prop('disabled', true);
+                        emailMode = 'show';
+                    }, 250);
+                } else {
+                    $formElements.infoEmail.text(response.message);
+                }
+            },
+            error: function() {
+                $formElements.infoEmail.text('Internal server error');
+
             }
         });
     }

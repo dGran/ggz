@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Customer\Auth\Ajax;
 
-use App\Service\UserService;
+use App\Manager\UserManager;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,13 +15,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SignUpController extends AbstractController
 {
-    private UserService $userService;
+    private UserManager $userManager;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserManager $userManager)
     {
-        $this->userService = $userService;
+        $this->userManager = $userManager;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     #[Route('/sign-up/check-email-availability', name: 'customer_sign_up_check_email_availability')]
     public function __invoke(Request $request): JsonResponse
     {
@@ -31,7 +37,7 @@ class SignUpController extends AbstractController
 
         $email = $request->get('sign_up_email');
 
-        if ($this->userService->isEmailAvailable($email)) {
+        if ($this->userManager->isEmailAvailable($email)) {
             $response = ['isAvailable' => true];
         } else {
             $response = ['isAvailable' => false, 'message' => 'There is already an account with this nickname'];

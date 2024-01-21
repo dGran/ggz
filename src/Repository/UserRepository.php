@@ -61,16 +61,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @return User[]|null
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
-    public function findByEmail(string $email): ?array
+    public function isEmailAvailable(string $email, ?int $userId = null): bool
     {
-        return $this->createQueryBuilder('user')
+        $qb = $this->createQueryBuilder('user')
+            ->select('COUNT(user.id)')
             ->where('user.email = :email')
-            ->setParameter('email', $email)
-            ->getQuery()
-            ->getResult()
-        ;
+            ->setParameter('email', $email);
+
+        if ($userId !== null) {
+            $qb->andWhere('user.id != :user_id')
+                ->setParameter('user_id', $userId);
+        }
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count === 0;
     }
 
     /**

@@ -38,6 +38,9 @@ class SettingController extends AbstractController
             [
                 'action' => $this->generateUrl('customer_user_settings_update_email', ['user' => $user->getId()]),
                 'method' => 'POST',
+                'attr' => [
+                    'id' => 'customer_user_settings_update_email',
+                ],
             ]
         )->createView();
 

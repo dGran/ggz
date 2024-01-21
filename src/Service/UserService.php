@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class UserService
 {
-    private const EMAIL_PATTERN = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/';
+    public const EMAIL_PATTERN = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/';
 
     private const CODE_200_PATTERN = '/^HTTP\/\d+\.\d+\s+200\s+OK/';
 
@@ -26,6 +26,10 @@ class UserService
         $this->parameterBag = $parameterBag;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     public function isValidEmail(string $email): bool
     {
         if (!$email) {
@@ -33,22 +37,9 @@ class UserService
         }
 
         $isValidEmailSyntax = \preg_match(self::EMAIL_PATTERN, $email);
-        $isEmailAvailable = $this->isEmailAvailable($email);
+        $isEmailAvailable = $this->userManager->isEmailAvailable($email);
 
         return $isValidEmailSyntax && $isEmailAvailable;
-    }
-
-    public function isEmailAvailable(string $email): bool
-    {
-        if (!$email) {
-            return false;
-        }
-
-        if (!empty($this->userManager->findByEmail($email))) {
-            return false;
-        }
-
-        return true;
     }
 
     public function isValidPassword(string $password): bool
