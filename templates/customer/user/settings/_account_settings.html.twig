@@ -11,12 +11,34 @@
         {{ form_end(form_nickname) }}
 
         {{ form_start(form_email) }}
-        {{ form_label(form_email.email) }}
-        <div class="flex flex-row items-center">
-            {{ form_widget(form_email.email) }}
-            {{ form_widget(form_email.submit) }}
-        </div>
-        <span id="email_info" class="text-red-500 text-sm"></span>
+            <div id="email-container">
+                {{ form_label(form_email.email) }}
+                <div>
+                    <div class="flex flex-row items-center">
+                        {{ form_widget(form_email.email) }}
+                        {{ form_widget(form_email.submit, {
+                            'attr': {
+                                'disabled': user.emailRequest is defined and user.emailRequest is not empty,
+                                'style': user.emailRequest is defined and user.emailRequest is not empty ? 'opacity: 0.5' : ''
+                            }
+                        }) }}
+                    </div>
+                    <span id="email_info" class="text-red-500 text-sm"></span>
+                </div>
+                {% if user.emailRequest %}
+                    <div class="my-3 flex flex-col space-y-1 text-sm">
+                        <p class="text-purpleggz2 text-base">Change requested to {{ user.emailRequest }}</p>
+                        <p class="pt-1.5">A request to change the email address associated with your account has been initiated. To complete this process, please follow the instructions below:</p>
+                        <ul class="list-disc list-inside">
+                            <li>Check your email inbox for a message from GGZ.</li>
+                            <li>Open the email and click on the confirmation link provided.</li>
+                        </ul>
+                        {% set deadline = user.dateEmailRequest|date_modify("+7 days") %}
+                        <p class="font-medium pt-1.5">You must confirm before the {{ deadline|date('Y-m-d H:i') }}.</p>
+                        <p>If you did not initiate this request or if you have any concerns, please contact our support team immediately.</p>
+                    </div>
+                {% endif %}
+            </div>
         {{ form_end(form_email) }}
     </div>
 

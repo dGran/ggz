@@ -77,19 +77,24 @@ class SettingController extends AbstractController
         return new JsonResponse($response);
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     #[Route('/user-settings/{user}/update-email', name: 'customer_user_settings_update_email')]
     #[Security('is_granted("ROLE_USER")')]
     public function updateEmail(Request $request, User $user): JsonResponse
     {
-        $email = $request->get('email');
-        $emailErrorResponse = $this->getEmailErrorResponse($email, $user->getId());
+        $emailRequest = $request->get('email');
+        $emailErrorResponse = $this->getEmailErrorResponse($emailRequest, $user->getId());
 
         if (!empty($emailErrorResponse)) {
             return new JsonResponse($emailErrorResponse);
         }
 
         try {
-            $user->setEmail($email);
+            $user->setEmailRequest($emailRequest);
+            $user->setDateEmailRequest(new \DateTime);
             $this->userManager->save($user);
             $response = ['result' => true];
         } catch (\Exception $exception) {

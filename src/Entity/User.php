@@ -71,6 +71,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     protected bool $verified = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?string $emailRequest = null;
+
+    #[ORM\Column(nullable: true)]
+    protected ?\DateTime $dateEmailRequest;
+
     #[ORM\Column]
     protected \DateTime $dateCreated;
 
@@ -84,6 +90,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->dateCreated = new \DateTime();
         $this->userLists = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->email;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return \array_unique($roles);
+    }
+
+    public function setRoles(array $roles): User
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -126,35 +166,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNickname(?string $nickname): User
     {
         $this->nickname = $nickname;
-
-        return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return \array_unique($roles);
-    }
-
-    public function setRoles(array $roles): User
-    {
-        $this->roles = $roles;
 
         return $this;
     }
@@ -249,6 +260,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getEmailRequest(): ?string
+    {
+        return $this->emailRequest;
+    }
+
+    public function setEmailRequest(?string $emailRequest): User
+    {
+        $this->emailRequest = $emailRequest;
+
+        return $this;
+    }
+
+    public function getDateEmailRequest(): ?\DateTime
+    {
+        return $this->dateEmailRequest;
+    }
+
+    public function setDateEmailRequest(?\DateTime $dateEmailRequest): User
+    {
+        $this->dateEmailRequest = $dateEmailRequest;
+
+        return $this;
+    }
+
     public function getDateCreated(): \DateTime
     {
         return $this->dateCreated;
@@ -271,11 +306,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->dateUpdated = $dateUpdated;
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->email;
     }
 
     /**
