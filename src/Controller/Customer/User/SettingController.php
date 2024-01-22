@@ -9,6 +9,7 @@ use App\Form\Customer\User\AccountSettingsEmailType;
 use App\Form\Customer\User\AccountSettingsNicknameType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,26 +32,27 @@ class SettingController extends AbstractController
                     'id' => 'customer_user_settings_update_nickname',
                 ],
             ]
-        )->createView();
+        );
+
         $formEmail = $this->createForm(
             AccountSettingsEmailType::class,
             $user,
             [
-                'action' => $this->generateUrl('customer_user_settings_update_email', ['user' => $user->getId()]),
+                'action' => $this->generateUrl('customer_user_settings_add_email_request', ['user' => $user->getId()]),
                 'method' => 'POST',
                 'attr' => [
-                    'id' => 'customer_user_settings_update_email',
+                    'id' => 'customer_user_settings_add_email_request',
                 ],
             ]
-        )->createView();
+        );
 
-        return$this->render('customer/user/settings/index.html.twig', [
+        $formNicknameView = $formNickname->createView();
+        $formEmailView = $formEmail->createView();
+
+        return $this->render('customer/user/settings/index.html.twig', [
             'user' => $user,
-            'form_nickname' => $formNickname,
-            'form_email' => $formEmail,
-            'attr' => [
-                'id' => 'customer_user_settings_update_email',
-            ],
+            'form_nickname' => $formNicknameView,
+            'form_email' => $formEmailView,
         ]);
     }
 }

@@ -102,4 +102,9 @@ class UserManager
     {
         return $this->repository->findUnverifiedAndVerificationTimeExceeded();
     }
+
+    public function updateEmailRequestedNotConfirmed(): int
+    {
+        return $this->repository->updateEmailRequestedNotConfirmed();
+    }
 }

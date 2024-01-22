@@ -69,6 +69,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $qb = $this->createQueryBuilder('user')
             ->select('COUNT(user.id)')
             ->where('user.email = :email')
+            ->orWhere('user.emailRequest = :email')
             ->setParameter('email', $email);
 
         if ($userId !== null) {
@@ -115,5 +116,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setParameter('max_time_to_verify', $maxTimeToVerify)
             ->getQuery()
             ->getResult();
+    }
+
+    public function updateEmailRequestedNotConfirmed(): int
+    {
+        $query = $this->getEntityManager()->createQuery('
+            UPDATE App\Entity\User user
+            SET user.emailRequest = NULL, user.dateEmailRequest = NULL
+            WHERE user.emailRequest IS NOT NULL
+            AND user.dateEmailRequest IS NOT NULL
+            AND user.dateEmailRequest < :deadline
+        ');
+        $query->setParameter('deadline', new \DateTime('-7 days'));
+
+        return $query->execute();
     }
 }

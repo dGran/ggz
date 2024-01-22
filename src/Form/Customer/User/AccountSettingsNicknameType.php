@@ -39,7 +39,7 @@ class AccountSettingsNicknameType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Edit',
                 'attr' => [
-                    'class' => 'font-lato text-purpleggz2 ml-4 hover:text-purpleggz',
+                    'class' => 'font-lato text-purpleggz2 ml-4 hover:text-purpleggz focus:text-purpleggz focus:outline-none',
                 ],
             ])
         ;
