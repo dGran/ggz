@@ -126,6 +126,14 @@ class SettingController extends AbstractController
         return new JsonResponse($response);
     }
 
+    public function updatePassword(): JsonResponse
+    {
+        //TODO
+        $response = ['result' => false];
+
+        return new JsonResponse($response);
+    }
+
     /**
      * @return array{result: bool, message: string}
      *
