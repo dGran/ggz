@@ -10,10 +10,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UnverifiedUsersCleanerCommand extends Command
+class SanitizeUserCommand extends Command
 {
     /** @var string */
-    protected static $defaultName = 'system:unverified-users-cleaner';
+    protected static $defaultName = 'system:sanitize-user';
 
     private UserManager $userManager;
 
@@ -33,11 +33,11 @@ class UnverifiedUsersCleanerCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln(\date(DATE_W3C).' - Start process to delete unverified user after exceeding the maximum time for account activation');
+        $output->writeln(\date(DATE_W3C).' - Start process to remove unverified users before the deadline');
 
-        $usersToDelete = $this->userManager->findUnverifiedAndVerificationTimeExceeded();
+        $unverifiedUsersToDelete = $this->userManager->findUnverifiedAndVerificationTimeExceeded();
 
-        foreach ($usersToDelete as $user) {
+        foreach ($unverifiedUsersToDelete as $user) {
             $this->logger->info('Delete unverified user with Id: '.$user->getId());
             $output->writeln(\date(DATE_W3C).' - Delete unverified user with Id: '.$user->getId());
 
@@ -49,7 +49,12 @@ class UnverifiedUsersCleanerCommand extends Command
             }
         }
 
-        $output->writeln(\date(DATE_W3C).' - End process to delete unverified user after exceeding the maximum time for account activation');
+        $output->writeln(\date(DATE_W3C).' - End process to remove unverified users before the deadline');
+
+        //TODO: Obtener los users, recorrerlos con el fin de logear uno a uno cada update
+        $output->writeln(\date(DATE_W3C).' - Start process to delete unconfirmed email change requests before deadline');
+        $this->userManager->updateEmailRequestedNotConfirmed();
+        $output->writeln(\date(DATE_W3C).' - End process to delete unconfirmed email change requests before deadline');
 
         return Command::SUCCESS;
     }
